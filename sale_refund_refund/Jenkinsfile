@@ -56,15 +56,15 @@ pipeline {
             
         }
        
-        stage('refund')
+        stage('refund1')
         {
             steps
             {
                 refund()
             }
         }
-        
-        stage('refund')
+
+        stage('refund2')
         {
             steps
             {
