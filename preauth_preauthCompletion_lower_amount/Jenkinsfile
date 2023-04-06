@@ -1,0 +1,77 @@
+def preauth()
+{
+    
+    catchError(stageResult: 'FAILURE')
+    {
+        script
+        {
+            str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ../AutomationTesting/validation/preauth0.txt -a 35 -out ../AutomationTesting/outData0.txt'
+            
+            bat str
+        }
+    }
+}
+
+def preauthComp()
+{
+    catchError(stageResult: 'FAILURE')
+    {
+        script
+        {
+            str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ../AutomationTesting/validation/preauthCompletion0.txt -a 12 -in ../AutomationTesting/outData0.txt -out ../AutomationTesting/outData0.txt'
+            bat str
+        }
+    }
+}
+def closeBatch()
+{
+    catchError(stageResult: 'FAILURE')
+    {
+        script
+        {
+            str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ../AutomationTesting/validation/closeBatch.txt'
+            bat str
+        }
+    }
+   
+}
+
+pipeline {
+    agent any
+  
+    stages 
+    {
+        stage('closeBatchStart')
+        {
+            steps
+            {
+                closeBatch()
+            }
+        }
+        stage('preauth')
+        {
+            steps
+            {
+
+                preauth()
+            }
+            
+        }
+        stage('preauth completion higher amount')
+        {
+            steps
+            {
+   
+                preauthComp()
+            }
+        }
+        
+        stage('closeBatch')
+        {
+            steps
+            {
+                closeBatch()
+            }
+        }
+    }
+}

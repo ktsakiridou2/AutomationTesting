@@ -1,0 +1,75 @@
+def sale()
+{
+    script
+    {
+        catchError(stageResult: 'FAILURE')
+        {
+            str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ../AutomationTesting/validation/sale0.txt -a 12 -out ../AutomationTesting/outData0.txt'
+            
+            bat str
+        }
+    }
+}
+
+def refund()
+{
+    script
+    {
+        catchError(stageResult: 'FAILURE')
+        {
+            str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ../AutomationTesting/validation/refund0.txt -a 12 -in ../AutomationTesting/outData0.txt'
+            bat str
+        }
+    }
+}
+def closeBatch()
+{
+    script
+    {
+        catchError(stageResult: 'FAILURE')
+        {
+            str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ../AutomationTesting/validation/closeBatch.txt'
+            bat str
+        }
+    }
+   
+}
+
+pipeline {
+    agent any
+  
+    stages 
+    {
+        stage('closeBatchStart')
+        {
+            steps
+            {
+                closeBatch()
+            }
+        }
+        stage('sale')
+        {
+            steps
+            {
+                sale()
+            }
+            
+        }
+       
+        stage('refund')
+        {
+            steps
+            {
+                refund()
+            }
+        }
+        
+        stage('close batch')
+        {
+            steps
+            {
+                closeBatch()
+            }
+        }
+    }
+}
