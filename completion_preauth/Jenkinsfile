@@ -1,3 +1,6 @@
+
+def ip = '-ip 192.168.1.19'
+
 def preauth(ip)
 {
         script
@@ -9,7 +12,7 @@ def preauth(ip)
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
                 data = ' -out ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py -t 0 '+ ip ' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data
+                str = 'python.exe ../AutomationTesting/Main.py -t 0 '+ ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data
                 bat str 
             }
         }
@@ -21,7 +24,7 @@ def preauthComp(ip)
     {
         i = 0
         data = '-in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-        str = 'python.exe ../AutomationTesting/Main.py -t 0 '+ ip ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + data
+        str = 'python.exe ../AutomationTesting/Main.py -t 0 '+ ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + data
         bat str
     }
 }
@@ -32,7 +35,7 @@ def closeBatch(ip, valPath)
     {
         script
         {
-            str = 'python.exe ../AutomationTesting/Main.py -t 0 '+ ip ' -vp ' + valPath
+            str = 'python.exe ../AutomationTesting/Main.py -t 0 '+ ip +' -vp ' + valPath
             bat str
         }
     }
@@ -50,7 +53,6 @@ pipeline {
             steps
             {
                         
-                def ip = '-ip 192.168.1.19'
                 closeBatch(ip,'../AutomationTesting/validation/closeBatch1.txt')
             }
         }
