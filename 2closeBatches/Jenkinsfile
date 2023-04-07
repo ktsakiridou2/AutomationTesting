@@ -4,7 +4,7 @@ def closeBatch(valPath)
     {
         script
         {
-            str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ' + valPath
+            str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.19 -vp ' + valPath
             bat str
         }
     }
