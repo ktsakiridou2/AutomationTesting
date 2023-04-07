@@ -1,5 +1,5 @@
 
-
+def ip = '-ip 192.168.1.19'
 
 def preauth()
 {
@@ -7,7 +7,6 @@ def preauth()
         {
             catchError(stageResult: 'FAILURE')
             {
-                def ip = '-ip 192.168.1.19'
                 i = 0
                 max = 98
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
@@ -25,7 +24,6 @@ def preauthComp()
     {
         catchError(stageResult: 'FAILURE')
         {
-            def ip = '-ip 192.168.1.19'
             i = 0
             data = '-in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
             str = 'python.exe ../AutomationTesting/Main.py -t 0 '+ ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + data
@@ -41,7 +39,6 @@ def closeBatch(valPath)
     {
         script
         {
-            def ip = '-ip 192.168.1.19'
             str = 'python.exe ../AutomationTesting/Main.py -t 0 '+ ip +' -vp ' + valPath
             bat str
         }
