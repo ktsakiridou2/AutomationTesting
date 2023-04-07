@@ -41,7 +41,7 @@ def closeBatch(ip, valPath)
 
 pipeline {
     agent any
-    ip = = '-ip 192.168.1.19'
+    ip = '-ip 192.168.1.19'
     stages 
     {
         stage('closeBatchStart')
