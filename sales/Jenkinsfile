@@ -27,7 +27,7 @@ def closeBatch(valPath)
     {
         catchError(stageResult: 'FAILURE')
         {
-            str = "AutomationTesting/Main.exe " + connType + ip +" -vp " + valPath
+            str = "C:\Users\Xrist\OneDrive\Υπολογιστής\AutomationTesting/Main.exe " + connType + ip +" -vp " + valPath
             bat str
         }
     }
@@ -45,7 +45,7 @@ pipeline {
             steps
             {
                         
-                closeBatch('AutomationTesting/validation/closeBatch1.txt')
+                closeBatch('C:\Users\Xrist\OneDrive\Υπολογιστής\AutomationTesting/validation/closeBatch1.txt')
             }
         }
 
