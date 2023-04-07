@@ -11,7 +11,7 @@ def preauth()
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
                 data = ' -out ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data
+                str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.19 -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data
                 bat str 
             }
         }
@@ -23,7 +23,7 @@ def preauthComp()
     {
         i = 0
         data = '-in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-        str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + data
+        str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.19 -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + data
         bat str
     }
 }
@@ -34,7 +34,7 @@ def closeBatch(valPath)
     {
         script
         {
-            str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ' + valPath
+            str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.19 -vp ' + valPath
             bat str
         }
     }
