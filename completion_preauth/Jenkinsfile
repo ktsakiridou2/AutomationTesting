@@ -63,7 +63,6 @@ pipeline {
         {
             steps
             {
-                def ip = '-ip 192.168.1.19'
                 preauthComp(ip)
             }
         }
@@ -72,7 +71,6 @@ pipeline {
         {
             steps
             {
-                def ip = '-ip 192.168.1.19'
                 preauth(ip)
             }
             
@@ -82,7 +80,6 @@ pipeline {
         {
             steps
             {
-                def ip = '-ip 192.168.1.19'
                 preauthComp(ip)
             }
             
@@ -92,7 +89,6 @@ pipeline {
         {
             steps
             {
-                def ip = '-ip 192.168.1.19'
                 closeBatch(ip,'../AutomationTesting/validation/closeBatch.txt')
             }
         }
