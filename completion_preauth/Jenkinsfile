@@ -1,6 +1,4 @@
-def ip
-
-def preauth()
+def preauth(ip)
 {
         script
         {
@@ -17,24 +15,24 @@ def preauth()
         }
 }
 
-def preauthComp()
+def preauthComp(ip)
 {
     catchError(stageResult: 'FAILURE')
     {
         i = 0
         data = '-in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-        str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.19 -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + data
+        str = 'python.exe ../AutomationTesting/Main.py -t 0 '+ ip ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + data
         bat str
     }
 }
 
-def closeBatch(valPath)
+def closeBatch(ip, valPath)
 {
     catchError(stageResult: 'FAILURE')
     {
         script
         {
-            str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.19 -vp ' + valPath
+            str = 'python.exe ../AutomationTesting/Main.py -t 0 '+ ip ' -vp ' + valPath
             bat str
         }
     }
@@ -50,7 +48,7 @@ pipeline {
         {
             steps
             {
-                closeBatch('../AutomationTesting/validation/closeBatch1.txt')
+                closeBatch(ip,'../AutomationTesting/validation/closeBatch1.txt')
             }
         }
 
@@ -59,7 +57,7 @@ pipeline {
         {
             steps
             {
-                preauthComp()
+                preauthComp(ip)
             }
         }
 
@@ -67,7 +65,7 @@ pipeline {
         {
             steps
             {
-                preauth()
+                preauth(ip)
             }
             
         }
@@ -76,7 +74,7 @@ pipeline {
         {
             steps
             {
-                preauthComp()
+                preauthComp(ip)
             }
             
         }
@@ -85,7 +83,7 @@ pipeline {
         {
             steps
             {
-                closeBatch('../AutomationTesting/validation/closeBatch.txt')
+                closeBatch(ip,'../AutomationTesting/validation/closeBatch.txt')
             }
         }
     }
