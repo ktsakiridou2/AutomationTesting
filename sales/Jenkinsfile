@@ -27,7 +27,7 @@ def closeBatch(valPath)
     {
         catchError(stageResult: 'FAILURE')
         {
-            str = 'AutomationTesting\Main.exe ' + connType + ip +' -vp ' + valPath
+            str = 'AutomationTesting/Main.exe ' + connType + ip +' -vp ' + valPath
             bat str
         }
     }
