@@ -12,15 +12,13 @@ def sale(iterations)
                 bat str
             } 
         }
-        
     }
 }
 
 def closeBatch(valPath)
 {
     script
-    {
-            
+    {    
         catchError(stageResult: 'FAILURE')
         {
             str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ' + valPath
