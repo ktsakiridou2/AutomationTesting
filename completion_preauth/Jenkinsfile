@@ -1,4 +1,4 @@
-def ip = '-ip 192.168.1.19'
+def ip
 
 def preauth()
 {
@@ -43,7 +43,7 @@ def closeBatch(valPath)
 
 pipeline {
     agent any
-  
+    ip = = '-ip 192.168.1.19'
     stages 
     {
         stage('closeBatchStart')
