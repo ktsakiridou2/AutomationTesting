@@ -13,8 +13,8 @@ def sale(size)
                 max = 98
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
-                data = ' -out ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'Main.exe ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data
+                data = ' -out transData/Data' + i.toString()+ '.txt'
+                str = 'Main.exe ' + connType + ip +' -vp validation/sale0.txt ' + amount + data
                 bat str 
             }
         }
@@ -45,7 +45,7 @@ pipeline {
             steps
             {
                         
-                closeBatch('../AutomationTesting/validation/closeBatch1.txt')
+                closeBatch('validation/closeBatch1.txt')
             }
         }
 
@@ -62,7 +62,7 @@ pipeline {
         {
             steps
             {
-                closeBatch('../AutomationTesting/validation/closeBatch.txt')
+                closeBatch('validation/closeBatch.txt')
             }
         }
     }
