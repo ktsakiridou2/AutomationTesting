@@ -14,7 +14,7 @@ def sale(size)
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = "-a" + random_num.toString()
                 data = " -out AutomationTesting/transData/Data" + i.toString()+ ".txt"
-                str = "C:\Users/Xrist/OneDrive/Υπολογιστής/AutomationTesting/Main.exe " + connType + ip +" -vp AutomationTesting/validation/sale0.txt " + amount + data
+                str = "Main.exe " + connType + ip +" -vp AutomationTesting/validation/sale0.txt " + amount + data
                 bat str 
             }
         }
@@ -27,7 +27,7 @@ def closeBatch(valPath)
     {
         catchError(stageResult: 'FAILURE')
         {
-            str = "C:\Users/Xrist/OneDrive/Υπολογιστής/AutomationTesting/Main.exe " + connType + ip +" -vp " + valPath
+            str = "Main.exe " + connType + ip +" -vp " + valPath
             bat str
         }
     }
