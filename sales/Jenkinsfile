@@ -14,8 +14,8 @@ def sale(size)
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = "-a" + random_num.toString()
                 data = " -out AutomationTesting/transData/Data" + i.toString()+ ".txt"
-                str = "Main.exe " + connType + ip +" -vp AutomationTesting/validation/sale0.txt " + amount + data
-                bat str 
+                str = "AutomationProject/Main.exe " + connType + ip +" -vp AutomationTesting/validation/sale0.txt " + amount + data
+                start str 
             }
         }
     }
@@ -27,8 +27,8 @@ def closeBatch(valPath)
     {
         catchError(stageResult: 'FAILURE')
         {
-            str = "Main.exe " + connType + ip +" -vp " + valPath
-            bat str
+            str = "AutomationProject/Main.exe " + connType + ip +" -vp " + valPath
+            start str
         }
     }
 }
