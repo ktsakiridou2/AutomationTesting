@@ -79,16 +79,7 @@ pipeline {
             }
             
         }
-
-        stage('preauthCompletion2')
-        {
-            steps
-            {
-                preauthComp()
-            }
             
-        }
-        
         stage('closeBatch')
         {
             steps
