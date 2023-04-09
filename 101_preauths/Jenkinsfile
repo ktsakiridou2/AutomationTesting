@@ -49,15 +49,24 @@ pipeline {
             }
         }
 
+        stage('100 preauths')
+        {
+            steps
+            {
+                preauth(100)
+            }
+            
+        }
+        
         stage('preauths')
         {
             steps
             {
-                preauth()
+                preauth(1)
             }
             
         }
-
+            
         stage('closeBatch')
         {
             steps
