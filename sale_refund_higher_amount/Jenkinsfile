@@ -63,7 +63,7 @@ pipeline {
         {
             steps
             {
-                sale(2)
+                sale(1)
             }
             
         }
@@ -71,7 +71,7 @@ pipeline {
         {
             steps
             {
-                refund(2)
+                refund(1)
             }
             
         }
