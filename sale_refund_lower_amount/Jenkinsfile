@@ -1,35 +1,46 @@
-def sale()
+def sale(iterations)
 {
-    
-    catchError(stageResult: 'FAILURE')
-    {
         script
         {
-            str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ../AutomationTesting/validation/sale0.txt -a 12 -out ../AutomationTesting/outData0.txt'
             
-            bat str
+            for(int i=0;i<iterations; ++i)
+            {
+                catchError(stageResult: 'FAILURE')
+                {
+                    amount = '-a 5'
+                    data = ' -out ../AutomationTesting/outData.txt'
+                    str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ../AutomationTesting/validation/sale0.txt ' + amount + data
+        
+                    bat str 
+                }
+            }
         }
-    }
 }
 
-def refund()
+def refund(iterations)
 {
-    catchError(stageResult: 'FAILURE')
-    {
         script
         {
-            str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ../AutomationTesting/validation/refund0.txt -a 5 -in ../AutomationTesting/outData0.txt'
-            bat str
+            for(int i=0;i<iterations; ++i)
+            {
+            
+                catchError(stageResult: 'FAILURE')
+                {
+                    data = ' -in ../AutomationTesting/outData.txt'
+                    str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ../AutomationTesting/validation/refund0.txt ' + data
+                    bat str
+                }
+            }
         }
-    }
 }
-def closeBatch()
+
+def closeBatch(valPath)
 {
-    catchError(stageResult: 'FAILURE')
+    script
     {
-        script
+        catchError(stageResult: 'FAILURE')
         {
-            str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ../AutomationTesting/validation/closeBatch.txt'
+            str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ' + valPath
             bat str
         }
     }
@@ -45,31 +56,30 @@ pipeline {
         {
             steps
             {
-                closeBatch()
+                closeBatch('../AutomationTesting/validation/closeBatch1.txt')
             }
         }
-        stage('sale')
+        stage('sales')
         {
             steps
             {
-                sale()
+                sale(1)
             }
             
         }
-       
-        stage('refund')
+        stage('refunds')
         {
             steps
             {
-                refund()
+                refund(1)
             }
+            
         }
-        
-        stage('close batch')
+        stage('closeBatch')
         {
             steps
             {
-                closeBatch()
+                closeBatch('../AutomationTesting/validation/closeBatch.txt')
             }
         }
     }
