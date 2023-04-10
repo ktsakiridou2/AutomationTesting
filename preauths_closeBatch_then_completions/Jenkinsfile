@@ -75,7 +75,7 @@ pipeline {
             }
             
         }
-        /*
+   
         stage('closeBatch1')
         {
             steps
@@ -83,7 +83,7 @@ pipeline {
                 closeBatch('../AutomationTesting/validation/closeBatch.txt')
             }
         }
-        */
+      
         stage('preauthCompletion')
         {
             steps
