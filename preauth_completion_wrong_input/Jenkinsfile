@@ -27,7 +27,7 @@ def preauthComp()
         {
 
             data = '-in ../AutomationTesting/outData.txt'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletionError3.txt ' + data
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletionError2.txt ' + data
             bat str
         }
     }
