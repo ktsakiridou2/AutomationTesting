@@ -19,7 +19,7 @@ def preauth()
         }
 }
 
-def preauthComp()
+def preauthComp(valPath)
 {
     script
     {
@@ -27,7 +27,7 @@ def preauthComp()
         {
             i = 0
             data = '-in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + data
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + data
             bat str
         }
     }
@@ -67,7 +67,7 @@ pipeline {
         {
             steps
             {
-                preauthComp()
+                preauthComp('../AutomationTesting/validation/preauthCompletionError.txt ')
             }
         }
 
@@ -84,7 +84,7 @@ pipeline {
         {
             steps
             {
-                preauthComp()
+                preauthComp('../AutomationTesting/validation/preauthCompletion0.txt ')
             }
             
         }
