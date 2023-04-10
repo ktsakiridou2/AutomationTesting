@@ -27,7 +27,7 @@ def preauthComp(valPath)
         {
             i = 0
             data = '-in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + data
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + data
             bat str
         }
     }
