@@ -69,11 +69,17 @@ pipeline {
         {
             steps
             {
-                sale(100)
+                sale(10)
             }
             
         }
-
+        stage('refund')
+        {
+            steps
+            {
+                refund(10)
+            }
+        }
         stage('closeBatch')
         {
             steps
