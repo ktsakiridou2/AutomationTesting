@@ -10,7 +10,7 @@ def sale(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                amount = '-a 100000000'
+                amount = '-a 10000000000'
                 data = ' -out ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data
                 bat str 
