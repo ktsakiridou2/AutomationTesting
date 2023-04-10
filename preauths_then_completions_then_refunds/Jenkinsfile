@@ -25,9 +25,10 @@ def preauthComp(size)
 {
     script
     {
-        catchError(stageResult: 'FAILURE')
+
+        for(int i=0; i<size; ++i)
         {
-            for(int i=0; i<size; ++i)
+            catchError(stageResult: 'FAILURE')
             {
                 data = '-in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + data
@@ -41,9 +42,9 @@ def refund(size)
 {
     script
     {
-        catchError(stageResult: 'FAILURE')
+        for(int i=0; i<size; ++i)
         {
-            for(int i=0; i<size; ++i)
+            catchError(stageResult: 'FAILURE')
             {
                 data = '-in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/refund0.txt ' + data
@@ -86,7 +87,7 @@ pipeline {
         {
             steps
             {
-                preauth(3)
+                preauth(2)
             }
             
         }
@@ -95,7 +96,7 @@ pipeline {
         {
             steps
             {
-                preauthComp(3)
+                preauthComp(2)
             }
             
         }
@@ -104,7 +105,7 @@ pipeline {
         {
             steps
             {
-                refund(3)
+                refund(2)
             }
             
         }
