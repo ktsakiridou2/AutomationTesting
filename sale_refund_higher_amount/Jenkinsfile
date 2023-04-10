@@ -1,37 +1,34 @@
-def sale(iterations)
+ip = ' -ip 192.168.1.2'
+connType = '-t 0'
+
+def sale()
 {
         script
         {
-            
-            for(int i=0;i<iterations; ++i)
+            catchError(stageResult: 'FAILURE')
             {
-                catchError(stageResult: 'FAILURE')
-                {
-                    amount = '-a 40'
-                    data = ' -out ../AutomationTesting/outData.txt'
-                    str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ../AutomationTesting/validation/sale0.txt ' + amount + data
-        
-                    bat str 
-                }
+                i = 0
+                amount = '-a 5'
+                data = ' -out ../AutomationTesting/OutData.txt'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data
+                bat str 
             }
         }
 }
 
-def refund(iterations)
+def refund()
 {
-        script
+    script
+    {
+        catchError(stageResult: 'FAILURE')
         {
-            for(int i=0;i<iterations; ++i)
-            {
-            
-                catchError(stageResult: 'FAILURE')
-                {
-                    data = ' -in ../AutomationTesting/outData.txt'
-                    str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ../AutomationTesting/validation/refund0.txt ' + data
-                    bat str
-                }
-            }
+            i = 0
+            data = ' -in ../AutomationTesting/OutData.txt'
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/refund0.txt ' + data
+            bat str
         }
+    }
+
 }
 
 def closeBatch(valPath)
@@ -40,41 +37,46 @@ def closeBatch(valPath)
     {
         catchError(stageResult: 'FAILURE')
         {
-            str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ' + valPath
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath
             bat str
         }
     }
-   
 }
 
 pipeline {
     agent any
-  
+
     stages 
     {
+
+
         stage('closeBatchStart')
         {
             steps
             {
+                        
                 closeBatch('../AutomationTesting/validation/closeBatch1.txt')
             }
         }
-        stage('sales')
+
+        stage('sale')
         {
             steps
             {
-                sale(1)
+                sale()
             }
             
         }
-        stage('refunds')
+
+        stage('refund')
         {
             steps
             {
-                refund(1)
+                refund()
             }
             
         }
+        
         stage('closeBatch')
         {
             steps
