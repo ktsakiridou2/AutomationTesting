@@ -1,39 +1,40 @@
-def sale(iterations)
+
+ip = ' -ip 192.168.1.2'
+connType = '-t 0'
+
+def sale(size)
 {
-        script
+    script
+    {
+        for(int i=0; i<size; ++i)
         {
-            
-            for(int i=0;i<iterations; ++i)
+            catchError(stageResult: 'FAILURE')
             {
-                catchError(stageResult: 'FAILURE')
-                {
-                    max = 98
-                    random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
-                    amount = '-a' + random_num.toString()
-                    data = ' -out ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                    str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ../AutomationTesting/validation/sale0.txt ' + amount + data
-        
-                    bat str 
-                }
+                max = 98
+                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                amount = '-a' + random_num.toString()
+                data = ' -out ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data
+                bat str 
             }
         }
+    }
 }
 
-def refund(iterations)
+def refund(size)
 {
-        script
+    script
+    {
+        for(int i=0; i<size; ++i)
         {
-            for(int i=0;i<iterations; ++i)
+            catchError(stageResult: 'FAILURE')
             {
-            
-                catchError(stageResult: 'FAILURE')
-                {
-                    data = '-in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                    str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ../AutomationTesting/validation/refund0.txt ' + data
-                    bat str
-                }
+                data = ' -in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/refund0.txt ' + data
+                bat str 
             }
         }
+    }
 }
 
 def closeBatch(valPath)
@@ -42,41 +43,37 @@ def closeBatch(valPath)
     {
         catchError(stageResult: 'FAILURE')
         {
-            str = 'python.exe ../AutomationTesting/Main.py -t 0 -ip 192.168.1.2 -vp ' + valPath
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath
             bat str
         }
     }
-   
 }
 
 pipeline {
     agent any
-  
+
     stages 
     {
+
+
         stage('closeBatchStart')
         {
             steps
             {
+                        
                 closeBatch('../AutomationTesting/validation/closeBatch1.txt')
             }
         }
-        stage('sales')
+
+        stage('sale')
         {
             steps
             {
-                sale(2)
+                sale(100)
             }
             
         }
-        stage('refunds')
-        {
-            steps
-            {
-                refund(2)
-            }
-            
-        }
+
         stage('closeBatch')
         {
             steps
