@@ -53,7 +53,7 @@ pipeline {
         {
             steps
             {
-                preauth(102)
+                preauth(50)
             }
             
         }
@@ -62,10 +62,19 @@ pipeline {
         {
             steps
             {
-                preauth(200)
+                preauth(50)
             }
             
-        }    
+        }
+        
+        stage('preauths3')
+        {
+            steps
+            {
+                preauth(51)
+            }
+            
+        }
 
         stage('closeBatch')
         {
