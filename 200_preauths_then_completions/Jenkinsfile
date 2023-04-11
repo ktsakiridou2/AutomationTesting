@@ -70,7 +70,7 @@ pipeline {
         {
             steps
             {
-                preauth(2,0)
+                preauth(100,0)
             }
             
         }
@@ -79,7 +79,7 @@ pipeline {
         {
             steps
             {
-                preauth(4,2)
+                preauth(200,100)
             }
             
         }
