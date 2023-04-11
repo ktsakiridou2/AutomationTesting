@@ -1,5 +1,5 @@
 
-ip = ' -ip 192.168.1.19'
+ip = ' -ip 192.168.1.2'
 connType = '-t 0'
 
 def sale()
