@@ -14,7 +14,7 @@ def preauth(size, offset)
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
                 data = ' -out ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + ' -lp Logs/stress_test/log.txt'
                 bat str 
             }
         }
@@ -30,7 +30,7 @@ def preauthComp(size, offset, valPath)
             catchError(stageResult: 'FAILURE')
             {
                 data = '-in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + data
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + data + ' -lp Logs/stress_test/log.txt'
                 bat str
             }
         }
@@ -50,7 +50,7 @@ def sale(size, offset)
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
                 data = ' -out ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + ' -lp Logs/stress_test/log.txt'
                 bat str 
             }
         }
@@ -66,7 +66,7 @@ def refund(size, offset, valPath)
             catchError(stageResult: 'FAILURE')
             {
                 data = ' -in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp '+ valPath + data
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp '+ valPath + data + ' -lp Logs/stress_test/log.txt'
                 bat str 
             }
         }
@@ -79,7 +79,7 @@ def closeBatch(valPath)
     {
         catchError(stageResult: 'FAILURE')
         {
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + ' -lp Logs/stress_test/log.txt'
             bat str
         }
     }
