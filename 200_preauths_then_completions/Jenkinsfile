@@ -1,9 +1,8 @@
 
 ip = ' -ip 192.168.1.2'
 connType = '-t 0'
-offset = 0
 
-def preauth(size)
+def preauth(size, offset)
 {
     script
     {
@@ -19,16 +18,13 @@ def preauth(size)
                 bat str 
             }
         }
-        offset += size
     }
 }
 
-def preauthComp(size)
+def preauthComp(size, offset)
 {
     script
     {
-        if(offset > size)
-            offset = 0
         for(int i= offset; i<size; ++i)
         {
             catchError(stageResult: 'FAILURE')
@@ -38,7 +34,6 @@ def preauthComp(size)
                 bat str
             }
         }
-        offset += size
     }
 
 }
@@ -75,7 +70,7 @@ pipeline {
         {
             steps
             {
-                preauth(2)
+                preauth(2,0)
             }
             
         }
@@ -84,27 +79,18 @@ pipeline {
         {
             steps
             {
-                preauth(4)
+                preauth(4,2)
             }
             
         }
-        stage('preauthCompletion1')
+        stage('preauthCompletion')
         {
             steps
             {
-                preauthComp(2)
+                preauthComp(1,0)
             }
-            
         }
-        stage('preauthCompletion2')
-        {
-            steps
-            {
-                preauthComp(4)
-            }
-            
-        }
-        
+   
         stage('closeBatch')
         {
             steps
