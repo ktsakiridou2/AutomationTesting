@@ -2,7 +2,7 @@
 ip = ' -ip 192.168.1.19'
 connType = '-t 0'
 
-def preauth()
+def sale()
 {
         script
         {
@@ -13,7 +13,7 @@ def preauth()
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
                 data = ' -out ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data
                 bat str 
             }
         }
@@ -62,11 +62,11 @@ pipeline {
             }
         }
 
-        stage('preauth')
+        stage('sale')
         {
             steps
             {
-                preauth()
+                sale()
             }
             
         }
