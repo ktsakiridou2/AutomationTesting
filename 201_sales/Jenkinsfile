@@ -7,8 +7,6 @@ def sale(size)
 {
     script
     {
-        if(offset > size)
-            offset = 0
         for(int i= offset; i<size; ++i)
         {
             catchError(stageResult: 'FAILURE')
@@ -21,7 +19,7 @@ def sale(size)
                 bat str 
             }
         }
-        offset += size
+        offset += 2
     }
 }
 
@@ -74,7 +72,7 @@ pipeline {
         {
             steps
             {
-                sale(5)
+                sale(6)
             }
             
         }
