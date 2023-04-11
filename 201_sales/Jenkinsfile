@@ -1,12 +1,13 @@
 
-ip = ' -ip 192.168.1.19'
+ip = ' -ip 192.168.1.2'
 connType = '-t 0'
+offset = 0
 
 def sale(size)
 {
     script
     {
-        for(int i=0; i<size; ++i)
+        for(int i= offset; i<size; ++i)
         {
             catchError(stageResult: 'FAILURE')
             {
@@ -18,24 +19,8 @@ def sale(size)
                 bat str 
             }
         }
+        offset += size
     }
-}
-
-def refund(size)
-{
-    script
-    {
-        catchError(stageResult: 'FAILURE')
-        {
-            for(int i=0; i<size; ++i)
-            {
-                data = '-in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/refund0.txt ' + data
-                bat str
-            }
-        }
-    }
-
 }
 
 def closeBatch(valPath)
@@ -62,19 +47,36 @@ pipeline {
             steps
             {
                         
-                closeBatch('../AutomationTesting/validation/closeBatch1.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch.txt')
             }
         }
 
-        stage('sale')
+        stage('sale1')
         {
             steps
             {
-                sale(5)
+                sale(2)
             }
             
         }
-
+        
+        stage('sale2')
+        {
+            steps
+            {
+                sale(2)
+            }
+            
+        }
+        stage('sale3')
+        {
+            steps
+            {
+                sale(1)
+            }
+            
+        }
+  
         stage('closeBatch')
         {
             steps
