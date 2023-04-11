@@ -85,7 +85,7 @@ pipeline {
         {
             steps
             {
-                preauthComp('../AutomationTesting/validation/preauthCompletionError.txt ')
+                preauthComp('../AutomationTesting/validation/preauthCompletion0.txt ')
             }
             
         }
