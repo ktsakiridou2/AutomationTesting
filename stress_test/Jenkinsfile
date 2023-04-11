@@ -199,5 +199,13 @@ pipeline {
             }
             
         }
+        
+        stage('closeBatch4')
+        {
+            steps
+            {
+                closeBatch('../AutomationTesting/validation/closeBatch.txt')
+            }
+        }
     }
 }
