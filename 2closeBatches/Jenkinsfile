@@ -34,7 +34,7 @@ pipeline {
         {
             steps
             {
-                closeBatch('../AutomationTesting/validation/closeBatchError.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch.txt')
             }
         }
     }
