@@ -166,11 +166,11 @@ pipeline {
             
         }
 
-        stage('preauthCompletion2', '../AutomationTesting/validation/preauthCompletion0.txt ')
+        stage('preauthCompletion2')
         {
             steps
             {
-                preauthComp(1,0)
+                preauthComp(1,0, '../AutomationTesting/validation/preauthCompletion0.txt ')
             }
             
         }
