@@ -105,7 +105,7 @@ pipeline {
         {
             steps
             {
-                preauth(100,0)
+                preauth(2,0)
             }
             
         }
@@ -114,7 +114,7 @@ pipeline {
         {
             steps
             {
-                preauth(200,100)
+                preauth(4,2)
             }
             
         }
@@ -122,7 +122,7 @@ pipeline {
         {
             steps
             {
-                preauthComp(1,0)
+                preauthComp(6,0)
             }
         }
 
@@ -138,7 +138,7 @@ pipeline {
         {
             steps
             {
-                sale(100,0)
+                sale(3,0)
             }
         }
 
@@ -146,7 +146,7 @@ pipeline {
         {
             steps
             {
-                sale(80,50)
+                sale(2,0)
             }
         }
 
@@ -157,12 +157,19 @@ pipeline {
                 closeBatch('../AutomationTesting/validation/closeBatch.txt')
             }
         }
-
+        stage('refund2')
+        {
+            steps
+            {
+                sale(3,2)
+            }
+        }
+        
         stage('preauth3')
         {
             steps
             {
-                preauth(50,0)
+                preauth(3,0)
             }
             
         }
@@ -171,7 +178,7 @@ pipeline {
         {
             steps
             {
-                preauth(10,0)
+                preauth(1,0)
             }
             
         }
@@ -188,7 +195,7 @@ pipeline {
         {
             steps
             {
-                preauth(50,10)
+                preauth(3,1)
             }
             
         }
