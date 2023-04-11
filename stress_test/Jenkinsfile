@@ -122,7 +122,7 @@ pipeline {
         {
             steps
             {
-                preauthComp(6,0)
+                preauthComp(4,0)
             }
         }
 
