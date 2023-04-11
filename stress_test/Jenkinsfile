@@ -85,6 +85,18 @@ def closeBatch(valPath)
     }
 }
 
+def closeBatchEnd(valPath)
+{
+    script
+    {
+        catchError(stageResult: 'FAILURE')
+        {
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + ' -lp ../AutomationTesting/Logs/stress_test/log.txt' + '-end 1'
+            bat str
+        }
+    }
+}
+
 pipeline {
     agent any
 
@@ -192,11 +204,11 @@ pipeline {
             
         }
         
-        stage('closeBatch4')
+        stage('closeBatchEnd')
         {
             steps
             {
-                closeBatch('../AutomationTesting/validation/closeBatch.txt')
+                closeBatchEnd('../AutomationTesting/validation/closeBatch.txt')
             }
         }
     }
