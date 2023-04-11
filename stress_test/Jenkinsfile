@@ -21,7 +21,7 @@ def preauth(size, offset)
     }
 }
 
-def preauthComp(size, offset)
+def preauthComp(size, offset, valPath)
 {
     script
     {
@@ -30,7 +30,7 @@ def preauthComp(size, offset)
             catchError(stageResult: 'FAILURE')
             {
                 data = '-in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + data
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + data
                 bat str
             }
         }
@@ -57,7 +57,7 @@ def sale(size, offset)
     }
 }
 
-def refund(size, offset)
+def refund(size, offset, valPath)
 {
     script
     {
@@ -66,7 +66,7 @@ def refund(size, offset)
             catchError(stageResult: 'FAILURE')
             {
                 data = ' -in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/refund0.txt ' + data
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp '+ valPath + data
                 bat str 
             }
         }
@@ -114,7 +114,7 @@ pipeline {
         {
             steps
             {
-                preauthComp(4,0)
+                preauthComp(4,0, '../AutomationTesting/validation/preauthCompletion0.txt ')
             }
         }
 
@@ -138,7 +138,7 @@ pipeline {
         {
             steps
             {
-                refund(2,0)
+                refund(2,0, '../AutomationTesting/validation/refund0.txt ')
             }
         }
 
@@ -153,7 +153,7 @@ pipeline {
         {
             steps
             {
-                refund(3,2)
+                refund(3,2, '../AutomationTesting/validation/refundError.txt ')
             }
         }
         
@@ -166,7 +166,7 @@ pipeline {
             
         }
 
-        stage('preauthCompletion2')
+        stage('preauthCompletion2', '../AutomationTesting/validation/preauthCompletion0.txt ')
         {
             steps
             {
@@ -187,7 +187,7 @@ pipeline {
         {
             steps
             {
-                preauthComp(3,1)
+                preauthComp(3,1, '../AutomationTesting/validation/preauthCompletionError2.txt ')
             }
             
         }
