@@ -105,19 +105,11 @@ pipeline {
         {
             steps
             {
-                preauth(2,0)
+                preauth(4,0)
             }
             
         }
         
-        stage('preauth2')
-        {
-            steps
-            {
-                preauth(4,2)
-            }
-            
-        }
         stage('preauthCompletion1')
         {
             steps
