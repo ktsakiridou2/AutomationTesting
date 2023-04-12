@@ -8,7 +8,7 @@ def sale()
             catchError(stageResult: 'FAILURE')
             {
                 i = 0
-                amount = '-a 60'
+                amount = ' -a 60'
                 data = ' -out ../AutomationTesting/OutData.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data
                 bat str 
@@ -23,7 +23,7 @@ def refund()
         catchError(stageResult: 'FAILURE')
         {
             i = 0
-            amount = '-a 30'
+            amount = ' -a 30'
             data = ' -in ../AutomationTesting/OutData.txt'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/refund0.txt ' + data + amount
             bat str
