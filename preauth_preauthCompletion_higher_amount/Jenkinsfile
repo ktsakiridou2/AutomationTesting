@@ -23,7 +23,7 @@ def preauthComp()
         catchError(stageResult: 'FAILURE')
         {
             i = 0
-            amount = '-a 20'
+            amount = ' -a 20'
             data = ' -in ../AutomationTesting/OutData.txt'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + data + amount
             bat str
