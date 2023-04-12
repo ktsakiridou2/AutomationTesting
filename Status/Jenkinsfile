@@ -1,0 +1,41 @@
+
+ip = ' -ip 192.168.1.2'
+connType = '-t 0'
+
+def status()
+{
+    script
+    {
+        catchError(stageResult: 'FAILURE')
+        {
+            str = 'python.exe ../AutomationTesting/Main.py -vp ../AutomationTesting/validation/status.txt'
+            bat str
+        }
+    }
+}
+
+pipeline {
+    agent any
+
+    stages 
+    {
+
+
+        stage('status1')
+        {
+            steps
+            {
+                        
+                status()
+            }
+        }
+
+        stage('status2')
+        {
+            steps
+            {
+                status()
+            }
+        }
+    }
+}
