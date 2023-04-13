@@ -8,7 +8,7 @@ def status()
     {
         catchError(stageResult: 'FAILURE')
         {
-            str = 'python.exe ../AutomationTesting/Main.py -vp ../AutomationTesting/validation/status.txt' + ' -dir ../AutomationTesting/Tests/Status -lp ../AutomationTesting/Logs/log0.LOG' + ip + connType
+            str = 'python.exe ../AutomationTesting/Main.py -vp ../AutomationTesting/validation/status.txt' + ' -dir ../AutomationTesting/Tests/Status -lp Logs/log0.LOG' + ip + connType
             bat str
         }
     }
