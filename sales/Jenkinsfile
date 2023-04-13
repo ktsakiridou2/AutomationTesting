@@ -13,7 +13,7 @@ def sale(size)
                 max = 98
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
-                data = ' -out ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
+                data = ' -out transData/Data' + i.toString()+ '.txt'
                 log = ' -lp Logs/saleLog' + i.toString() + '.LOG'
                 dir = ' -dir Tests/sales'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log
