@@ -30,7 +30,9 @@ def preauthComp()
             data = ' -out transData/Data' + i.toString()+ '.txt'
             log = ' -lp Logs/saleLog' + i.toString() + '.LOG'
             dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_input'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletionError2.txt ' + dir + log + data
+            stan = ' -stan 134'
+            authCode = ' -auth 123456'
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletionError2.txt ' + dir + log + data + stan + auth
             bat str
         }
     }
