@@ -23,13 +23,13 @@ def sale(size)
     }
 }
 
-def closeBatch(valPath)
+def closeBatch(valPath, index)
 {
     script
     {
         catchError(stageResult: 'FAILURE')
         {
-            log = ' -lp Logs/closeBatchLog.LOG'
+            log = ' -lp Logs/closeBatchLog' + index.toString() + '.LOG'
             dir = ' -dir ../AutomationTesting/Tests/sales'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log
             bat str
@@ -44,12 +44,12 @@ pipeline {
     {
 
 
-        stage('closeBatchStart')
+        stage('closeBatch1')
         {
             steps
             {
                         
-                closeBatch('../AutomationTesting/validation/closeBatch1.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch1.txt', 1)
             }
         }
 
@@ -66,7 +66,7 @@ pipeline {
         {
             steps
             {
-                closeBatch('../AutomationTesting/validation/closeBatch.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 2)
             }
         }
     }
