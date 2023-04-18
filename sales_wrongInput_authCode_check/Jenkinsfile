@@ -17,7 +17,7 @@ def sale(size)
                 log = ' -lp Logs/saleLog' + i.toString() + '.LOG'
                 dir = ' -dir ../AutomationTesting/Tests/sales_authCode_RRN'
                 authCode = ' -auth 123'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt '+' -gv ../AutomationTesting/validation/globalValidations.txt ' + amount + dir + log + data + authCode
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale_wrong_input.txt '+' -gv ../AutomationTesting/validation/globalValidations.txt ' + amount + dir + log + data + authCode
                 bat str 
             }
         }
