@@ -64,12 +64,12 @@ pipeline {
         {
             steps
             {
-                sale(1)
+                sale_refund(1)
             }
             
         }
 
-        stage('closeBatch')
+        stage('closeBatch2')
         {
             steps
             {
