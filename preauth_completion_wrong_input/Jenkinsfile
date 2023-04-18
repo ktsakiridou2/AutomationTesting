@@ -12,8 +12,10 @@ def preauth()
                 max = 98
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
-                data = ' -out ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data
+                data = ' -out transData/Data' + i.toString()+ '.txt'
+                log = ' -lp Logs/saleLog' + i.toString() + '.LOG'
+                dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_input'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
                 bat str 
             }
         }
@@ -25,22 +27,25 @@ def preauthComp()
     {
         catchError(stageResult: 'FAILURE')
         {
-
-            data = '-in ../AutomationTesting/outData.txt'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletionError2.txt ' + data
+            data = ' -out transData/Data' + i.toString()+ '.txt'
+            log = ' -lp Logs/saleLog' + i.toString() + '.LOG'
+            dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_input'
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletionError2.txt ' + dir + log + data
             bat str
         }
     }
 
 }
 
-def closeBatch(valPath)
+def closeBatch(valPath, index)
 {
     script
     {
         catchError(stageResult: 'FAILURE')
         {
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath
+            log = ' -lp Logs/saleLog' + index.toString() + '.LOG'
+            dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_input'
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log
             bat str
         }
     }
@@ -53,12 +58,12 @@ pipeline {
     {
 
 
-        stage('closeBatchStart')
+        stage('closeBatch1')
         {
             steps
             {
                         
-                closeBatch('../AutomationTesting/validation/closeBatch.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
             }
         }
 
@@ -80,11 +85,11 @@ pipeline {
             
         }
         
-        stage('closeBatch')
+        stage('closeBatch2')
         {
             steps
             {
-                closeBatch('../AutomationTesting/validation/closeBatch.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 2)
             }
         }
     }
