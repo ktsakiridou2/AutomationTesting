@@ -27,6 +27,7 @@ def preauthComp()
     {
         catchError(stageResult: 'FAILURE')
         {
+            i = 0
             data = ' -out transData/Data' + i.toString()+ '.txt'
             log = ' -lp Logs/saleLog' + i.toString() + '.LOG'
             dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_input'
