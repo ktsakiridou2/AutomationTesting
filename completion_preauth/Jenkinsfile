@@ -31,7 +31,7 @@ def preauthComp(valPath)
             dir = ' -dir ../AutomationTesting/Tests/completion_preauth'
             log = ' -lp Logs/preauthCompletionLog' + i.toString() + '.LOG'
             data = ' -in transData/Data' + i.toString()+ '.txt'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + dir + log + data
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + data
             bat str
         }
     }
