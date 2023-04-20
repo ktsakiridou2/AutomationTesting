@@ -3,14 +3,6 @@ ip = ' -ip 192.168.1.2'
 connType = '-t 0'
 dir = ' -dir ../AutomationTesting/Tests/sales'
 
-def getTime()
-{
-    script
-    {
-        DATETIME_TAG = java.time.LocalDateTime.now()
-        sh "echo ${DATETIME_TAG}"
-    }
-}
 def sale(size)
 {
     script
@@ -55,7 +47,6 @@ pipeline {
         {
             steps
             {
-                getTime()
                 closeBatch('../AutomationTesting/validation/closeBatch1.txt', 1)
             }
         }
