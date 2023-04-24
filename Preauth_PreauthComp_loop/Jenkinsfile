@@ -47,7 +47,7 @@ def closeBatch(valPath, index)
         catchError(stageResult: 'FAILURE')
         {
             dir = ' -dir ../AutomationTesting/Tests/Preauth_PreauthComp_loop'
-            log = ' -lp Logs/closeBatchLog' + index.toString() + '.LOG'
+            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log
             bat str
         }
