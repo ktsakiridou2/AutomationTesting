@@ -2,6 +2,14 @@
 ip = ' -ip 192.168.1.2'
 connType = '-t 0'
 
+def init()
+{
+        script
+        {
+                bat 'python.exe ../AutomationTesting/SetupTest.py '
+        }
+}
+
 def sale(size, offset)
 {
     script
@@ -14,8 +22,8 @@ def sale(size, offset)
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
                 dir = ' -dir ../AutomationTesting/Tests/201_sales'
-                log = ' -lp Logs/saleLog' + i.toString() + '.LOG'
-                data = ' -out transData/Data' + i.toString()+ '.txt'
+                log = ' -lp saleLog' + i.toString() + '.LOG'
+                data = ' -out Data' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + dir + log + data
                 bat str 
             }
@@ -30,7 +38,7 @@ def closeBatch(valPath, index)
         catchError(stageResult: 'FAILURE')
         {
             dir = ' -dir ../AutomationTesting/Tests/201_sales'
-            log = ' -lp Logs/closeBatchLog' + index.toString() + '.LOG'
+            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log
             bat str
         }
@@ -42,7 +50,13 @@ pipeline {
 
     stages 
     {
-
+        stage('Init')
+        {
+            steps
+            {
+                init() 
+            }
+        }
 
         stage('closeBatch1')
         {
@@ -57,11 +71,11 @@ pipeline {
         {
             steps
             {
-                sale(100,0)
+                sale(5,0)
             }
             
         }
-        
+        /*
         stage('sale2')
         {
             steps
@@ -69,7 +83,7 @@ pipeline {
                 sale(200,100)
             }
             
-        }
+        }*/
         stage('sale3')
         {
             steps
