@@ -2,50 +2,69 @@
 ip = ' -ip 192.168.1.2'
 connType = '-t 0'
 
+def init()
+{
+        script
+        {
+                bat 'python.exe ../AutomationTesting/SetupTest.py '
+        }
+}
+
 def preauth(size)
 {
-    script
-    {
-        for(int i=0; i<size; ++i)
+        script
         {
-            catchError(stageResult: 'FAILURE')
+            for(int i=0;i<size;++i)
             {
-                max = 98
-                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
-                amount = '-a' + random_num.toString()
-                data = ' -out ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' +' -gv ../AutomationTesting/validation/globalValidations.txt '+ amount + data
-                bat str 
+                catchError(stageResult: 'FAILURE')
+                {
+                    max = 98
+                    random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                    amount = '-a' + random_num.toString()
+                    dir = ' -dir ../AutomationTesting/Tests/preauths_then_completions_authcode_rnn_check'
+                    log = ' -lp preauthLog' + i.toString() + '.LOG'
+                    data = ' -out Data' + i.toString()+ '.txt'
+                    globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
+                    str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data + globalVal
+                    bat str 
+                }
             }
+            
         }
-    }
 }
-
 def preauthComp(size)
 {
-    script
-    {
-
-        for(int i=0; i<size; ++i)
+        script
         {
-            catchError(stageResult: 'FAILURE')
+            for(int i=0;i<size;++i)
             {
-                data = '-in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt '+' -gv ../AutomationTesting/validation/globalValidations.txt ' + data
-                bat str
+                catchError(stageResult: 'FAILURE')
+                {
+                    max = 98
+                    random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                    amount = '-a' + random_num.toString()
+                    dir = ' -dir ../AutomationTesting/Tests/preauths_then_completions_authcode_rnn_check'
+             
+                    log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
+                    data = ' -in Data' + i.toString()+ '.txt'
+                    globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
+                    str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + dir + log + data + globalVal
+                    bat str
+                }
             }
+            
         }
-    }
-
 }
 
-def closeBatch(valPath)
+def closeBatch(valPath, index)
 {
     script
     {
         catchError(stageResult: 'FAILURE')
         {
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath
+            dir = ' -dir ../AutomationTesting/Tests/preauths_then_completions_authcode_rnn_check'
+            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log
             bat str
         }
     }
@@ -57,39 +76,44 @@ pipeline {
     stages 
     {
 
-
-        stage('closeBatchStart')
+        stage('Init')
+        {
+            steps
+            {
+                init() 
+            }
+        }
+            
+        stage('closeBatch1')
         {
             steps
             {
                         
-                closeBatch('../AutomationTesting/validation/closeBatch1.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 0)
             }
         }
 
-        stage('preauth')
+        stage('preauths')
         {
             steps
             {
-                preauth(3)
+                preauth(2)
             }
             
         }
-
-        stage('preauthCompletion')
+        stage('preauthCompletions')
         {
             steps
             {
-                preauthComp(3)
+                preauthComp(2)
             }
             
         }
-        
-        stage('closeBatch')
+        stage('closeBatch2')
         {
             steps
             {
-                closeBatch('../AutomationTesting/validation/closeBatch.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
             }
         }
     }
