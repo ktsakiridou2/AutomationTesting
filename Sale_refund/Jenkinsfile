@@ -77,12 +77,12 @@ pipeline {
             }
         }
 
-        stage('closeBatchStart')
+        stage('closeBatch1')
         {
             steps
             {
                         
-                closeBatch('../AutomationTesting/validation/closeBatch.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 0)
             }
         }
 
@@ -104,11 +104,11 @@ pipeline {
             
         }
         
-        stage('closeBatch')
+        stage('closeBatch2')
         {
             steps
             {
-                closeBatch('../AutomationTesting/validation/closeBatch.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
             }
         }
     }
