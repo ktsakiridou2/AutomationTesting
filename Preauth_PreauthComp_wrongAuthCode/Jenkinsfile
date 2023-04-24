@@ -1,6 +1,14 @@
 ip = ' -ip 192.168.1.2'
 connType = '-t 0'
 
+def init()
+{
+        script
+        {
+                bat 'python.exe ../AutomationTesting/SetupTest.py '
+        }
+}
+
 def preauth()
 {
         script
@@ -11,8 +19,8 @@ def preauth()
                 max = 98
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
-                data = ' -out transData/Data' + i.toString()+ '.txt'
-                log = ' -lp Logs/preauthLog' + i.toString() + '.LOG'
+                data = ' -out Data' + i.toString()+ '.txt'
+                log = ' -lp preauthLog' + i.toString() + '.LOG'
                 dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_authCode'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
                 bat str 
@@ -27,8 +35,8 @@ def preauthComp()
         catchError(stageResult: 'FAILURE')
         {
             i = 0
-            data = ' -in transData/Data' + i.toString()+ '.txt'
-            log = ' -lp Logs/preauthCompLog' + i.toString() + '.LOG'
+            data = ' -in Data' + i.toString()+ '.txt'
+            log = ' -lp preauthCompLog' + i.toString() + '.LOG'
             dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_authCode'
             authCode = ' -auth 12345'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + ' -gv ../AutomationTesting/validation/globalValidations.txt ' + dir + log + data  + authCode
@@ -44,7 +52,7 @@ def closeBatch(valPath, index)
     {
         catchError(stageResult: 'FAILURE')
         {
-            log = ' -lp Logs/closeBatchLog' + index.toString() + '.LOG'
+            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
             dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_authCode'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log
             bat str
@@ -58,7 +66,14 @@ pipeline {
     stages 
     {
 
-
+        stage('Init')
+        {
+            steps
+            {
+                init() 
+            }
+        }
+            
         stage('closeBatch1')
         {
             steps
