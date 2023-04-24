@@ -35,8 +35,8 @@ def preauthComp()
             i = 0
             amount = ' -a 20'
             dir = ' -dir ../AutomationTesting/Tests/preauth_preauthCompletion_higher_amount'
-            log = ' -lp Logs/preauthLog' + i.toString() + '.LOG'
-            data = ' -in transData/Data' + i.toString()+ '.txt'
+            log = ' -lp preauthCompLog' + i.toString() + '.LOG'
+            data = ' -in Data' + i.toString()+ '.txt'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + data + amount + dir + log
             bat str
         }
@@ -51,7 +51,7 @@ def closeBatch(valPath, index)
         catchError(stageResult: 'FAILURE')
         {
             dir = ' -dir ../AutomationTesting/Tests/preauth_preauthCompletion_higher_amount'
-            log = ' -lp Logs/preauthLog' + index.toString() + '.LOG'
+            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir  + log
             bat str
         }
