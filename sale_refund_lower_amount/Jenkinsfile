@@ -1,6 +1,14 @@
 ip = ' -ip 192.168.1.2'
 connType = '-t 0'
 
+def init()
+{
+        script
+        {
+                bat 'python.exe ../AutomationTesting/init.py '
+        }
+}
+
 def sale()
 {
         script
@@ -8,9 +16,11 @@ def sale()
             catchError(stageResult: 'FAILURE')
             {
                 i = 0
-                amount = ' -a 60'
-                data = ' -out ../AutomationTesting/OutData.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data
+                amount = '-a 50'
+                dir = ' -dir ../AutomationTesting/Tests/sale_refund_lower_amount'
+                log = ' -lp preauthLog' + i.toString() + '.LOG'
+                data = ' -out Data' + i.toString()+ '.txt'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log
                 bat str 
             }
         }
@@ -23,22 +33,26 @@ def refund()
         catchError(stageResult: 'FAILURE')
         {
             i = 0
-            amount = ' -a 30'
-            data = ' -in ../AutomationTesting/OutData.txt'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/refund0.txt ' + data + amount
+            amount = ' -a 20'
+            dir = ' -dir ../AutomationTesting/Tests/sale_refund_lower_amount'
+            log = ' -lp preauthCompLog' + i.toString() + '.LOG'
+            data = ' -in Data' + i.toString()+ '.txt'
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/refund0.txt ' + data + amount + dir + log
             bat str
         }
     }
 
 }
 
-def closeBatch(valPath)
+def closeBatch(valPath, index)
 {
     script
     {
         catchError(stageResult: 'FAILURE')
         {
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath
+            dir = ' -dir ../AutomationTesting/Tests/sale_refund_lower_amount'
+            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir  + log
             bat str
         }
     }
@@ -50,13 +64,20 @@ pipeline {
     stages 
     {
 
-
-        stage('closeBatchStart')
+        stage('Init')
+        {
+            steps
+            {
+                init() 
+            }
+        }
+            
+        stage('closeBatch1')
         {
             steps
             {
                         
-                closeBatch('../AutomationTesting/validation/closeBatch1.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch1.txt', 1)
             }
         }
 
@@ -78,11 +99,11 @@ pipeline {
             
         }
         
-        stage('closeBatch')
+        stage('closeBatch2')
         {
             steps
             {
-                closeBatch('../AutomationTesting/validation/closeBatch.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 2)
             }
         }
     }
