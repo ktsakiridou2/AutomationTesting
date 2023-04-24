@@ -5,7 +5,7 @@ def init()
 {
         script
         {
-                bat 'python.exe ../AutomationTesting/init.py '
+                bat 'python.exe ../AutomationTesting/SetupTest.py '
         }
 }
 def preauth()
