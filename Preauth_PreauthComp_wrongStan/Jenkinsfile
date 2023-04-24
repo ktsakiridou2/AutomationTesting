@@ -1,6 +1,13 @@
 ip = ' -ip 192.168.1.2'
 connType = '-t 0'
 
+def timestamp
+{
+        script
+        {
+                bat 'python.exe ../AutomationTesting/SetupTest.py '
+        }
+}
 def preauth()
 {
         script
@@ -63,7 +70,7 @@ pipeline {
         {
             steps
             {
-                        
+                timestamp()        
                 closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
             }
         }
