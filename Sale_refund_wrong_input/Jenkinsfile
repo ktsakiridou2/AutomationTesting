@@ -72,7 +72,14 @@ pipeline {
     stages 
     {
 
-
+        stage('Init')
+        {
+            steps
+            {
+                init() 
+            }
+        }
+            
         stage('closeBatch1')
         {
             steps
