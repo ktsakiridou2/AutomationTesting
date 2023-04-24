@@ -2,13 +2,24 @@
 ip = ' -ip 192.168.1.2'
 connType = ' -t 0'
 
+def init()
+{
+        script
+        {
+                bat 'python.exe ../AutomationTesting/SetupTest.py '
+        }
+}
+
+
 def status()
 {
     script
     {
         catchError(stageResult: 'FAILURE')
         {
-            str = 'python.exe ../AutomationTesting/Main.py -vp ../AutomationTesting/validation/status.txt' + ' -dir ../AutomationTesting/Tests/Status -lp Logs/log0.LOG' + ip + connType
+            dir = ' -dir ../AutomationTesting/Tests/Status'
+            log = ' -lp statusLog' + i.toString() + '.LOG'
+            str = 'python.exe ../AutomationTesting/Main.py -vp ../AutomationTesting/validation/status.txt' + ip + connType + dir + log
             bat str
         }
     }
@@ -19,9 +30,7 @@ pipeline {
 
     stages 
     {
-
-
-        stage('status1')
+        stage('status')
         {
             steps
             {
@@ -29,21 +38,4 @@ pipeline {
                 status()
             }
         }
-
-        stage('status2')
-        {
-            steps
-            {
-                status()
-            }
-        }
-        
-        stage('status3')
-        {
-            steps
-            {
-                status()
-            }
-        }
-    }
 }
