@@ -29,6 +29,24 @@ def preauth()
         }
 }
 
+def preauthCompError(valPath, index)
+{
+    script
+    {
+        catchError(stageResult: 'FAILURE')
+        {
+            i = 0
+            dir = ' -dir ../AutomationTesting/Tests/completion_preauth_completion'
+            log = ' -lp preauthCompletionLog' + index.toString() + '.LOG'
+            stan = ' -stan 0'
+            authCode = ' -auth 000000'
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp '  +valPath + dir + log + stan + authCode
+            bat str
+        }
+    }
+
+}
+
 def preauthComp(valPath, index)
 {
     script
