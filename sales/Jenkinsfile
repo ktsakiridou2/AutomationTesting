@@ -3,6 +3,14 @@ ip = ' -ip 192.168.1.2'
 connType = '-t 0'
 dir = ' -dir ../AutomationTesting/Tests/sales'
 
+def init()
+{
+        script
+        {
+                bat 'python.exe ../AutomationTesting/SetupTest.py '
+        }
+}
+
 def sale(size)
 {
     script
@@ -42,7 +50,13 @@ pipeline {
     stages 
     {
 
-        
+        stage('Init')
+        {
+            steps
+            {
+                init() 
+            }
+        }
         stage('closeBatch1')
         {
             steps
