@@ -101,11 +101,11 @@ pipeline {
         }
 
         
-        stage('preauthCompletion1')
+        stage('preauthCompletionError')
         {
             steps
             {
-                preauthComp('../AutomationTesting/validation/preauthCompletionError1.txt ', 1)
+                preauthCompError('../AutomationTesting/validation/preauthCompletionError1.txt ', 1)
             }
         }
 
