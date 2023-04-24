@@ -2,6 +2,14 @@
 ip = ' -ip 192.168.1.2'
 connType = '-t 0'
 
+def init()
+{
+        script
+        {
+                bat 'python.exe ../AutomationTesting/SetupTest.py '
+        }
+}
+
 def preauth()
 {
         script
@@ -13,8 +21,8 @@ def preauth()
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
                 dir = ' -dir ../AutomationTesting/Tests/preauths_2completions'
-                log = ' -lp Logs/preauthLog' + i.toString() + '.LOG'
-                data = ' -out transData/Data' + i.toString()+ '.txt'
+                log = ' -lp preauthLog' + i.toString() + '.LOG'
+                data = ' -out Data' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
                 bat str 
             }
@@ -29,8 +37,8 @@ def preauthComp(valPath)
         {
             i = 0
             dir = ' -dir ../AutomationTesting/Tests/preauths_2completions'
-            log = ' -lp Logs/preauthCompLog' + i.toString() + '.LOG'
-            data = ' -in transData/Data' + i.toString()+ '.txt'
+            log = ' -lp preauthCompLog' + i.toString() + '.LOG'
+            data = ' -in Data' + i.toString()+ '.txt'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + data
             bat str
         }
@@ -45,7 +53,7 @@ def closeBatch(valPath, index)
         catchError(stageResult: 'FAILURE')
         {
             dir = ' -dir ../AutomationTesting/Tests/preauths_2completions'
-            log = ' -lp Logs/closeBatchLog' + index.toString() + '.LOG'
+            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log
             bat str
         }
@@ -57,7 +65,13 @@ pipeline {
 
     stages 
     {
-
+        stage('Init')
+        {
+            steps
+            {
+                init() 
+            }
+        }
 
         stage('closeBatch1')
         {
