@@ -1,7 +1,7 @@
 
 ip = ' -ip 192.168.1.2'
 connType = '-t 0'
-dir = ' -dir ../AutomationTesting/Tests/sales'
+dir = ' -dir ../AutomationTesting/Tests/sale_reversal_wrong_amount'
 
 def init()
 {
@@ -19,9 +19,7 @@ def sale(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                max = 98
-                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
-                amount = '-a' + random_num.toString()
+                amount = ' -a 10'
                 data = ' -out Data' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
@@ -39,10 +37,11 @@ def reversal(size)
         {
             catchError(stageResult: 'FAILURE')
             {
+                amount = ' -a 50'
                 data = ' -in Data' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log + globalVal
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/reversal_wrong_amount.txt ' + data + amount + dir + log + globalVal
                 bat str 
             }
         }
