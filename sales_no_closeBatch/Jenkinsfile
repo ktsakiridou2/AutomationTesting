@@ -24,7 +24,8 @@ def sale(size, offset)
                 dir = ' -dir ../AutomationTesting/Tests/sales_no_closeBatch'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 data = ' -out Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + dir + log + data
+                globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + dir + log + data + globalVal
                 bat str 
             }
         }
@@ -71,7 +72,7 @@ pipeline {
         {
             steps
             {
-                sale(200,0)
+                sale(2,0)
             }
             
         }
@@ -79,7 +80,7 @@ pipeline {
         {
             steps
             {
-                sale(201,200)
+                sale(3,2)
             }
             
         }
