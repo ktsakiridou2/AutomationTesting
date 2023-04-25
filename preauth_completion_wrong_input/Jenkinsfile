@@ -40,10 +40,9 @@ def preauthComp()
             log = ' -lp preauthCompLog' + i.toString() + '.LOG'
             dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_input'
             stan = ' -stan 134'
-            rrn = '-rrn 123456789123'
+            rrn = ' -rrn 123456789123'
             authCode = ' -auth 123456'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion_wrong_input.txt ' + dir + log + data + stan + authCode
-            bat str
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion_wrong_input.txt ' + dir + log + data + stan + authCode + rrn            bat str
         }
     }
 
