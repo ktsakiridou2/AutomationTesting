@@ -1,0 +1,112 @@
+ip = ' -ip 192.168.1.2'
+connType = '-t 0'
+
+def init()
+{
+        script
+        {
+                bat 'python.exe ../AutomationTesting/SetupTest.py '
+        }
+}
+
+def preauth()
+{
+        script
+        {
+            catchError(stageResult: 'FAILURE')
+            {
+                i = 0
+                max = 98
+                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                amount = '-a' + random_num.toString()
+                data = ' -out Data' + i.toString()+ '.txt'
+                log = ' -lp preauthLog' + i.toString() + '.LOG'
+                dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_RRN'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
+                bat str 
+            }
+        }
+}
+
+def preauthComp()
+{
+    script
+    {
+        catchError(stageResult: 'FAILURE')
+        {
+            i = 0
+            data = ' -in Data' + i.toString()+ '.txt'
+            log = ' -lp preauthCompLog' + i.toString() + '.LOG'
+            dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_RRN'
+            rrn = ' -rrn 123456789123'
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion_wrong_auth_rrn.txt ' + ' -gv ../AutomationTesting/validation/globalValidations.txt ' + dir + log + data  + rrn
+            bat str
+        }
+    }
+
+}
+
+def closeBatch(valPath, index)
+{
+    script
+    {
+        catchError(stageResult: 'FAILURE')
+        {
+            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
+            dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_RRN'
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log
+            bat str
+        }
+    }
+}
+
+pipeline {
+    agent any
+
+    stages 
+    {
+
+        stage('Init')
+        {
+            steps
+            {
+                init() 
+            }
+        }
+            
+        stage('closeBatch1')
+        {
+            steps
+            {
+                        
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
+            }
+        }
+
+        stage('preauth')
+        {
+            steps
+            {
+                preauth()
+            }
+            
+        }
+
+        stage('preauthCompletion')
+        {
+            steps
+            {
+                preauthComp()
+            }
+            
+        }
+        
+        stage('closeBatch2')
+        {
+            steps
+            {
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 2)
+            }
+        }
+    }
+}
