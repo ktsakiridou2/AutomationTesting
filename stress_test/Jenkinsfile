@@ -118,7 +118,7 @@ pipeline {
         {
             steps
             {
-                preauth_preauthComp(2)
+                preauth_preauthComp(10)
             }
             
         }
@@ -134,7 +134,7 @@ pipeline {
         {
             steps
             {
-                sale(2)
+                sale(10)
             }
             
         }
@@ -142,7 +142,7 @@ pipeline {
         {
             steps
             {
-                refund(1)
+                refund(5)
             }
             
         }
