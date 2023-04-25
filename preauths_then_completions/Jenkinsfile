@@ -24,8 +24,8 @@ def preauth(size)
                     dir = ' -dir ../AutomationTesting/Tests/Preauth_PreauthComp_loop'
                     log = ' -lp preauthLog' + i.toString() + '.LOG'
                     data = ' -out Data' + i.toString()+ '.txt'
-                    
-                    str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
+                    globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
+                    str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data + globalVal
                     bat str 
                 }
             }
@@ -47,7 +47,8 @@ def preauthComp(size)
              
                     log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
                     data = ' -in Data' + i.toString()+ '.txt'
-                    str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + dir + log + data
+                    globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
+                    str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + dir + log + data + globalVal
                     bat str
                 }
             }
