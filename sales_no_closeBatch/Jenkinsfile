@@ -67,7 +67,7 @@ pipeline {
             }
         }
 
-        stage('sale1')
+        stage('200_sale')
         {
             steps
             {
@@ -75,7 +75,7 @@ pipeline {
             }
             
         }
-        stage('sale1')
+        stage('last_sale')
         {
             steps
             {
