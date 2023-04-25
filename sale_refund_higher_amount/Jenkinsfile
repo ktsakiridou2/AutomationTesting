@@ -18,7 +18,7 @@ def sale()
                 i = 0
                 amount = '-a 5'
                 dir = ' -dir ../AutomationTesting/Tests/sale_refund_higher_amount'
-                log = ' -lp preauthLog' + i.toString() + '.LOG'
+                log = ' -lp saleLog' + i.toString() + '.LOG'
                 data = ' -out Data' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log
                 bat str 
@@ -35,7 +35,7 @@ def refund()
             i = 0
             amount = ' -a 20'
             dir = ' -dir ../AutomationTesting/Tests/sale_refund_higher_amount'
-            log = ' -lp preauthCompLog' + i.toString() + '.LOG'
+            log = ' -lp refundLog' + i.toString() + '.LOG'
             data = ' -in Data' + i.toString()+ '.txt'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/refund0.txt ' + data + amount + dir + log
             bat str
