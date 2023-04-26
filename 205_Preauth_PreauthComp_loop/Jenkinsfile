@@ -81,21 +81,37 @@ pipeline {
         {
             steps
             {
-                preauth_preauthComp(200, 0)
+                preauth_preauthComp(50, 0)
             }
             
         }
-        /*
+       
         stage('preauths/preauthCompletions2')
         {
             steps
             {
-                preauth_preauthComp(200, 100)
+                preauth_preauthComp(100, 50)
             }
             
         }
-        */
         stage('preauths/preauthCompletions3')
+        {
+            steps
+            {
+                preauth_preauthComp(150, 100)
+            }
+            
+        }    
+        
+        stage('preauths/preauthCompletions4')
+        {
+            steps
+            {
+                preauth_preauthComp(200, 150)
+            }
+            
+        }
+        tage('preauths/preauthCompletions5')
         {
             steps
             {
@@ -103,7 +119,6 @@ pipeline {
             }
             
         }
-
         stage('closeBatch2')
         {
             steps
