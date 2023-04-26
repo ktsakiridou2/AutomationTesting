@@ -81,10 +81,11 @@ pipeline {
         {
             steps
             {
-                preauth_preauthComp(100, 0)
+                preauth_preauthComp(200, 0)
             }
             
         }
+        /*
         stage('preauths/preauthCompletions2')
         {
             steps
@@ -93,11 +94,12 @@ pipeline {
             }
             
         }
+        */
         stage('preauths/preauthCompletions3')
         {
             steps
             {
-                preauth_preauthComp(205, 200)
+                preauth_preauthComp(201, 200)
             }
             
         }
