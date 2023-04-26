@@ -71,7 +71,7 @@ pipeline {
         {
             steps
             {
-                sale(100,0)
+                sale(50,0)
             }
             
         }
@@ -80,7 +80,7 @@ pipeline {
         {
             steps
             {
-                sale(200,100)
+                sale(100,50)
             }
             
         }
@@ -88,7 +88,7 @@ pipeline {
         {
             steps
             {
-                sale(300,200)
+                sale(150,100)
             }
             
         }
@@ -96,7 +96,7 @@ pipeline {
         {
             steps
             {
-                sale(400,300)
+                sale(200,150)
             }
             
         }
@@ -104,11 +104,43 @@ pipeline {
         {
             steps
             {
-                sale(401,400)
+                sale(250,200)
             }
             
         }
-      
+        stage('sale6')
+        {
+            steps
+            {
+                sale(300,250)
+            }
+            
+        }
+            
+        stage('sale7')
+        {
+            steps
+            {
+                sale(350,300)
+            }
+            
+        }
+        stage('sale8')
+        {
+            steps
+            {
+                sale(400,350)
+            }
+            
+        }       
+        stage('sale9')
+        {
+            steps
+            {
+                sale(405,400)
+            }
+            
+        } 
         stage('closeBatch2')
         {
             steps
