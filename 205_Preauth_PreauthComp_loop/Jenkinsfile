@@ -111,7 +111,7 @@ pipeline {
             }
             
         }
-        tage('preauths/preauthCompletions5')
+        stage('preauths/preauthCompletions5')
         {
             steps
             {
