@@ -18,7 +18,7 @@ def sale(size, offset)
         {
             catchError(stageResult: 'FAILURE')
             {
-                max = 98
+                max = 10000
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
                 dir = ' -dir ../AutomationTesting/Tests/401_sales'
