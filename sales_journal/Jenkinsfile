@@ -88,7 +88,7 @@ pipeline {
             
         }
 
-        stage('journal')
+        stage('journal1')
         {
             steps
             {
