@@ -18,7 +18,7 @@ def hanshake()
         catchError(stageResult: 'FAILURE')
         {
             dir = ' -dir ../AutomationTesting/Tests/hanshake'
-            log = ' -lp statusLog' + i.toString() + '.LOG'
+            log = ' -lp handshakeLog' + i.toString() + '.LOG'
             str = 'python.exe ../AutomationTesting/Main.py -vp ../AutomationTesting/validation/hanshake.txt' + ip + connType + dir + log
             bat str
         }
@@ -27,9 +27,17 @@ def hanshake()
 
 pipeline {
     agent any
-
+    
     stages 
     {
+        stage('init')
+        {
+            steps
+            {
+                        
+                init()
+            }
+        }
         stage('hanshake')
         {
             steps
@@ -38,4 +46,5 @@ pipeline {
                 hanshake()
             }
         }
+    }
 }
