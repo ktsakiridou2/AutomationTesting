@@ -38,8 +38,9 @@ def journal()
     {
         catchError(stageResult: 'FAILURE')
         {
-            log = ' -lp journalLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/status.txt ' + dir + log
+            i = 0
+            log = ' -lp journalLog' + i.toString() + '.LOG'
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/journal.txt ' + dir + log
             bat str
         }
     }
@@ -78,7 +79,7 @@ pipeline {
                 closeBatch('../AutomationTesting/validation/closeBatch1.txt', 1)
             }
         }
-        /*
+     
         stage('sale')
         {
             steps
@@ -87,7 +88,7 @@ pipeline {
             }
             
         }
-        */
+       
        stage('journal')
         {
             steps
