@@ -116,7 +116,7 @@ pipeline {
         {
             steps
             {
-                preauth(380,300)
+                preauth(382,300)
             }
             
         }
@@ -124,7 +124,7 @@ pipeline {
         {
             steps
             {
-                sale(400,380)
+                sale(400,382)
             }
         }
    
