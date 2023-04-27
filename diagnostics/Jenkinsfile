@@ -18,7 +18,7 @@ def diagnostics()
         catchError(stageResult: 'FAILURE')
         {
             dir = ' -dir ../AutomationTesting/Tests/diagnostics'
-            log = ' -lp statusLog.LOG'
+            log = ' -lp diagnosticsLog.LOG'
             str = 'python.exe ../AutomationTesting/Main.py -vp ../AutomationTesting/validation/diagnostics.txt' + ip + connType + dir + log
             bat str
         }
