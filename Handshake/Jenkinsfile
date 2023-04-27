@@ -18,7 +18,7 @@ def hanshake()
         catchError(stageResult: 'FAILURE')
         {
             dir = ' -dir ../AutomationTesting/Tests/hanshake'
-            log = ' -lp handshakeLog' + i.toString() + '.LOG'
+            log = ' -lp handshakeLog.LOG'
             str = 'python.exe ../AutomationTesting/Main.py -vp ../AutomationTesting/validation/hanshake.txt' + ip + connType + dir + log
             bat str
         }
