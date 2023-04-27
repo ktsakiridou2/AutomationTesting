@@ -1,0 +1,41 @@
+
+ip = ' -ip 192.168.1.2'
+connType = ' -t 0'
+
+def init()
+{
+        script
+        {
+                bat 'python.exe ../AutomationTesting/SetupTest.py '
+        }
+}
+
+
+def diagnostics()
+{
+    script
+    {
+        catchError(stageResult: 'FAILURE')
+        {
+            dir = ' -dir ../AutomationTesting/Tests/diagnostics'
+            log = ' -lp statusLog.LOG'
+            str = 'python.exe ../AutomationTesting/Main.py -vp ../AutomationTesting/validation/diagnostics.txt' + ip + connType + dir + log
+            bat str
+        }
+    }
+}
+
+pipeline {
+    agent any
+
+    stages 
+    {
+        stage('diagnostics')
+        {
+            steps
+            {
+                        
+                diagnostics()
+            }
+        }
+}
