@@ -38,7 +38,7 @@ def preauthComp()
             data = ' -in Data' + i.toString()+ '.txt'
             log = ' -lp preauthCompLog' + i.toString() + '.LOG'
             dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_authCode'
-            authCode = ' -auth 1000000'
+            authCode = ' -auth 100000'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion_wrong_auth.txt ' + ' -gv ../AutomationTesting/validation/globalValidations.txt ' + dir + log + data  + authCode
             bat str
         }
