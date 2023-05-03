@@ -37,7 +37,7 @@ def preauthComp()
             dir = ' -dir ../AutomationTesting/Tests/preauth_preauthCompletion_higher_amount'
             log = ' -lp preauthCompLog' + i.toString() + '.LOG'
             data = ' -in Data' + i.toString()+ '.txt'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion_higher_amount.txt ' + data + amount + dir + log
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + data + amount + dir + log
             bat str
         }
     }
