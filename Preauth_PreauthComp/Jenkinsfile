@@ -18,10 +18,9 @@ def preauth_preauthComp(size)
                 catchError(stageResult: 'FAILURE')
                 {
                     i = 0
-                    max = 1000000
+                    max = 10000
                     random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                     amount = '-a' + random_num.toString()
-                    amount = ' -a 100000'
                     dir = ' -dir ../AutomationTesting/Tests/Preauth_PreauthComp'
                     log = ' -lp preauthLog' + i.toString() + '.LOG'
                     data = ' -out Data' + i.toString()+ '.txt'
