@@ -24,8 +24,7 @@ def sale(size)
                 amount = '-a' + random_num.toString()
                 data = ' -out Data' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
-                globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sales_chip_card_removed.txt ' + amount + data + dir + log + globalVal
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sales_chip_card_removed.txt ' + amount + data + dir + log
                 bat str 
             }
         }
