@@ -20,7 +20,7 @@ def sale(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                amount = ' -a 1000'
+                amount = ' -a 1322'
                 globalAmount += 1322   
                 data = ' -out Data' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
@@ -40,7 +40,7 @@ def refund(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                amount = ' -a 500'
+                amount = ' -a 543'
                 refundsAmount += 543   
                 data = ' -in Data' + i.toString()+ '.txt'
                 log = ' -lp refundLog' + i.toString() + '.LOG'
