@@ -21,8 +21,8 @@ def sale(size)
             {
                 max = 1000
                 random_amount = "${Math.abs(1 + new Random().nextInt(max+1))}"
-                amount = ' -a 10'
-                globalAmount += 10    
+                amount = ' -a ' + random_amount.toString()
+                globalAmount += random_amount   
                 data = ' -out Data' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
