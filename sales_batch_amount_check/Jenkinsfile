@@ -19,10 +19,8 @@ def sale(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                max = 1000
-                random_amount = "${Math.abs(1 + new Random().nextInt(max+1))}"
-                amount = ' -a ' + random_amount.toString()
-                globalAmount += random_amount   
+                amount = ' -a 1000'
+                globalAmount += 1000   
                 data = ' -out Data' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
