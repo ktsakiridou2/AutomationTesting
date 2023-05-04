@@ -2,7 +2,7 @@
 ip = ' -ip 192.168.1.2'
 connType = '-t 0'
 globalAmount = 0
-globalRefundAmount = 0
+refundsNum = 0
 dir = ' -dir ../AutomationTesting/Tests/sale_refund_batch_amount_check'
 def init()
 {
@@ -40,8 +40,8 @@ def refund(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                amount = ' -a 1000'
-                globalRefundAmount += 1200   
+                amount = ' -a 500'
+                refundsNum += 1   
                 data = ' -in Data' + i.toString()+ '.txt'
                 log = ' -lp refundLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/refund0.txt ' + data + log + dir + amount
@@ -59,7 +59,7 @@ def closeBatch(valPath, index)
         catchError(stageResult: 'FAILURE')
         {
             amount = ' -a ' + globalAmount.toString()
-            reAmount = ' -rea ' + globalRefundAmount.toString()  
+            reAmount = ' -ren ' + refundsNum.toString()  
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + amount + reAmount
             bat str
