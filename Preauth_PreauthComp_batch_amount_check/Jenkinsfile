@@ -20,7 +20,7 @@ def preauth_preauthComp(size)
                         catchError(stageResult: 'FAILURE')
                         {
                            globalAmount += 10000
-                           amount = ' -a ' + globalAmount.toString()
+                           amount = ' -a 10000'
 
                             log = ' -lp preauthLog' + i.toString() + '.LOG'
                             data = ' -out Data' + i.toString()+ '.txt'
