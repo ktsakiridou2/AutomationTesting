@@ -71,7 +71,7 @@ pipeline {
             }
         }
             
-        stage('closeBatchStart')
+        stage('closeBatch1')
         {
             steps
             {
@@ -89,7 +89,7 @@ pipeline {
             
         }
 
-        stage('closeBatchEnd')
+        stage('closeBatch2')
         {
             steps
             {
