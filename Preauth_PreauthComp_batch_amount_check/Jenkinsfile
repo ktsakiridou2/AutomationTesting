@@ -15,7 +15,7 @@ def preauth_preauthComp(size)
 {
         script
         {
-                for(int i=0; i< size: ++i)
+                for(int i=0; i< size; ++i)
                 {
                         catchError(stageResult: 'FAILURE')
                         {
