@@ -20,8 +20,8 @@ def sale(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                amount = ' -a 1322'
-                globalAmount += 1322   
+                amount = ' -a 10000'
+                globalAmount += 10000   
                 data = ' -out Data' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
@@ -40,8 +40,8 @@ def refund(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                amount = ' -a 543'
-                refundsAmount += 543   
+                amount = ' -a 5000'
+                refundsAmount += 5000   
                 data = ' -in Data' + i.toString()+ '.txt'
                 log = ' -lp refundLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/refund0.txt ' + data + log + dir + amount
