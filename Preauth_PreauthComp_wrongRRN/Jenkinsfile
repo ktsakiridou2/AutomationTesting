@@ -39,7 +39,7 @@ def preauthComp()
             log = ' -lp preauthCompLog' + i.toString() + '.LOG'
             dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_RRN'
             rrn = ' -rrn 023456789123'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion_wrong_rrn.txt ' + ' -gv ../AutomationTesting/validation/globalValidations.txt ' + dir + log + data  + rrn
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + ' -gv ../AutomationTesting/validation/globalValidations.txt ' + dir + log + data  + rrn
             bat str
         }
     }
