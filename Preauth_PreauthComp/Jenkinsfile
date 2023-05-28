@@ -26,7 +26,7 @@ def preauth_preauthComp(size)
                     data = ' -out Data' + i.toString()+ '.txt'
                     globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
                         
-                    str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data + globalVal
+                    str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
                     bat str 
 
 
