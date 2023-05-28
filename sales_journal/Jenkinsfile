@@ -24,8 +24,7 @@ def sale(size)
                 amount = '-a' + random_num.toString()
                 data = ' -out Data' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
-                globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + globalVal
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log
                 bat str 
             }
         }
@@ -40,7 +39,8 @@ def journal()
         {
             i = 0
             log = ' -lp journalLog' + i.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/journal.txt ' + dir + log
+            globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/journal.txt ' + dir + log + globalVal
             bat str
         }
     }
