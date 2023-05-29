@@ -98,7 +98,11 @@ pipeline {
             }
             
         }
-
+        stage('Journal')
+        {
+            journal()
+        }
+            
         stage('closeBatch2')
         {
             steps
