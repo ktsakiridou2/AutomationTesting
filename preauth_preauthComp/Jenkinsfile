@@ -16,29 +16,28 @@ def preauth_preauthComp(size)
 {
         script
         {
-
-                catchError(stageResult: 'FAILURE')
+                for(int i=0; i < size; ++i)
                 {
-                    i = 0
-                    max = 10
-                    random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
-                    amount = '-a' + random_num.toString()
-                
-                    log = ' -lp preauthLog' + i.toString() + '.LOG'
-                    data = ' -out Data' + i.toString()+ '.txt'
-                    globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
-                        
-                    str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data + logsPort
-                    bat str 
+                        catchError(stageResult: 'FAILURE')
+                        {
+                            max = 10
+                            random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                            amount = '-a' + random_num.toString()
+
+                            log = ' -lp preauthLog' + i.toString() + '.LOG'
+                            data = ' -out Data' + i.toString()+ '.txt'
+                            globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
+
+                            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data + logsPort
+                            bat str 
 
 
-                    log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
-                    data = ' -in Data' + i.toString()+ '.txt'
-                    str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + dir + log + data + globalVal + logsPort
-                    bat str
+                            log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
+                            data = ' -in Data' + i.toString()+ '.txt'
+                            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + dir + log + data + globalVal + logsPort
+                            bat str
+                        }
                 }
-        
-            
         }
 }
 
@@ -83,7 +82,7 @@ pipeline {
         {
             steps
             {
-                preauth_preauthComp(1)
+                preauth_preauthComp(2)
             }
             
         }
