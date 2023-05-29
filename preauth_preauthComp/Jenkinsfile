@@ -2,6 +2,7 @@
 ip = ' -ip 192.168.1.2'
 connType = '-t 0'
 logsPort = ' -logsPort COM17'
+dir = ' -dir ../AutomationTesting/Tests/Preauth_PreauthComp'
 
 def init()
 {
@@ -22,7 +23,7 @@ def preauth_preauthComp(size)
                     max = 10
                     random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                     amount = '-a' + random_num.toString()
-                    dir = ' -dir ../AutomationTesting/Tests/Preauth_PreauthComp'
+                
                     log = ' -lp preauthLog' + i.toString() + '.LOG'
                     data = ' -out Data' + i.toString()+ '.txt'
                     globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
@@ -48,7 +49,6 @@ def closeBatch(valPath, index)
     {
         catchError(stageResult: 'FAILURE')
         {
-            dir = ' -dir ../AutomationTesting/Tests/Preauth_PreauthComp'
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + logsPort
             bat str
