@@ -48,7 +48,7 @@ def journal()
         catchError(stageResult: 'FAILURE')
         {
              log = ' -lp journalLog.LOG'
-             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + ' -vp ../AutomationTesting/validation/journal.txt ' + dir + log + logsPort
+             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip  + ' -vp ../AutomationTesting/validation/journal.txt ' + dir + log + logsPort
              bat str
         }
     }
