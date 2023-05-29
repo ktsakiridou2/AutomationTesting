@@ -41,6 +41,18 @@ def preauth_preauthComp(size)
         }
 }
 
+def journal()
+{
+    script
+    {
+        catchError(stageResult: 'FAILURE')
+        {
+             log = ' -lp journalLog.LOG'
+             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + ' -vp ../AutomationTesting/validation/journal.txt ' + dir + log + logsPort
+             bat str
+        }
+    }       
+}
 
 def closeBatch(valPath, index)
 {
