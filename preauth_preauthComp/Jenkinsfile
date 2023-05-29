@@ -100,7 +100,10 @@ pipeline {
         }
         stage('Journal')
         {
-            journal()
+            steps
+            {
+                journal()
+            }
         }
             
         stage('closeBatch2')
