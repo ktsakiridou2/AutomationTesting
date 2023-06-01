@@ -27,6 +27,7 @@ def preauth_preauthComp(size)
                 random_q = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 q = ' -q ' + random_q.toString()
                
+                max = 500    
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
                 data = ' -out Data' + i.toString()+ '.txt'
