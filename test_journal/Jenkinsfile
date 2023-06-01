@@ -155,7 +155,7 @@ pipeline {
         {
             steps
             {
-                preauth_preauthComp(10)
+                preauth_preauthComp(1)
             }
             
         }
@@ -164,7 +164,7 @@ pipeline {
         {
             steps
             {
-                preauth_preauthComp_lower_amount(10)
+                preauth_preauthComp_lower_amount(1)
             }
         }
 
@@ -172,7 +172,7 @@ pipeline {
         {
             steps
             {
-                preauth_void(10)
+                preauth_void(1)
             }
         }
        stage('journal')
