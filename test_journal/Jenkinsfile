@@ -3,7 +3,7 @@ ip = ' -ip 192.168.1.2'
 connType = '-t 2'
 dir = ' -dir ../AutomationTesting/Tests/test_journal'
 comPort = ' -serialPort COM18'
-baudRate = ' -baud 115200'
+baudRate = ' -baud 9600'
 cur = ' -cur 975'
 
 
