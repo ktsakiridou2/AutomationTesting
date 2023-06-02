@@ -162,14 +162,14 @@ pipeline {
             }
             
         }
-        /*
+        
         stage('preauth_preauthComp_lower_amount')
         {
             steps
             {
                 preauth_preauthComp_lower_amount(1)
             }
-        }*/
+        }
 
         stage('preauth_void')
         {
