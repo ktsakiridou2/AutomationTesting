@@ -64,15 +64,15 @@ def preauth_preauthComp_lower_amount(size)
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + dir + log + comPort + baudRate + cur + q 
                 bat str 
                 
-                println random_num
-                max = new Int(random_num) - 1
-                println max    
-                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
-                println random_num
-                amount = '-a' + random_num.toString()
+ 
+                max2 = random_num.toInterger() - 1
+                println max2    
+                random_num2 = "${Math.abs(1 + new Random().nextInt(max2+1))}"
+                println random_num2
+                amount2 = '-a' + random_num2.toString()
                 log = ' -lp preauthCompLog' + i.toString() + '.LOG'
                 data = ' -in Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + amount + data + dir + log + comPort + baudRate + cur
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + amount2 + data + dir + log + comPort + baudRate + cur
                 bat str 
             }
         }
