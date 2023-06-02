@@ -64,8 +64,8 @@ def preauth_preauthComp_lower_amount(size)
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + dir + log + comPort + baudRate + cur + q 
                 bat str 
                 
- 
-                max2 = random_num.toInterger() - 1
+                raNum = random_num as Integer
+                max2 = raNum - 1
                 println max2    
                 random_num2 = "${Math.abs(1 + new Random().nextInt(max2+1))}"
                 println random_num2
@@ -155,7 +155,7 @@ pipeline {
                 closeBatch('../AutomationTesting/validation/closeBatch1.txt', 1)
             }
         }
-     
+     /*
         stage('preauth_preauthComp')
         {
             steps
@@ -163,7 +163,7 @@ pipeline {
                 preauth_preauthComp(1)
             }
             
-        }
+        }*/
         
         stage('preauth_preauthComp_lower_amount')
         {
@@ -172,14 +172,14 @@ pipeline {
                 preauth_preauthComp_lower_amount(1)
             }
         }
-
+/*
         stage('preauth_void')
         {
             steps
             {
                 preauth_void(1)
             }
-        }
+        }*/
        stage('journal')
         {
             steps
