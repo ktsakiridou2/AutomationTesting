@@ -155,7 +155,7 @@ pipeline {
                 closeBatch('../AutomationTesting/validation/closeBatch1.txt', 1)
             }
         }
-     /*
+     
         stage('preauth_preauthComp')
         {
             steps
@@ -163,7 +163,7 @@ pipeline {
                 preauth_preauthComp(1)
             }
             
-        }*/
+        }
         
         stage('preauth_preauthComp_lower_amount')
         {
