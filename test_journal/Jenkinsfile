@@ -66,6 +66,7 @@ def preauth_preauthComp_lower_amount(size)
                 
                 max = random_num - 1
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                print(max)
                 amount = '-a' + random_num.toString()
                 log = ' -lp preauthCompLog' + i.toString() + '.LOG'
                 data = ' -in Data' + i.toString()+ '.txt'
