@@ -28,7 +28,6 @@ def preauth_preauthComp(size)
                 random_q = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 q = ' -q ' + random_q.toString()
                
-                max = 50   
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
                 data = ' -out Data' + i.toString()+ '.txt'
@@ -160,7 +159,7 @@ pipeline {
         {
             steps
             {
-                preauth_preauthComp(1)
+                preauth_preauthComp(10)
             }
             
         }
@@ -169,7 +168,7 @@ pipeline {
         {
             steps
             {
-                preauth_preauthComp_lower_amount(1)
+                preauth_preauthComp_lower_amount(10)
             }
         }
 
@@ -177,7 +176,7 @@ pipeline {
         {
             steps
             {
-                preauth_void(1)
+                preauth_void(10)
             }
         }
        stage('journal')
