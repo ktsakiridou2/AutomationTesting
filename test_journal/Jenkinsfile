@@ -53,8 +53,8 @@ def preauth_preauthComp_lower_amount(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                max = 9999
-                random_q = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                int max = 9999
+                int random_q = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 q = ' -q ' + random_q.toString()
                
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
