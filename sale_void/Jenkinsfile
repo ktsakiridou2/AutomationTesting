@@ -1,7 +1,13 @@
 
-ip = ' -ip 192.168.1.2'
-connType = '-t 0'
-dir = ' -dir ../AutomationTesting/Tests/sale_void'
+ip = ' -ip 192.168.0.103'
+connType = '-t 2'
+dir = ' -dir ../AutomationTesting/Tests/test_journal'
+globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
+comPort = ' -serialPort COM18'
+logsPort = ' -logsPort COM17'
+baudRate = ' -baud 9600'
+cur = ' -cur 975'
+
 
 def init()
 {
@@ -11,7 +17,9 @@ def init()
         }
 }
 
-def sale(size)
+
+
+def sale_void(size)
 {
     script
     {
@@ -19,31 +27,38 @@ def sale(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                max = 98
+                 max = 9999
+                random_q = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                q = ' -q ' + random_q.toString()
+                max = 500
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
-                data = ' -out Data' + i.toString()+ '.txt'
-                log = ' -lp saleLog' + i.toString() + '.LOG'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log
+                data = ' -out preauthVoidData' + i.toString()+ '.txt'
+                log = ' -lp preauthLog_void' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + comPort + baudRate + cur + q + logsPort
+                bat str 
+                
+                log = ' -lp preauthVoidLog' + i.toString() + '.LOG'
+                data = ' -in preauthVoidData' + i.toString()+ '.txt'
+                outData = ' -out voidData' + i.toString()+ '.txt'    
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/refund0.txt ' + data + dir + log + comPort + baudRate + cur + logsPort + outData
                 bat str 
             }
         }
     }
 }
-def voidTrans(size)
+
+def journal()
 {
     script
     {
-        for(int i=0; i<size; ++i)
+        catchError(stageResult: 'FAILURE')
         {
-            catchError(stageResult: 'FAILURE')
-            {
-                data = ' -in Data' + i.toString()+ '.txt'
-                log = ' -lp saleLog' + i.toString() + '.LOG'
-                globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/void0.txt ' + data + dir + log + globalVal
-                bat str 
-            }
+            i = 0
+            log = ' -lp journalLog' + i.toString() + '.LOG'
+            globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/journal.txt ' + dir + log + comPort + baudRate + globalVal + logsPort
+            bat str
         }
     }
 }
@@ -55,7 +70,7 @@ def closeBatch(valPath, index)
         catchError(stageResult: 'FAILURE')
         {
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + comPort + baudRate + logsPort
             bat str
         }
     }
@@ -81,23 +96,25 @@ pipeline {
                 closeBatch('../AutomationTesting/validation/closeBatch1.txt', 1)
             }
         }
+            
 
-        stage('sale')
+        stage('sale_void')
         {
             steps
             {
-                sale(1)
+                sale_void(10)
             }
-            
         }
-        stage('void')
+        
+       stage('journal')
         {
             steps
             {
-                voidTrans(1)
+                journal()
             }
             
         }
+        /*
         stage('closeBatch2')
         {
             steps
@@ -105,5 +122,6 @@ pipeline {
                 closeBatch('../AutomationTesting/validation/closeBatch.txt', 2)
             }
         }
+        */
     }
 }
