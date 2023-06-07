@@ -17,6 +17,29 @@ def init()
         }
 }
 
+def sale(size)
+{
+    script
+    {
+        for(int i=0; i<size; ++i)
+        {
+            catchError(stageResult: 'FAILURE')
+            {
+                max = 9999
+                random_q = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                q = ' -q ' + random_q.toString()
+               
+                max = 500
+                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                amount = '-a' + random_num.toString()
+                data = ' -out saleData' + i.toString()+ '.txt'
+                log = ' -lp saleLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + comPort + baudRate + cur + q  + logsPort 
+                bat str
+            }
+        }
+    }
+}
 def preauth_preauthComp(size)
 {
     script
@@ -38,7 +61,7 @@ def preauth_preauthComp(size)
                 bat str 
                 
                 log = ' -lp preauthCompLog' + i.toString() + '.LOG'
-                data = ' -in preauthData' + i.toString()+ '.txt'
+                data = ' -in preauthCompData' + i.toString()+ '.txt'
                 outData = ' -out CompData' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + data + dir + log + comPort + baudRate + cur + globalVal + logsPort + outData
                 bat str 
@@ -101,7 +124,7 @@ def preauth_void(size)
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + dir + log + comPort + baudRate + cur + q + logsPort
                 bat str 
                 
-                log = ' -lp voidLog' + i.toString() + '.LOG'
+                log = ' -lp preauthVoidLog' + i.toString() + '.LOG'
                 data = ' -in preauthVoidData' + i.toString()+ '.txt'
                 outData = ' -out voidData' + i.toString()+ '.txt'    
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/refund0.txt ' + data + dir + log + comPort + baudRate + cur + logsPort + outData
@@ -159,7 +182,16 @@ pipeline {
                 closeBatch('../AutomationTesting/validation/closeBatch1.txt', 1)
             }
         }
-     
+            
+        stage('sales')
+        {
+            steps
+            {
+                sale(5)
+            }
+            
+        }
+            
         stage('preauth_preauthComp')
         {
             steps
