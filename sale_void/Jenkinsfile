@@ -102,7 +102,7 @@ pipeline {
         {
             steps
             {
-                sale_void(10)
+                sale_void(4)
             }
         }
         
@@ -114,7 +114,7 @@ pipeline {
             }
             
         }
-        /*
+        
         stage('closeBatch2')
         {
             steps
@@ -122,6 +122,6 @@ pipeline {
                 closeBatch('../AutomationTesting/validation/closeBatch.txt', 2)
             }
         }
-        */
+        
     }
 }
