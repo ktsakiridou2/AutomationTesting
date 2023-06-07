@@ -164,7 +164,7 @@ pipeline {
         {
             steps
             {
-                preauth_preauthComp(1)
+                preauth_preauthComp(5)
             }
             
         }
@@ -173,7 +173,7 @@ pipeline {
         {
             steps
             {
-                preauth_preauthComp_lower_amount(1)
+                preauth_preauthComp_lower_amount(5)
             }
         }
         
@@ -181,7 +181,7 @@ pipeline {
         {
             steps
             {
-                preauth_void(1)
+                preauth_void(5)
             }
         }
         
