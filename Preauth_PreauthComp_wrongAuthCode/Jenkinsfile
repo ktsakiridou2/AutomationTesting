@@ -1,5 +1,13 @@
-ip = ' -ip 192.168.1.2'
-connType = '-t 0'
+
+ip = ' -ip 192.168.0.103'
+connType = '-t 2'
+dir = ' -dir ../AutomationTesting/Tests/test_journal'
+globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
+comPort = ' -serialPort COM18'
+logsPort = ' -logsPort COM17'
+baudRate = ' -baud 9600'
+cur = ' -cur 975'
+
 
 def init()
 {
@@ -9,41 +17,138 @@ def init()
         }
 }
 
-def preauth()
+def sale(size)
 {
-        script
+    script
+    {
+        for(int i=0; i<size; ++i)
         {
             catchError(stageResult: 'FAILURE')
             {
-                i = 0
-                max = 98
+                max = 9999
+                random_q = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                q = ' -q ' + random_q.toString()
+               
+                max = 500
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
-                data = ' -out Data' + i.toString()+ '.txt'
+                data = ' -out saleData' + i.toString()+ '.txt'
+                log = ' -lp saleLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + comPort + baudRate + cur + q  + logsPort 
+                bat str
+            }
+        }
+    }
+}
+def preauth_preauthComp(size)
+{
+    script
+    {
+        for(int i=0; i<size; ++i)
+        {
+            catchError(stageResult: 'FAILURE')
+            {
+                max = 9999
+                random_q = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                q = ' -q ' + random_q.toString()
+               
+                max = 500
+                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                amount = '-a' + random_num.toString()
+                data = ' -out preauthData' + i.toString()+ '.txt'
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
-                dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_authCode'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
+            
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + dir + log + comPort + baudRate + cur + q  + logsPort 
+                bat str
+                
+                authCode = ' -auth 111111'     
+                log = ' -lp preauthCompLog' + i.toString() + '.LOG'
+                data = ' -in preauthData' + i.toString()+ '.txt'
+                outData = ' -out CompData' + i.toString()+ '.txt'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + data + dir + log + comPort + baudRate + cur + globalVal + logsPort + outData + authCode
                 bat str 
             }
         }
+    }
 }
 
-def preauthComp()
+def preauth_preauthComp_lower_amount(size)
+{
+    script
+    {
+        for(int i=0; i<size; ++i)
+        {
+            catchError(stageResult: 'FAILURE')
+            {
+                max = 9999
+                random_q = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                q = ' -q ' + random_q.toString()
+                max = 500
+                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                amount = '-a' + random_num.toString()
+                data = ' -out preauthLowerAmountData' + i.toString()+ '.txt'
+                log = ' -lp preauthLog_lower_amount' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + dir + log + comPort + baudRate + cur + q + logsPort
+                bat str 
+                
+                raNum = random_num as Integer
+                max2 = raNum - 1
+          
+                random_num2 = "${Math.abs(1 + new Random().nextInt(max2+1))}"
+   
+                amount2 = '-a' + random_num2.toString()
+                log = ' -lp preauthCompLog_lower_amount' + i.toString() + '.LOG'
+                data = ' -in preauthLowerAmountData' + i.toString()+ '.txt'
+                outData = ' -out compLowerAmountData' + i.toString()+ '.txt'    
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + amount2 + data + dir + log + comPort + baudRate + cur + logsPort + outData
+                bat str 
+            }
+        }
+    }
+}
+
+def preauth_void(size)
+{
+    script
+    {
+        for(int i=0; i<size; ++i)
+        {
+            catchError(stageResult: 'FAILURE')
+            {
+                 max = 9999
+                random_q = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                q = ' -q ' + random_q.toString()
+                max = 500
+                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                amount = '-a' + random_num.toString()
+                data = ' -out preauthVoidData' + i.toString()+ '.txt'
+                log = ' -lp preauthLog_void' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + dir + log + comPort + baudRate + cur + q + logsPort
+                bat str 
+                
+                log = ' -lp preauthVoidLog' + i.toString() + '.LOG'
+                data = ' -in preauthVoidData' + i.toString()+ '.txt'
+                outData = ' -out voidData' + i.toString()+ '.txt'    
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/refund0.txt ' + data + dir + log + comPort + baudRate + cur + logsPort + outData
+                bat str 
+            }
+        }
+    }
+}
+
+def journal()
 {
     script
     {
         catchError(stageResult: 'FAILURE')
         {
             i = 0
-            data = ' -in Data' + i.toString()+ '.txt'
-            log = ' -lp preauthCompLog' + i.toString() + '.LOG'
-            dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_authCode'
-            authCode = ' -auth 012345'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion_wrong_input.txt ' + ' -gv ../AutomationTesting/validation/globalValidations.txt ' + dir + log + data  + authCode
+            log = ' -lp journalLog' + i.toString() + '.LOG'
+            globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/journal.txt ' + dir + log + comPort + baudRate + globalVal + logsPort
             bat str
         }
     }
-
 }
 
 def closeBatch(valPath, index)
@@ -53,8 +158,7 @@ def closeBatch(valPath, index)
         catchError(stageResult: 'FAILURE')
         {
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_authCode'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + comPort + baudRate + logsPort
             bat str
         }
     }
@@ -73,34 +177,25 @@ pipeline {
                 init() 
             }
         }
-            
         stage('closeBatch1')
         {
             steps
             {
-                        
-                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
+                closeBatch('../AutomationTesting/validation/closeBatch1.txt', 1)
             }
         }
-
-        stage('preauth')
-        {
-            steps
-            {
-                preauth()
-            }
             
-        }
-
-        stage('preauthCompletion')
+ 
+        stage('preauth_preauthComp')
         {
             steps
             {
-                preauthComp()
+                preauth_preauthComp(3)
             }
             
         }
         
+   
         stage('closeBatch2')
         {
             steps
