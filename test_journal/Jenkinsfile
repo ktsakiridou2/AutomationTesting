@@ -166,7 +166,7 @@ pipeline {
             }
             
         }
-        
+        /*
         stage('preauth_preauthComp_lower_amount')
         {
             steps
@@ -182,7 +182,7 @@ pipeline {
                 preauth_void(1)
             }
         }
-        
+        */
        stage('journal')
         {
             steps
