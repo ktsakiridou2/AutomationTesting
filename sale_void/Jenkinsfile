@@ -35,7 +35,7 @@ def sale_void(size)
                 amount = '-a' + random_num.toString()
                 data = ' -out preauthVoidData' + i.toString()+ '.txt'
                 log = ' -lp preauthLog_void' + i.toString() + '.LOG'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + comPort + baudRate + cur + q + logsPort
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale_chip.txt ' + amount + data + dir + log + comPort + baudRate + cur + q + logsPort
                 bat str 
                 
                 log = ' -lp preauthVoidLog' + i.toString() + '.LOG'
