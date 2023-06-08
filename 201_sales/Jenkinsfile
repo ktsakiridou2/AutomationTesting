@@ -1,3 +1,4 @@
+
 ip = ' -ip 192.168.0.103'
 connType = '-t 2'
 dir = ' -dir ../AutomationTesting/Tests/test_journal'
@@ -6,6 +7,7 @@ comPort = ' -serialPort COM6'
 logsPort = ' -logsPort COM7'
 baudRate = ' -baud 9600'
 cur = ' -cur 975'
+
 
 def init()
 {
@@ -19,18 +21,21 @@ def sale(size)
 {
     script
     {
-        for(int i= 0; i<size; ++i)
+        for(int i=0; i<size; ++i)
         {
             catchError(stageResult: 'FAILURE')
             {
-                max = 98
+                max = 9999
+                random_q = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                q = ' -q ' + random_q.toString()
+               
+                max = 500
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
-                dir = ' -dir ../AutomationTesting/Tests/201_sales'
+                data = ' -out saleData' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
-                data = ' -out Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py '+ connType + ip + comPort + logsPort + baudRate +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + cur + log + dir + data
-                bat str 
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + comPort + baudRate + cur + q  + logsPort 
+                bat str
             }
         }
     }
