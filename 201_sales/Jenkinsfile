@@ -29,7 +29,7 @@ def sale(size)
                 dir = ' -dir ../AutomationTesting/Tests/201_sales'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 data = ' -out Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py '+ connType + ip + dir + comPort + logsPort + baudRate +' -vp ../AutomationTesting/validation/sale0.txt ' + cur + log + data
+                str = 'python.exe ../AutomationTesting/Main.py '+ connType + ip + comPort + logsPort + baudRate +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + cur + log + dir + data
                 bat str 
             }
         }
