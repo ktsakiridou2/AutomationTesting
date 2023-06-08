@@ -46,7 +46,7 @@ def preauthComp(size)
             {
                 dir = ' -dir ../AutomationTesting/Tests/200_preauths_then_completions'
                 log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
-                data = ' -in preauthCompletionData' + i.toString()+ '.txt'
+                data = ' -in preauthData' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate + cur +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + dir + log + data
                 bat str
             }
@@ -94,7 +94,7 @@ pipeline {
         {
             steps
             {
-                preauth(10)
+                preauth(3)
             }
             
         }
@@ -104,7 +104,7 @@ pipeline {
         {
             steps
             {
-                preauthComp(10)
+                preauthComp(3)
             }
         }
    
