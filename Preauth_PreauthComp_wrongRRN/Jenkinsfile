@@ -44,14 +44,14 @@ def preauthComp(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-            log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
-            data = ' -in preauthData' + i.toString()+ '.txt'
-            rrn = ' -rrn 023456789123'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate + cur + log + data + rrn + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + ' -gv ../AutomationTesting/validation/globalValidations.txt '
-            bat str
-        }
-    }
-
+                    log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
+                    data = ' -in preauthData' + i.toString()+ '.txt'
+                    rrn = ' -rrn 023456789123'
+                    str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate + cur + log + data + rrn + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + ' -gv ../AutomationTesting/validation/globalValidations.txt '
+                    bat str
+         }
+      }
+   }
 }
 
 def closeBatch(valPath, index)
