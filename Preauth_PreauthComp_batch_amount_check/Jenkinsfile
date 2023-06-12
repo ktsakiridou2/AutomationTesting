@@ -7,7 +7,7 @@ comPort = ' -serialPort COM6'
 logsPort = ' -logsPort COM7'
 baudRate = ' -baud 9600'
 cur = ' -cur 975'
-amount_check = 0
+int amount_check = 0
 
 def init()
 {
@@ -32,7 +32,8 @@ def preauth_preauthComp(size)
                 max = 500
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num
-                int amount_check += random_num as Integer
+                val = random_num as Integer
+                amount_check += val
                 println amount_check
                 data = ' -out preauthData' + i.toString()+ '.txt'
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
