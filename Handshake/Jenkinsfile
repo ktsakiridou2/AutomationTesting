@@ -15,8 +15,8 @@ def init()
         }
 }
 
-
-def hanshake()
+/*
+def handshake()
 {
     script
     {
@@ -28,7 +28,7 @@ def hanshake()
             bat str
         }
     }
-}
+}*/
 
 pipeline {
     agent any
@@ -43,13 +43,14 @@ pipeline {
                 init()
             }
         }
-        stage('hanshake')
+        /*    
+        stage('handshake')
         {
             steps
             {
                         
-                hanshake()
+                handshake()
             }
-        }
+        }*/
     }
 }
