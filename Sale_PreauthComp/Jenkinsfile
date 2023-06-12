@@ -82,7 +82,7 @@ pipeline {
         {
             steps
             {
-                sale()
+                sale(2)
             }
             
         }
@@ -91,7 +91,7 @@ pipeline {
         {
             steps
             {
-                preauthComp()
+                preauthComp(2)
             }
             
         }
