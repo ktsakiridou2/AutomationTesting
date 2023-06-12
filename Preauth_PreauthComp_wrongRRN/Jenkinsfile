@@ -1,5 +1,12 @@
-ip = ' -ip 192.168.1.2'
-connType = '-t 0'
+
+ip = ' -ip 192.168.0.103'
+connType = '-t 2'
+dir = ' -dir ../AutomationTesting/Tests/test_journal'
+globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
+comPort = ' -serialPort COM6'
+logsPort = ' -logsPort COM7'
+baudRate = ' -baud 9600'
+cur = ' -cur 975'
 
 def init()
 {
@@ -9,52 +16,55 @@ def init()
         }
 }
 
-def preauth()
-{
-        script
-        {
-            catchError(stageResult: 'FAILURE')
-            {
-                i = 0
-                max = 98
-                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
-                amount = '-a' + random_num.toString()
-                data = ' -out Data' + i.toString()+ '.txt'
-                log = ' -lp preauthLog' + i.toString() + '.LOG'
-                dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_RRN'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
-                bat str 
-            }
-        }
-}
-
-def preauthComp()
+def preauth(size)
 {
     script
     {
-        catchError(stageResult: 'FAILURE')
+        for(int i= 0; i<size; ++i)
         {
-            i = 0
-            data = ' -in Data' + i.toString()+ '.txt'
-            log = ' -lp preauthCompLog' + i.toString() + '.LOG'
+            catchError(stageResult: 'FAILURE')
+            {
+                max = 98
+                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                amount = '-a' + random_num.toString()
+                dir = ' -dir ../AutomationTesting/Tests/200_preauths_then_completions'
+                data = ' -out preauthData' + i.toString()+ '.txt'
+                log = ' -lp preauthLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate + cur +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + log
+                bat str 
+            }
+        }
+    }
+}
+
+def preauthComp(size)
+{
+    script
+    {
+        for(int i= 0; i<size; ++i)
+        {
+            catchError(stageResult: 'FAILURE')
+            {
+            index = 0
+            log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
+            data = ' -in preauthData' + i.toString()+ '.txt'
             dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_RRN'
             rrn = ' -rrn 023456789123'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + ' -gv ../AutomationTesting/validation/globalValidations.txt ' + dir + log + data  + rrn
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate + cur + log + data + rrn + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + ' -gv ../AutomationTesting/validation/globalValidations.txt '
             bat str
         }
     }
 
 }
 
-def closeBatch(valPath, index)
+        def closeBatch(valPath, index)
 {
     script
     {
         catchError(stageResult: 'FAILURE')
         {
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_RRN'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate +' -vp ' + valPath + log
             bat str
         }
     }
