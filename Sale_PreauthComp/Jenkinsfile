@@ -24,7 +24,7 @@ def sale()
         }
 }
 
-/* def preauthComp()
+def preauthComp()
 {
     script
     {
@@ -37,9 +37,9 @@ def sale()
         }
     }
 
-} */
+}
 
-def closeBatch(valPath)
+/* def closeBatch(valPath)
 {
     script
     {
@@ -50,7 +50,7 @@ def closeBatch(valPath)
             bat str
         }
     }
-}
+} */
 
 pipeline {
     agent any
