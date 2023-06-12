@@ -7,6 +7,7 @@ comPort = ' -serialPort COM6'
 logsPort = ' -logsPort COM7'
 baudRate = ' -baud 9600'
 cur = ' -cur 975'
+amount_check = 0
 
 def init()
 {
@@ -31,6 +32,7 @@ def preauth_preauthComp(size)
                 max = 500
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
+                amount_check += random_num
                 data = ' -out preauthData' + i.toString()+ '.txt'
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + dir + log + comPort + baudRate + cur + q  + logsPort 
@@ -54,7 +56,7 @@ def closeBatch(valPath, index)
         catchError(stageResult: 'FAILURE')
         {
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + comPort + baudRate + logsPort
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + comPort + baudRate + logsPort + amount_check
             bat str
         }
     }
