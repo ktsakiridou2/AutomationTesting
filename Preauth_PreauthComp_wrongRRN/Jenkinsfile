@@ -1,7 +1,7 @@
 
 ip = ' -ip 192.168.0.103'
 connType = '-t 2'
-dir = ' -dir ../AutomationTesting/Tests/test_journal'
+dir = ' -dir ../AutomationTesting/Tests/Preauth_PreauthComp_wrongRRN'
 globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
 comPort = ' -serialPort COM6'
 logsPort = ' -logsPort COM7'
@@ -27,7 +27,7 @@ def preauth(size)
                 max = 98
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
-                dir = ' -dir ../AutomationTesting/Tests/200_preauths_then_completions'
+                dir = ' -dir ../AutomationTesting/Tests/Preauth_PreauthComp_wrongRRN'
                 data = ' -out preauthData' + i.toString()+ '.txt'
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate + cur +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + log
@@ -57,14 +57,14 @@ def preauthComp(size)
 
 }
 
-        def closeBatch(valPath, index)
+def closeBatch(valPath, index)
 {
     script
     {
         catchError(stageResult: 'FAILURE')
         {
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate +' -vp ' + valPath + log
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + comPort + baudRate + logsPort
             bat str
         }
     }
