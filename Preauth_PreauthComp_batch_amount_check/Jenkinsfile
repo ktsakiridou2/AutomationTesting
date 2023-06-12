@@ -70,7 +70,6 @@ def closeBatch1(valPath, index)
     {
         catchError(stageResult: 'FAILURE')
             {
-            amount_check += 1
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
             amount = ' -a ' + amount_check.toString()
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + comPort + baudRate + logsPort + amount
