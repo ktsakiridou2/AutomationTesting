@@ -67,9 +67,9 @@ def closeBatch1(valPath, index)
     script
     {
         catchError(stageResult: 'FAILURE')
-        {
+            {
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + comPort + baudRate + logsPort + amount_check
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + comPort + baudRate + logsPort + ' -a '+ amount_check
             bat str
         }
     }
