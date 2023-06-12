@@ -32,7 +32,7 @@ def preauth_preauthComp(size)
                 max = 500
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num
-                amount_check += random_num
+                amount_check = amount_check + random_num
                 println amount_check
                 data = ' -out preauthData' + i.toString()+ '.txt'
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
