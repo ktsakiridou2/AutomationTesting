@@ -43,7 +43,7 @@ pipeline {
                 init()
             }
         }
-        /*    
+            
         stage('handshake')
         {
             steps
@@ -51,6 +51,6 @@ pipeline {
                         
                 handshake()
             }
-        }*/
+        }
     }
 }
