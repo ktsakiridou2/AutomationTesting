@@ -66,7 +66,7 @@ def closeBatch(valPath, index)
         catchError(stageResult: 'FAILURE')
         {
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate +' -vp ' + valPath + log
             bat str
         }
     }
@@ -85,12 +85,12 @@ pipeline {
                 init() 
             }
         }
-        stage('closeBatch1')
+         stage('closeBatchStart')
         {
             steps
             {
                         
-                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 0)
             }
         }
 
@@ -98,7 +98,7 @@ pipeline {
         {
             steps
             {
-                sale(10)
+                sale(2)
             }
             
         }
@@ -108,15 +108,15 @@ pipeline {
         {
             steps
             {
-                preauth(5)
+                preauth(2)
             }
         }
    
-        stage('closeBatch2')
+        stage('closeBatch')
         {
             steps
             {
-                closeBatch('../AutomationTesting/validation/closeBatch.txt', 2)
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
             }
         }
     }
