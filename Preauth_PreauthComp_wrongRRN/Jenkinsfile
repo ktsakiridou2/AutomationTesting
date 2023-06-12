@@ -1,7 +1,7 @@
 
 ip = ' -ip 192.168.0.103'
 connType = '-t 2'
-dir = ' -dir ../AutomationTesting/Tests/Preauth_PreauthComp_wrongRRN'
+dir = ' -dir ../AutomationTesting/Tests/test_journal'
 globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
 comPort = ' -serialPort COM6'
 logsPort = ' -logsPort COM7'
@@ -97,7 +97,7 @@ pipeline {
         {
             steps
             {
-                preauth()
+                preauth(2)
             }
             
         }
@@ -106,7 +106,7 @@ pipeline {
         {
             steps
             {
-                preauthComp()
+                preauthComp(2)
             }
             
         }
