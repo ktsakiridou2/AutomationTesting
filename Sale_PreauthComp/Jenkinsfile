@@ -59,7 +59,7 @@ pipeline {
     {
 
 
-        stage('closeBatchStart')
+       /* stage('closeBatchStart')
         {
             steps
             {
@@ -67,7 +67,7 @@ pipeline {
                 closeBatch('../AutomationTesting/validation/closeBatch1.txt')
             }
         }
-
+*/
         stage('sale')
         {
             steps
@@ -86,12 +86,13 @@ pipeline {
             
         }
         
-        stage('closeBatch')
+    /*    stage('closeBatch')
         {
             steps
             {
                 closeBatch('../AutomationTesting/validation/closeBatch.txt')
             }
         }
+        */
     }
 }
