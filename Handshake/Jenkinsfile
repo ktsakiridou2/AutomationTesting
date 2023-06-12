@@ -1,6 +1,6 @@
 ip = ' -ip 192.168.0.103'
 connType = '-t 2'
-dir = ' -dir ../AutomationTesting/Tests/test_journal'
+dir = ' -dir ../AutomationTesting/Tests/hanshake'
 globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
 comPort = ' -serialPort COM6'
 logsPort = ' -logsPort COM7'
@@ -23,9 +23,8 @@ def hanshake()
         catchError(stageResult: 'FAILURE')
         {
             i = 0
-            dir = ' -dir ../AutomationTesting/Tests/hanshake'
             log = ' -lp handshakeLog.LOG'+ i.toString() + '.LOG
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/handshake.txt' + dir + log + comPort + baudRate + globalVal + logsPort
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/handshake.txt' + dir + log + comPort + baudRate + logsPort
             bat str
         }
     }
