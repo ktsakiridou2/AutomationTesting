@@ -1,11 +1,6 @@
-ip = ' -ip 192.168.0.103'
-connType = '-t 2'
-dir = ' -dir ../AutomationTesting/Tests/Sale_PreauthComp'
-globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
-comPort = ' -serialPort COM6'
-logsPort = ' -logsPort COM7'
-baudRate = ' -baud 9600'
-cur = ' -cur 975'
+
+ip = ' -ip 192.168.1.2'
+connType = '-t 0'
 
 def sale()
 {
@@ -18,8 +13,8 @@ def sale()
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
                 data = ' -out ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + log + comPort + baudRate + cur + q  + logsPort 
-                bat str
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data
+                bat str 
             }
         }
 }
@@ -32,7 +27,7 @@ def preauthComp()
         {
             i = 0
             data = '-in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate + cur + log + data + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt '
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + data
             bat str
         }
     }
@@ -45,8 +40,7 @@ def closeBatch(valPath)
     {
         catchError(stageResult: 'FAILURE')
         {
-            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + comPort + baudRate + logsPort
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath
             bat str
         }
     }
@@ -59,7 +53,7 @@ pipeline {
     {
 
 
-       stage('closeBatchStart')
+        stage('closeBatchStart')
         {
             steps
             {
@@ -67,7 +61,7 @@ pipeline {
                 closeBatch('../AutomationTesting/validation/closeBatch1.txt')
             }
         }
-            
+
         stage('sale')
         {
             steps
@@ -86,13 +80,12 @@ pipeline {
             
         }
         
-       stage('closeBatch')
+        stage('closeBatch')
         {
             steps
             {
                 closeBatch('../AutomationTesting/validation/closeBatch.txt')
             }
         }
-    
     }
 }
