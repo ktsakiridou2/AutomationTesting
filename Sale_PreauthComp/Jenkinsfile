@@ -24,7 +24,7 @@ def sale()
         }
 }
 
-def preauthComp()
+/* def preauthComp()
 {
     script
     {
@@ -37,7 +37,7 @@ def preauthComp()
         }
     }
 
-}
+} */
 
 def closeBatch(valPath)
 {
