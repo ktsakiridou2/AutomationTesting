@@ -30,10 +30,10 @@ def preauth_preauthComp(size)
                 q = ' -q ' + random_q.toString()
                
                 max = 500
-                //random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
-                random_num = 10
+                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
                 amount_check += random_num
+                println amount_check
                 data = ' -out preauthData' + i.toString()+ '.txt'
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + dir + log + comPort + baudRate + cur + q  + logsPort 
