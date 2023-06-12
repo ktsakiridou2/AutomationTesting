@@ -30,7 +30,8 @@ def preauth_preauthComp(size)
                 q = ' -q ' + random_q.toString()
                
                 max = 500
-                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                //random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                random_num = 10
                 amount = '-a' + random_num.toString()
                 amount_check += random_num
                 data = ' -out preauthData' + i.toString()+ '.txt'
@@ -69,7 +70,7 @@ def closeBatch1(valPath, index)
         catchError(stageResult: 'FAILURE')
             {
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            amount = ' -a' + amount_check.toString()
+            amount = ' -a ' + amount_check.toString()
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + comPort + baudRate + logsPort + amount
             bat str
         }
