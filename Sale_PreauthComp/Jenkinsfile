@@ -1,5 +1,6 @@
 ip = ' -ip 192.168.0.103'
 connType = '-t 2'
+dir = ' -dir ../AutomationTesting/Tests/Sale_PreauthComp'
 globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
 comPort = ' -serialPort COM6'
 logsPort = ' -logsPort COM7'
