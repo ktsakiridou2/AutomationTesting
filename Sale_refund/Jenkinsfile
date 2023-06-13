@@ -5,6 +5,7 @@ comPort = ' -serialPort COM6'
 logsPort = ' -logsPort COM7'
 baudRate = ' -baud 9600'
 cur = ' -cur 975'
+dir = ' -dir ../AutomationTesting/Tests/Sale_refund'
 
 
 def init()
