@@ -99,6 +99,14 @@ pipeline {
             }
             
         }
+        
+          stage('preauthCompletion2')
+        {
+            steps
+            {
+                preauthComp(2)
+            }
+        }
             
         stage('closeBatch')
         {
