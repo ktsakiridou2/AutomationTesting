@@ -23,7 +23,7 @@ def status()
         {
             dir = ' -dir ../AutomationTesting/Tests/status'
             log = ' -lp statusLog.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py -vp ../AutomationTesting/validation/status.txt' + ip + connType + dir + log
+            str = 'python.exe ../AutomationTesting/Main.py -vp ../AutomationTesting/validation/status.txt' + ip + connType + dir + log + globalVal + comPort + logsPort + baudRate + cur
             bat str
         }
     }
