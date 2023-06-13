@@ -1,6 +1,6 @@
 ip = ' -ip 192.168.0.103'
 connType = '-t 2'
-dir = ' -dir ../AutomationTesting/Tests/Preauth_PreauthComp_wrongRRN'
+dir = ' -dir ../AutomationTesting/Tests/Preauth_PreauthComp_wrongStan'
 globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
 comPort = ' -serialPort COM6'
 logsPort = ' -logsPort COM7'
@@ -26,7 +26,6 @@ def preauth()
                 amount = '-a' + random_num.toString()
                 data = ' -out Data' + i.toString()+ '.txt'
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
-                dir = ' -dir ../AutomationTesting/Tests/Preauth_PreauthComp_wrongStan'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate + cur +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + log
                 bat str 
             }
@@ -42,7 +41,6 @@ def preauthComp()
             i = 0
             data = ' -in Data' + i.toString()+ '.txt'
             log = ' -lp preauthCompLog' + i.toString() + '.LOG'
-            dir = ' -dir ../AutomationTesting/Tests/Preauth_PreauthComp_wrongStan'
             stan = ' -stan 1234'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate + cur + log + data + stan + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + ' -gv ../AutomationTesting/validation/globalValidations.txt '
             bat str
