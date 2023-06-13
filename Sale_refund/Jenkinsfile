@@ -1,6 +1,5 @@
 ip = ' -ip 192.168.0.103'
 connType = '-t 2'
-dir = ' -dir ../AutomationTesting/Tests/Sale_refund'
 globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
 comPort = ' -serialPort COM6'
 logsPort = ' -logsPort COM7'
@@ -30,6 +29,7 @@ def sale(size)
                 max = 500
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
+                dir = ' -dir ../AutomationTesting/Tests/Sale_refund'
                 data = ' -out saleData' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + comPort + baudRate + cur + q  + logsPort 
@@ -49,6 +49,7 @@ def refund(size)
             {
                 log = ' -lp refundLog' + i.toString() + '.LOG'
                 data = ' -in saleData' + i.toString()+ '.txt'
+                dir = ' -dir ../AutomationTesting/Tests/Sale_refund'
                 outData = ' -out refundData' + i.toString()+ '.txt'    
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/refund0.txt ' + data + dir + log + comPort + baudRate + cur + logsPort + outData
                 bat str 
