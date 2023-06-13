@@ -50,8 +50,8 @@ def refund(size)
                 log = ' -lp refundLog' + i.toString() + '.LOG'
                 data = ' -in saleData' + i.toString()+ '.txt'
                 outData = ' -out refundData' + i.toString()+ '.txt'
-                auth = ' -auth 012345'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/refund0.txt ' + data + dir + log + comPort + baudRate + cur + logsPort + auth + outData
+                stan = ' -stan 1234'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/refund0.txt ' + stan + data + dir + log + comPort + baudRate + cur + logsPort + auth + outData
                 bat str 
             }
         }
