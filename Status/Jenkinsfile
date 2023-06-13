@@ -1,6 +1,5 @@
 ip = ' -ip 192.168.0.103'
 connType = ' -t 2'
-globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
 comPort = ' -serialPort COM6'
 logsPort = ' -logsPort COM7'
 baudRate = ' -baud 9600'
@@ -23,7 +22,7 @@ def status()
         {
             dir = ' -dir ../AutomationTesting/Tests/status'
             log = ' -lp statusLog.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py -vp ../AutomationTesting/validation/status.txt' + ip + connType + dir + log + globalVal + comPort + logsPort + baudRate + cur
+            str = 'python.exe ../AutomationTesting/Main.py -vp ../AutomationTesting/validation/status.txt' + ip + connType + dir + log + comPort + logsPort + baudRate + cur
             bat str
         }
     }
