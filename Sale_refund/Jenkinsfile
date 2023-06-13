@@ -32,7 +32,7 @@ def sale(size)
                 amount = '-a' + random_num.toString()
                 data = ' -out saleData' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + comPort + baudRate + cur + q  + logsPort 
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + comPort + baudRate + cur + q  + logsPort 
                 bat str
             }
         }
@@ -50,7 +50,7 @@ def refund(size)
                 log = ' -lp refundLog' + i.toString() + '.LOG'
                 data = ' -in saleData' + i.toString()+ '.txt'
                 outData = ' -out refundData' + i.toString()+ '.txt'    
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/refund0.txt ' + data + dir + log + comPort + baudRate + cur + logsPort + outData
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/refund0.txt ' + data + dir + log + comPort + baudRate + cur + logsPort + outData
                 bat str 
               }
         }
