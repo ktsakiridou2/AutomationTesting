@@ -96,7 +96,7 @@ pipeline {
             steps
             {
                         
-                closeBatch('../AutomationTesting/validation/closeBatch1.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch1.txt', 0)
             }
         }
 
@@ -131,7 +131,7 @@ pipeline {
         {
             steps
             {
-                closeBatch('../AutomationTesting/validation/closeBatch.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
             }
         }
     }
