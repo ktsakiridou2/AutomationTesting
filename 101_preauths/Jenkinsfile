@@ -1,4 +1,4 @@
-ip = ' -ip 192.168.0.103'
+ip = ' -ip 10.1.101.47'
 connType = '-t 2'
 dir = ' -dir ../AutomationTesting/Tests/test_journal'
 globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
