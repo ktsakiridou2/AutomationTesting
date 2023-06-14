@@ -1,6 +1,6 @@
 ip = ' -ip 192.168.0.103'
 connType = ' -t 2'
-dir = ' -dir ../AutomationTesting/Tests/test_journal'
+dir = ' -dir ../AutomationTesting/Tests/200_preauths_then_completions'
 globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
 comPort = ' -serialPort COM6'
 logsPort = ' -logsPort COM7'
@@ -25,8 +25,7 @@ def preauth(size)
             {
                 max = 98
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
-                amount = '-a' + random_num.toString()
-                dir = ' -dir ../AutomationTesting/Tests/200_preauths_then_completions'
+                amount = '-a' + random_num.toString()               
                 data = ' -out preauthData' + i.toString()+ '.txt'
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate + cur +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + log
@@ -44,7 +43,6 @@ def preauthComp(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                dir = ' -dir ../AutomationTesting/Tests/200_preauths_then_completions'
                 log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
                 data = ' -in preauthData' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + " -stan 1991" + globalVal + connType + ip + dir + comPort + logsPort + baudRate + cur + log + data + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt '
