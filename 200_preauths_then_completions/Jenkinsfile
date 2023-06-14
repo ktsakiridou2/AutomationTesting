@@ -47,7 +47,7 @@ def preauthComp(size)
                 dir = ' -dir ../AutomationTesting/Tests/200_preauths_then_completions'
                 log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
                 data = ' -in preauthData' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + globalVal + connType + ip + dir + comPort + logsPort + baudRate + cur + log + data + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt '
+                str = 'python.exe ../AutomationTesting/Main.py ' + " -stan 1991" + globalVal + connType + ip + dir + comPort + logsPort + baudRate + cur + log + data + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt '
                 bat str
             }
         }
@@ -62,7 +62,7 @@ def closeBatch(valPath, index)
         catchError(stageResult: 'FAILURE')
         {
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + " -stan 1991" + connType + ip + dir + comPort + logsPort + baudRate +' -vp ' + valPath + log
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate +' -vp ' + valPath + log
             bat str
         }
     }
