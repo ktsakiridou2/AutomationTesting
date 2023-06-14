@@ -25,22 +25,17 @@ def preauth_preauthComp(size)
             {
                 max = 9999
                 random_q = "${Math.abs(1 + new Random().nextInt(max+1))}"
-                q = ' -q ' + random_q.toString()
-               
+                q = ' -q ' + random_q.toString()               
                 max = 500
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
-                amount = '-a' + random_num
-                val = random_num as Integer
-                amount_check +=  val
-    
-                data = ' -out preauthData' + i.toString()+ '.txt'
+                data = ' -out preauthData' + i.toString() + '.txt'
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + dir + log + comPort + baudRate + cur + q  + logsPort 
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + data + dir + log + comPort + baudRate + cur + q  + logsPort 
                 bat str 
                 
                 log = ' -lp preauthCompLog' + i.toString() + '.LOG'
-                data = ' -in preauthData' + i.toString()+ '.txt'
-                outData = ' -out CompData' + i.toString()+ '.txt'
+                data = ' -in preauthData' + i.toString() + '.txt'
+                outData = ' -out CompData' + i.toString() + '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + data + dir + log + comPort + baudRate + cur + globalVal + logsPort + outData
                 bat str 
             }
