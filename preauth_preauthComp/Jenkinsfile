@@ -1,8 +1,11 @@
-
-ip = ' -ip 192.168.1.2'
-connType = '-t 0'
-logsPort = ' -logsPort COM17'
 dir = ' -dir ../AutomationTesting/Tests/Preauth_PreauthComp'
+ip = ' -ip 192.168.0.103'
+connType = '-t 2'
+globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
+comPort = ' -serialPort COM6'
+logsPort = ' -logsPort COM7'
+baudRate = ' -baud 9600'
+cur = ' -cur 975'
 
 def init()
 {
@@ -14,44 +17,32 @@ def init()
 
 def preauth_preauthComp(size)
 {
-        script
-        {
-                for(int i=0; i < size; ++i)
-                {
-                        catchError(stageResult: 'FAILURE')
-                        {
-                            max = 10
-                            random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
-                            amount = '-a' + random_num.toString()
-
-                            log = ' -lp preauthLog' + i.toString() + '.LOG'
-                            data = ' -out Data' + i.toString()+ '.txt'
-                            globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
-
-                            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data + logsPort
-                            bat str 
-
-
-                            log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
-                            data = ' -in Data' + i.toString()+ '.txt'
-                            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + dir + log + data + globalVal + logsPort
-                            bat str
-                        }
-                }
-        }
-}
-
-def journal()
-{
     script
     {
-        catchError(stageResult: 'FAILURE')
+        for(int i=0; i<size; ++i)
         {
-             log = ' -lp journalLog.LOG'
-             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/journal.txt ' + dir + log + logsPort
-             bat str
+            catchError(stageResult: 'FAILURE')
+            {
+                max = 9999
+                random_q = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                q = ' -q ' + random_q.toString()
+               
+                max = 500
+                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                amount = '-a' + random_num.toString()
+                data = ' -out preauthData' + i.toString()+ '.txt'
+                log = ' -lp preauthLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + dir + log + comPort + baudRate + cur + q  + logsPort 
+                bat str 
+                
+                log = ' -lp preauthCompLog' + i.toString() + '.LOG'
+                data = ' -in preauthData' + i.toString()+ '.txt'
+                outData = ' -out CompData' + i.toString()+ '.txt'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + data + dir + log + comPort + baudRate + cur + globalVal + logsPort + outData
+                bat str 
+            }
         }
-    }       
+    }
 }
 
 def closeBatch(valPath, index)
@@ -61,7 +52,7 @@ def closeBatch(valPath, index)
         catchError(stageResult: 'FAILURE')
         {
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + logsPort
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + comPort + baudRate + logsPort
             bat str
         }
     }
@@ -94,16 +85,9 @@ pipeline {
         {
             steps
             {
-                preauth_preauthComp(1)
+                preauth_preauthComp(4)
             }
             
-        }
-        stage('Journal')
-        {
-            steps
-            {
-                journal()
-            }
         }
             
         stage('closeBatch2')
