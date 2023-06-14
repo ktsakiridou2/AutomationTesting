@@ -1,4 +1,4 @@
-dir = ' -dir ../AutomationTesting/Tests/Preauth_PreauthComp'
+dir = ' -dir ../AutomationTesting/Tests/preauth_PreauthComp'
 ip = ' -ip 192.168.0.103'
 connType = '-t 2'
 globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
