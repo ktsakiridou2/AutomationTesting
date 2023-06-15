@@ -1,6 +1,6 @@
 ip = ' -ip 192.168.0.103'
 connType = '-t 2'
-dir = ' -dir ../AutomationTesting/Tests/sale_refund_higher_amount'
+dir = ' -dir ../AutomationTesting/Tests/test_journal'
 globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
 comPort = ' -serialPort COM6'
 logsPort = ' -logsPort COM7'
@@ -8,46 +8,21 @@ baudRate = ' -baud 9600'
 cur = ' -cur 975'
 
 
-def init()
-{
-        script
-        {
-                bat 'python.exe ../AutomationTesting/SetupTest.py '
-        }
-}
-
-
-def sale(size)
+def preauth(size)
 {
     script
     {
-        for(int i=0; i<size; ++i)
-        {
-            catchError(stageResult: 'FAILURE')
-            {        
-                 amount = '-a 5'
-                data = ' -out saleData' + i.toString()+ '.txt'
-                log = ' -lp saleLog' + i.toString() + '.LOG'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + comPort + baudRate + cur + logsPort 
-                bat str
-            }
-        }
-    }
-}
-def refund(size)
-{
-    script
-    {
-        for(int i=0; i<size; ++i)
+        for(int i= 0; i<size; ++i)
         {
             catchError(stageResult: 'FAILURE')
             {
-                amount = ' -a 20'
-                log = ' -lp partialVoidLog' + i.toString() + '.LOG'
-                data = ' -in saleData' + i.toString()+ '.txt'
-                outData = ' -out partialVoidData' + i.toString()+ '.txt'    
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/refund0.txt ' + amount + data + dir + log + comPort + baudRate + cur + logsPort + outData
-                bat str
+                max = 98
+                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                amount = '-a' + random_num.toString()
+                data = ' -out preauthData' + i.toString()+ '.txt'
+                log = ' -lp preauthLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate + cur +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + log
+                bat str 
             }
         }
     }
@@ -60,7 +35,7 @@ def closeBatch(valPath, index)
         catchError(stageResult: 'FAILURE')
         {
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + comPort + baudRate + logsPort
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate +' -vp ' + valPath + log
             bat str
         }
     }
@@ -72,38 +47,26 @@ pipeline {
     stages 
     {
 
-        stage('Init')
+
+        stage('closeBatchStart')
         {
             steps
             {
-                init() 
-            }
-        }
-        stage('closeBatch1')
-        {
-            steps
-            {
-                closeBatch('../AutomationTesting/validation/closeBatch1.txt', 0)
+                        
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 0)
             }
         }
 
-        stage('sale')
+        stage('preauth')
         {
             steps
             {
-                sale(2)
+                preauth(1)
             }
             
         }
-        stage('void')
-        {
-            steps
-            {
-                refund(2)
-            }
-            
-        }
-        stage('closeBatch1')
+      
+        stage('closeBatch')
         {
             steps
             {
