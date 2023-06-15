@@ -43,6 +43,9 @@ def preauthComp(size)
         {
             catchError(stageResult: 'FAILURE')
             {
+                amount = ' -a 10'
+                stan = ' -stan 0000'
+                authCode = ' -auth 000000'
                 log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
                 data = ' -in preauthData' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate + cur + log + data + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt '
