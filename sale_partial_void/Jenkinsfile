@@ -42,7 +42,7 @@ def voidTrans(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                amount = ' -a 100'
+                amount = ' -a 500'
                 log = ' -lp partialVoidLog' + i.toString() + '.LOG'
                 data = ' -in saleData' + i.toString()+ '.txt'
                 outData = ' -out partialVoidData' + i.toString()+ '.txt'    
