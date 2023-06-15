@@ -51,11 +51,9 @@ def preauthComp(size, dataInput, validationPath)
                 data = ' -in preauthData' + i.toString()+ '.txt'
                 if (dataInput == 1) {
                         str = 'python.exe ../AutomationTesting/Main.py ' + authCode + stan + amount + connType + ip + dir + comPort + logsPort + baudRate + cur + log + validationPath
-                        println 'hi1'
                 }
                 else {
                        str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate + cur + log + data + validationPath
-                       println 'hi2'
                 }   
                  bat str
             }
