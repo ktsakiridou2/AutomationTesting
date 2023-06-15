@@ -41,6 +41,7 @@ def preauthComp(size, dataInput)
     {
         for(int i= 0; i<size; ++i)
         {
+            str = ''    
             catchError(stageResult: 'FAILURE')
             {
                 amount = ' -a 10'
