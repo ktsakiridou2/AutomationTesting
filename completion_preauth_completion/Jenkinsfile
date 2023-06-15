@@ -1,11 +1,11 @@
 ip = ' -ip 192.168.0.103'
 connType = ' -t 2'
+dir = ' -dir ../AutomationTesting/Tests/completion_preauth'
 globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
 comPort = ' -serialPort COM6'
 logsPort = ' -logsPort COM7'
 baudRate = ' -baud 9600'
 cur = ' -cur 975'
-
 
 def init()
 {
@@ -15,58 +15,49 @@ def init()
         }
 }
 
-def preauth()
+def preauth(size)
 {
-        script
+    script
+    {
+        for(int i= 0; i<size; ++i)
         {
             catchError(stageResult: 'FAILURE')
             {
-                i = 0
                 max = 98
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
-                amount = '-a' + random_num.toString()
-                dir = ' -dir ../AutomationTesting/Tests/completion_preauth_completion'
+                amount = '-a' + random_num.toString()              
+                data = ' -out preauthData' + i.toString()+ '.txt'
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
-                data = ' -out Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + globalVal + comPort + logsPort + baudRate + cur + connType + ip + ' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate + cur +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + log
                 bat str 
             }
         }
+    }
 }
 
-def preauthCompError(valPath, index)
+def preauthComp(size, dataInput)
 {
     script
     {
-        catchError(stageResult: 'FAILURE')
+        for(int i= 0; i<size; ++i)
         {
-            i = 0
-            dir = ' -dir ../AutomationTesting/Tests/completion_preauth_completion'
-            log = ' -lp preauthCompletionLog' + index.toString() + '.LOG'
-            stan = ' -stan 0'
-            authCode = ' -auth 000000'
-            str = 'python.exe ../AutomationTesting/Main.py ' + globalVal + comPort + logsPort + baudRate + cur + connType + ip + ' -vp '  +valPath + dir + log + stan + authCode
-            bat str
+            catchError(stageResult: 'FAILURE')
+            {
+                amount = ' -a 10'
+                stan = ' -stan 0000'
+                authCode = ' -auth 000000'
+                log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
+                data = ' -in preauthData' + i.toString()+ '.txt'
+                if (dataInput == 1) {
+                        str = 'python.exe ../AutomationTesting/Main.py ' + authCode + stan + amount + connType + ip + dir + comPort + logsPort + baudRate + cur + log + ' -vp ../AutomationTesting/validation/preauthCompletionError.txt '
+                }
+                else {
+                       str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate + cur + log + data + ' -vp ../AutomationTesting/validation/preauthCompletionError.txt '
+                }   
+                 bat str
+            }
         }
     }
-
-}
-
-def preauthComp(valPath, index)
-{
-    script
-    {
-        catchError(stageResult: 'FAILURE')
-        {
-            i = 0
-            dir = ' -dir ../AutomationTesting/Tests/completion_preauth_completion'
-            log = ' -lp preauthCompletionLog' + index.toString() + '.LOG'
-            data = ' -in Data' + i.toString()+ '.txt'
-            str = 'python.exe ../AutomationTesting/Main.py ' + globalVal + comPort + logsPort + baudRate + cur + connType + ip + ' -vp '  +valPath + dir + log + data
-            bat str
-        }
-    }
-
 }
 
 def closeBatch(valPath, index)
@@ -109,7 +100,7 @@ pipeline {
         {
             steps
             {
-                preauthCompError('../AutomationTesting/validation/preauthCompletionError1.txt ', 1)
+                preauthCompError(1, 1)
             }
         }
 
@@ -117,7 +108,7 @@ pipeline {
         {
             steps
             {
-                preauth()
+                preauth(3)
             }
             
         }
@@ -126,7 +117,7 @@ pipeline {
         {
             steps
             {
-                preauthComp('../AutomationTesting/validation/preauthCompletion0.txt ', 2)
+                preauthComp(3, 0)
             }
         }
             
