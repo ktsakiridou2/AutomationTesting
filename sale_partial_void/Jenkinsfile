@@ -95,14 +95,6 @@ pipeline {
             }
             
         }
-
-        stage('closeBatch2')
-        {
-            steps
-            {
-                closeBatch('../AutomationTesting/validation/closeBatch1.txt', 1)
-            }
-        }
         stage('void')
         {
             steps
@@ -111,11 +103,11 @@ pipeline {
             }
             
         }
-        stage('closeBatch3')
+        stage('closeBatch1')
         {
             steps
             {
-                closeBatch('../AutomationTesting/validation/closeBatch.txt', 2)
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
             }
         }
     }
