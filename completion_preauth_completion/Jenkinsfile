@@ -35,7 +35,7 @@ def preauth(size)
     }
 }
 
-def preauthComp(size, dataInput)
+def preauthComp(size, dataInput, validationPath)
 {
     script
     {
@@ -49,13 +49,12 @@ def preauthComp(size, dataInput)
                 authCode = ' -auth 000000'
                 log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
                 data = ' -in preauthData' + i.toString()+ '.txt'
-                println 'hi'
                 if (dataInput == 1) {
-                        str = 'python.exe ../AutomationTesting/Main.py ' + authCode + stan + amount + connType + ip + dir + comPort + logsPort + baudRate + cur + log + ' -vp ../AutomationTesting/validation/preauthCompletionError.txt '
+                        str = 'python.exe ../AutomationTesting/Main.py ' + authCode + stan + amount + connType + ip + dir + comPort + logsPort + baudRate + cur + log + validationPath
                         println 'hi1'
                 }
                 else {
-                       str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate + cur + log + data + ' -vp ../AutomationTesting/validation/preauthCompletionError.txt '
+                       str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate + cur + log + data + validationPath
                        println 'hi2'
                 }   
                  bat str
@@ -104,7 +103,7 @@ pipeline {
         {
             steps
             {
-                preauthComp(3, 1)
+                preauthComp(3, 1, ' -vp ../AutomationTesting/validation/preauthCompletionError1.txt')
             }
         }
 
@@ -121,7 +120,7 @@ pipeline {
         {
             steps
             {
-                preauthComp(3, 0)
+                preauthComp(3, 0, '  -vp ../AutomationTesting/validation/preauthCompletion.txt ')
             }
         }
             
