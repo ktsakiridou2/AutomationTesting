@@ -1,5 +1,12 @@
-ip = ' -ip 192.168.1.2'
-connType = '-t 0'
+ip = ' -ip 192.168.0.103'
+connType = '-t 2'
+dir = ' -dir ../AutomationTesting/Tests/sale_refund_higher_amount'
+globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
+comPort = ' -serialPort COM6'
+logsPort = ' -logsPort COM7'
+baudRate = ' -baud 9600'
+cur = ' -cur 975'
+
 
 def init()
 {
@@ -9,39 +16,41 @@ def init()
         }
 }
 
-def sale()
-{
-        script
-        {
-            catchError(stageResult: 'FAILURE')
-            {
-                i = 0
-                amount = '-a 5'
-                dir = ' -dir ../AutomationTesting/Tests/sale_refund_higher_amount'
-                log = ' -lp saleLog' + i.toString() + '.LOG'
-                data = ' -out Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log
-                bat str 
-            }
-        }
-}
 
-def refund()
+def sale(size)
 {
     script
     {
-        catchError(stageResult: 'FAILURE')
+        for(int i=0; i<size; ++i)
         {
-            i = 0
-            amount = ' -a 20'
-            dir = ' -dir ../AutomationTesting/Tests/sale_refund_higher_amount'
-            log = ' -lp refundLog' + i.toString() + '.LOG'
-            data = ' -in Data' + i.toString()+ '.txt'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/refund_higher_amount.txt ' + data + amount + dir + log
-            bat str
+            catchError(stageResult: 'FAILURE')
+            {        
+                 amount = '-a 5'
+                data = ' -out saleData' + i.toString()+ '.txt'
+                log = ' -lp saleLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + comPort + baudRate + cur + logsPort 
+                bat str
+            }
         }
     }
-
+}
+def refund(size)
+{
+    script
+    {
+        for(int i=0; i<size; ++i)
+        {
+            catchError(stageResult: 'FAILURE')
+            {
+                amount = ' -a 20'
+                log = ' -lp partialVoidLog' + i.toString() + '.LOG'
+                data = ' -in saleData' + i.toString()+ '.txt'
+                outData = ' -out partialVoidData' + i.toString()+ '.txt'    
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/refund0.txt ' + amount + data + dir + log + comPort + baudRate + cur + logsPort + outData
+                bat str
+            }
+        }
+    }
 }
 
 def closeBatch(valPath, index)
@@ -50,9 +59,8 @@ def closeBatch(valPath, index)
     {
         catchError(stageResult: 'FAILURE')
         {
-            dir = ' -dir ../AutomationTesting/Tests/sale_refund_higher_amount'
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir  + log
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + comPort + baudRate + logsPort
             bat str
         }
     }
@@ -71,13 +79,11 @@ pipeline {
                 init() 
             }
         }
-            
         stage('closeBatch1')
         {
             steps
             {
-                        
-                closeBatch('../AutomationTesting/validation/closeBatch1.txt', 1)
+                closeBatch('../AutomationTesting/validation/closeBatch1.txt', 0)
             }
         }
 
@@ -85,25 +91,23 @@ pipeline {
         {
             steps
             {
-                sale()
+                sale(2)
             }
             
         }
-
-        stage('refund')
+        stage('void')
         {
             steps
             {
-                refund()
+                refund(2)
             }
             
         }
-        
-        stage('closeBatch2')
+        stage('closeBatch1')
         {
             steps
             {
-                closeBatch('../AutomationTesting/validation/closeBatch.txt', 2)
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
             }
         }
     }
