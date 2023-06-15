@@ -75,56 +75,6 @@ pipeline {
 
     stages 
     {
-        stage('Init')
-        {
-            steps
-            {
-                init() 
-            }
-        }
-
-        stage('closeBatch1')
-        {
-            steps
-            {
-                        
-                closeBatch('../AutomationTesting/validation/closeBatch.txt', 0)
-            }
-        }
-
-        stage('sale')
-        {
-            steps
-            {
-                sale(3)
-            }
-            
-        }
-
-        stage('refund')
-        {
-            steps
-            {
-                refund(3)
-            }
-            
-        }
-        
-        stage('closeBatch2')
-        {
-            steps
-            {
-                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
-            }
-        }
-    }
-}
-
-pipeline {
-    agent any
-
-    stages 
-    {
 
 
         stage('closeBatchStart')
@@ -140,7 +90,7 @@ pipeline {
         {
             steps
             {
-                sale(2)
+                sale(1)
             }
             
         }
@@ -149,7 +99,7 @@ pipeline {
         {
             steps
             {
-                refund(2)
+                refund(1)
             }
             
         }
@@ -158,7 +108,7 @@ pipeline {
         {
             steps
             {
-                refund(2)
+                refund(1)
             }
             
         }
