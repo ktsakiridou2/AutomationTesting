@@ -42,7 +42,7 @@ def voidTrans(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                amount = ' -a 500'
+                amount = ' -a 100'
                 log = ' -lp partialVoidLog' + i.toString() + '.LOG'
                 data = ' -in saleData' + i.toString()+ '.txt'
                 outData = ' -out partialVoidData' + i.toString()+ '.txt'    
@@ -83,7 +83,7 @@ pipeline {
         {
             steps
             {
-                closeBatch('../AutomationTesting/validation/closeBatch1.txt', 1)
+                closeBatch('../AutomationTesting/validation/closeBatch1.txt', 0)
             }
         }
 
@@ -95,6 +95,14 @@ pipeline {
             }
             
         }
+
+        stage('closeBatch2')
+        {
+            steps
+            {
+                closeBatch('../AutomationTesting/validation/closeBatch1.txt', 1)
+            }
+        }
         stage('void')
         {
             steps
@@ -103,7 +111,7 @@ pipeline {
             }
             
         }
-        stage('closeBatch2')
+        stage('closeBatch3')
         {
             steps
             {
