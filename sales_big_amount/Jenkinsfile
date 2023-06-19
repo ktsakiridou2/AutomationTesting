@@ -1,6 +1,20 @@
+ip = ' -ip 192.168.0.103'
+connType = ' -t 2'
+dir = ' -dir ../AutomationTesting/Tests/sales_big_amount'
+globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
+comPort = ' -serialPort COM6'
+logsPort = ' -logsPort COM7'
+baudRate = ' -baud 9600'
+cur = ' -cur 975'
 
-ip = ' -ip 192.168.1.2'
-connType = '-t 0'
+
+def init()
+{
+        script
+        {
+                bat 'python.exe ../AutomationTesting/SetupTest.py '
+        }
+}
 
 def sale(size)
 {
@@ -10,22 +24,42 @@ def sale(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                amount = '-a 10000000'
-                data = ' -out ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data
-                bat str 
+                amount = '-a 20000'
+                data = ' -out saleData' + i.toString()+ '.txt'
+                log = ' -lp saleLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + comPort + baudRate + cur + q  + logsPort 
+                bat str
             }
         }
     }
 }
 
-def closeBatch(valPath)
+def refund(size)
+{
+    script
+    {
+        for(int i=0; i<size; ++i)
+        {
+            catchError(stageResult: 'FAILURE')
+            {
+                log = ' -lp refundLog' + i.toString() + '.LOG'
+                data = ' -in saleData' + i.toString()+ '.txt'
+                outData = ' -out refundData' + i.toString()+ '.txt'    
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/refund0.txt ' + data + dir + log + comPort + baudRate + cur + logsPort + outData
+                bat str 
+              }
+        }
+    }
+}
+          
+def closeBatch(valPath, index)
 {
     script
     {
         catchError(stageResult: 'FAILURE')
         {
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath
+            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + comPort + baudRate + logsPort
             bat str
         }
     }
@@ -36,14 +70,20 @@ pipeline {
 
     stages 
     {
+        stage('Init')
+        {
+            steps
+            {
+                init() 
+            }
+        }
 
-
-        stage('closeBatchStart')
+        stage('closeBatch1')
         {
             steps
             {
                         
-                closeBatch('../AutomationTesting/validation/closeBatch1.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 0)
             }
         }
 
@@ -51,16 +91,25 @@ pipeline {
         {
             steps
             {
-                sale(2)
+                sale(3)
             }
             
         }
 
-        stage('closeBatch')
+        stage('refund')
         {
             steps
             {
-                closeBatch('../AutomationTesting/validation/closeBatch.txt')
+                refund(3)
+            }
+            
+        }
+        
+        stage('closeBatch2')
+        {
+            steps
+            {
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
             }
         }
     }
