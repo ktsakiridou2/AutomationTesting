@@ -79,7 +79,7 @@ pipeline {
         {
             steps
             {
-                sale(20)
+                sale(5)
             }
             
         }
