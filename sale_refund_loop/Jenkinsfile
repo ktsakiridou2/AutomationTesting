@@ -64,7 +64,7 @@ pipeline {
         {
             steps
             {
-                sale_refund(1)
+                sale_refund(10)
             }
             
         }
