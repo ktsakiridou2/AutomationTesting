@@ -24,7 +24,7 @@ def sale(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                amount = '-a 19900'
+                amount = '-a 20000'
                 data = ' -out saleData' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + comPort + baudRate + cur + logsPort 
