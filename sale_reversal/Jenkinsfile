@@ -1,7 +1,11 @@
-
-ip = ' -ip 192.168.1.2'
-connType = '-t 0'
 dir = ' -dir ../AutomationTesting/Tests/sale_reversal'
+ip = ' -ip 192.168.0.103'
+connType = '-t 2'
+globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
+comPort = ' -serialPort COM6'
+logsPort = ' -logsPort COM7'
+baudRate = ' -baud 9600'
+cur = ' -cur 975'
 
 def init()
 {
@@ -19,18 +23,21 @@ def sale(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                max = 98
+                max = 9999
+                random_q = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                q = ' -q ' + random_q.toString()               
+                max = 500
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
-                data = ' -out Data' + i.toString()+ '.txt'
+                data = ' -out saleData' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
-                globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + globalVal
-                bat str 
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + comPort + baudRate + cur + q  + logsPort 
+                bat str
             }
         }
     }
 }
+
 def reversal(size)
 {
     script
@@ -39,10 +46,10 @@ def reversal(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                data = ' -in Data' + i.toString()+ '.txt'
-                log = ' -lp saleLog' + i.toString() + '.LOG'
-                globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log + globalVal
+                data = ' -in saleData' + i.toString()+ '.txt'
+                outData = ' -out reversalData' + i.toString()+ '.txt'
+                log = ' -lp reversalLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log + comPort + baudRate + cur + logsPort + outData
                 bat str 
             }
         }
@@ -56,7 +63,7 @@ def closeBatch(valPath, index)
         catchError(stageResult: 'FAILURE')
         {
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + comPort + baudRate + logsPort
             bat str
         }
     }
@@ -87,7 +94,7 @@ pipeline {
         {
             steps
             {
-                sale(1)
+                sale(4)
             }
             
         }
@@ -95,7 +102,7 @@ pipeline {
         {
             steps
             {
-                reversal(1)
+                reversal(4)
             }
             
         }
