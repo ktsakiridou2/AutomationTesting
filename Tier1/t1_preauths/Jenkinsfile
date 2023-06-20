@@ -1,6 +1,6 @@
 ip = ' -ip 192.168.0.103'
 connType = ' -t 2'
-dir = ' -dir ../AutomationTesting/Tests/101_preauths'
+dir = ' -dir ../AutomationTesting/Tests/t1_preauths'
 globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
 comPort = ' -serialPort COM6'
 logsPort = ' -logsPort COM7'
@@ -28,35 +28,11 @@ def preauth(size)
     }
 }
 
-def closeBatch(valPath, index)
-{
-    script
-    {
-        catchError(stageResult: 'FAILURE')
-        {
-            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate +' -vp ' + valPath + log
-            bat str
-        }
-    }
-}
-
 pipeline {
     agent any
 
     stages 
     {
-
-
-        stage('closeBatchStart')
-        {
-            steps
-            {
-                        
-                closeBatch('../AutomationTesting/validation/closeBatch.txt', 0)
-            }
-        }
-
         stage('preauth')
         {
             steps
@@ -64,14 +40,6 @@ pipeline {
                 preauth(1)
             }
             
-        }
-      
-        stage('closeBatch')
-        {
-            steps
-            {
-                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
-            }
         }
     }
 }
