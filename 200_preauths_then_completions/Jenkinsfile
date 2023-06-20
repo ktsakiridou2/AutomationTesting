@@ -92,7 +92,7 @@ pipeline {
         {
             steps
             {
-                preauth(1)
+                preauth(100)
             }
             
         }
@@ -102,7 +102,7 @@ pipeline {
         {
             steps
             {
-                preauthComp(1)
+                preauthComp(100)
             }
         }
    
