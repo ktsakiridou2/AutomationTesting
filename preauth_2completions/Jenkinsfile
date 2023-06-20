@@ -94,7 +94,7 @@ pipeline {
         {
             steps
             {
-                preauth(2)
+                preauth(70)
             }
             
         }
@@ -105,7 +105,7 @@ pipeline {
         {
             steps
             {
-                preauthComp( '../AutomationTesting/validation/preauthCompletion0.txt ', 2)
+                preauthComp( '../AutomationTesting/validation/preauthCompletion0.txt ', 70)
             }
         }
 
@@ -113,7 +113,7 @@ pipeline {
         {
             steps
             {
-                preauthComp('../AutomationTesting/validation/preauthCompletion0.txt ', 2)
+                preauthComp('../AutomationTesting/validation/preauthCompletion0.txt ', 70)
             }
             
         }
