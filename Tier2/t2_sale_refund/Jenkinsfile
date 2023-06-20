@@ -1,0 +1,90 @@
+ip = ' -ip 192.168.0.103'
+connType = ' -t 2'
+dir = ' -dir ../AutomationTesting/Tests/t2_sale_refund'
+globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
+comPort = ' -serialPort COM6'
+logsPort = ' -logsPort COM7'
+baudRate = ' -baud 9600'
+cur = ' -cur 975'
+
+
+def init()
+{
+        script
+        {
+                bat 'python.exe ../AutomationTesting/SetupTest.py '
+        }
+}
+
+def sale(size)
+{
+    script
+    {
+        for(int i=0; i<size; ++i)
+        {
+            catchError(stageResult: 'FAILURE')
+            {
+                max = 9999
+                random_q = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                q = ' -q ' + random_q.toString()               
+                max = 500
+                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                amount = '-a' + random_num.toString()
+                data = ' -out saleData' + i.toString()+ '.txt'
+                log = ' -lp saleLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + comPort + baudRate + cur + q + logsPort 
+                bat str
+            }
+        }
+    }
+}
+
+def refund(size)
+{
+    script
+    {
+        for(int i=0; i<size; ++i)
+        {
+            catchError(stageResult: 'FAILURE')
+            {
+                log = ' -lp refundLog' + i.toString() + '.LOG'
+                data = ' -in saleData' + i.toString()+ '.txt'
+                outData = ' -out refundData' + i.toString()+ '.txt'    
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/refund0.txt ' + data + dir + log + comPort + baudRate + cur + logsPort + outData
+                bat str 
+              }
+        }
+    }
+}
+
+pipeline {
+    agent any
+
+    stages 
+    {
+        stage('Init')
+        {
+            steps
+            {
+                init() 
+            }
+        }
+
+        stage('sale')
+        {
+            steps
+            {
+                sale(3)
+            }   
+        }
+
+        stage('refund')
+        {
+            steps
+            {
+                refund(3)
+            }
+            
+        }
+    }
+}

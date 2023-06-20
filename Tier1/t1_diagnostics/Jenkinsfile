@@ -1,0 +1,54 @@
+ip = ' -ip 192.168.0.103'
+connType = ' -t 2'
+dir = ' -dir ../AutomationTesting/Tests/t1_diagnostics'
+globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
+comPort = ' -serialPort COM6'
+logsPort = ' -logsPort COM7'
+baudRate = ' -baud 9600'
+cur = ' -cur 975'
+
+def init()
+{
+        script
+        {
+                bat 'python.exe ../AutomationTesting/SetupTest.py '
+        }
+}
+
+
+def diagnostics()
+{
+    script
+    {
+        catchError(stageResult: 'FAILURE')
+        {
+            log = ' -lp diagnosticsLog.LOG'
+            str = 'python.exe ../AutomationTesting/Main.py -vp ../AutomationTesting/validation/diagnostics.txt' + ip + connType + dir + log + comPort + logsPort + baudRate
+            bat str
+        }
+    }
+}
+
+pipeline {
+    agent any
+
+    stages 
+    {
+        stage('init')
+        {
+            steps
+            {
+                        
+                init()
+            }
+        }
+        stage('diagnostics')
+        {
+            steps
+            {
+                        
+                diagnostics()
+            }
+        }
+    }
+}
