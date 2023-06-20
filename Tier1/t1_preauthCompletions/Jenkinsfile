@@ -51,7 +51,7 @@ pipeline {
         {
             steps
             {
-                preauthComp(100)
+                preauthComp(1)
             }
         }
     }
