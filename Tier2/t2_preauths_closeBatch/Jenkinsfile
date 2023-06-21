@@ -46,6 +46,13 @@ pipeline {
 
     stages 
     {
+        stage('closeBatch1')
+        {
+            steps
+            {
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 0)
+            }
+        }
         stage('preauth')
         {
             steps
@@ -55,7 +62,7 @@ pipeline {
             
         }
       
-        stage('closeBatch')
+        stage('closeBatch2')
         {
             steps
             {
