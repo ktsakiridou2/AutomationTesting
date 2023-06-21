@@ -59,6 +59,19 @@ def sale(size)
     }
 }
 
+def closeBatch(valPath, index)
+{
+    script
+    {
+        catchError(stageResult: 'FAILURE')
+        {
+            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + comPort + baudRate + logsPort
+            bat str
+        }
+    }
+}
+
 pipeline {
     agent any
 
