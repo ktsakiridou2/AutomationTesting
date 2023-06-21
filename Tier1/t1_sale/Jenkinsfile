@@ -58,9 +58,16 @@ pipeline {
         {
             steps
             {
-                sale(5)
+                sale(100)
+            }  
+        }
+
+        stage('sale2')
+        {
+            steps
+            {
+                sale(100)
             }
-            
         }
     }
 }
