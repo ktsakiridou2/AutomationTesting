@@ -85,6 +85,21 @@ def closeBatch(valPath, index)
     }
 }
 
+def journal()
+{
+    script
+    {
+        catchError(stageResult: 'FAILURE')
+        {
+            i = 0
+            log = ' -lp journalLog' + i.toString() + '.LOG'
+            globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/journal.txt ' + dir + log + comPort + baudRate + globalVal + logsPort
+            bat str
+        }
+    }
+}
+
 
 pipeline {
     agent any
@@ -108,20 +123,23 @@ pipeline {
             {
                 preauth(10)
             }
-            
         }
-
         
         stage('refund')
         {
             steps
             {
                 refund(10)
-            }
-            
+            } 
         }
         
-        
+       stage('Journal')
+        {
+            steps
+            {
+                journal()
+            }
+        } 
         stage('preauthCompletion')
         {
             steps
@@ -129,6 +147,14 @@ pipeline {
                 preauthComp(10)
             }
             
+        }
+
+        stage('Journal')
+        {
+            steps
+            {
+                journal()
+            }
         }
 
         stage('closeBatch')
