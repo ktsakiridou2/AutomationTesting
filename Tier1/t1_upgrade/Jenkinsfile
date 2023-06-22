@@ -1,0 +1,53 @@
+ip = ' -ip 192.168.0.103'
+connType = ' -t 2'
+comPort = ' -serialPort COM6'
+logsPort = ' -logsPort COM7'
+baudRate = ' -baud 9600'
+cur = ' -cur 975'
+
+def init()
+{
+        script
+        {
+                bat 'python.exe ../AutomationTesting/SetupTest.py '
+        }
+}
+
+
+def upgrade()
+{
+    script
+    {
+        catchError(stageResult: 'FAILURE')
+        {
+            dir = ' -dir ../AutomationTesting/Tests/upgrade'
+            log = ' -lp upgradeLog.LOG'
+            str = 'python.exe ../AutomationTesting/Main.py -vp ../AutomationTesting/validation/upgrade.txt' + ip + connType + dir + log + comPort + logsPort + baudRate + cur
+            bat str
+        }
+    }
+}
+
+pipeline {
+    agent any
+    
+    stages 
+    {
+        stage('init')
+        {
+            steps
+            {
+                        
+                init()
+            }
+        }
+        stage('upgrade')
+        {
+            steps
+            {
+                        
+                upgrade()
+            }
+        }
+    }
+}
