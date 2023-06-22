@@ -106,7 +106,7 @@ pipeline {
         {
             steps
             {
-                preauth(3)
+                preauth(10)
             }
             
         }
@@ -116,7 +116,7 @@ pipeline {
         {
             steps
             {
-                refund(3)
+                refund(10)
             }
             
         }
@@ -126,7 +126,7 @@ pipeline {
         {
             steps
             {
-                preauthComp(3)
+                preauthComp(10)
             }
             
         }
