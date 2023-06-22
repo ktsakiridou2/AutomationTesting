@@ -52,7 +52,6 @@ def journal()
         {
             i = 0
             log = ' -lp journalLog' + i.toString() + '.LOG'
-            globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/journal.txt ' + dir + log + comPort + baudRate + globalVal + logsPort
             bat str
         }
@@ -104,6 +103,7 @@ pipeline {
             }
 
         }
+       
         stage('Journal')
         {
             steps
