@@ -133,7 +133,7 @@ pipeline {
             } 
         }
         
-       stage('Journal')
+       stage('Journal1')
         {
             steps
             {
@@ -149,7 +149,7 @@ pipeline {
             
         }
 
-        stage('Journal')
+        stage('Journal2')
         {
             steps
             {
