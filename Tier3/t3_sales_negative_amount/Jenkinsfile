@@ -29,7 +29,7 @@ def sale(size)
                 val = random_num as Integer
                 val = -val
                 println val
-                amount = '-a ' + val.toString()
+                amount = '-a -56'
                 data = ' -out saleData' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + comPort + baudRate + cur + logsPort 
