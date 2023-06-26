@@ -62,6 +62,13 @@ pipeline {
 
     stages 
     {
+        stage('Init')
+        {
+            steps
+            {
+                init() 
+            }
+        }
 
         stage('sale')
         {
