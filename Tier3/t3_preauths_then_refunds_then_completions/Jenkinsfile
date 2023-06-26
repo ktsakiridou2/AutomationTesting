@@ -107,7 +107,13 @@ pipeline {
     stages 
     {
 
-
+        stage('Init')
+        {
+            steps
+            {
+                init() 
+            }
+        }
         stage('closeBatchStart')
         {
             steps
@@ -133,28 +139,12 @@ pipeline {
             } 
         }
         
-       stage('Journal1')
-        {
-            steps
-            {
-                journal()
-            }
-        } 
         stage('preauthCompletion')
         {
             steps
             {
                 preauthComp(10)
-            }
-            
-        }
-
-        stage('Journal2')
-        {
-            steps
-            {
-                journal()
-            }
+            }  
         }
 
         stage('closeBatch')
