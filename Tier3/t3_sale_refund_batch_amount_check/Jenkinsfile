@@ -46,7 +46,7 @@ def refund(size)
             catchError(stageResult: 'FAILURE')
             {
                 amount = ' -a 500'
-                refundsAmount += amount
+                globalAmount -= amount
                 log = ' -lp refundLog' + i.toString() + '.LOG'
                 data = ' -in saleData' + i.toString()+ '.txt'
                 outData = ' -out refundData' + i.toString()+ '.txt'    
