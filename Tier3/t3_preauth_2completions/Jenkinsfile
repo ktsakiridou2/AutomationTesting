@@ -26,7 +26,6 @@ def preauth(size)
                 max = 98
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
-                dir = ' -dir ../AutomationTesting/Tests/200_preauths_then_completions'
                 data = ' -out preauthData' + i.toString()+ '.txt'
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate + cur +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + log
@@ -44,7 +43,6 @@ def preauthComp(valPath, size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                dir = ' -dir ../AutomationTesting/Tests/200_preauths_then_completions'
                 log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
                 data = ' -in preauthData' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate + cur + log + data + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt '
