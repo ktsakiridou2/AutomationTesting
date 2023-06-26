@@ -101,7 +101,7 @@ pipeline {
         {
             steps
             {
-                preauthComp(55, 1, ' -vp ../AutomationTesting/validation/preauthCompletionError1.txt')
+                preauthComp(5, 1, ' -vp ../AutomationTesting/validation/preauthCompletionError1.txt')
             }
         }
 
@@ -109,7 +109,7 @@ pipeline {
         {
             steps
             {
-                preauth(60)
+                preauth(5)
             }
             
         }
@@ -118,11 +118,11 @@ pipeline {
         {
             steps
             {
-                preauthComp(60, 0, '  -vp ../AutomationTesting/validation/preauthCompletion0.txt ')
+                preauthComp(5, 0, '  -vp ../AutomationTesting/validation/preauthCompletion0.txt ')
             }
         }
             
-        stage('closeBatch')
+        stage('closeBatch2')
         {
             steps
             {
