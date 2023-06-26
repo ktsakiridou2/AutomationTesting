@@ -26,9 +26,9 @@ def sale(size)
             catchError(stageResult: 'FAILURE')
             {
                 amount = ' -a 100'
-                globalAmount += amount
+                globalAmount += 100
                 data = ' -out saleData' + i.toString()+ '.txt'
-                log = ' -lp saleLog' + i.toString() + '.LOG'
+                log = ' -lp saleLog' + i.toString() + '.LOG' 
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + comPort + baudRate + cur + logsPort 
                 bat str
             }
@@ -45,7 +45,7 @@ def refund(size)
             catchError(stageResult: 'FAILURE')
             {
                 amount = ' -a 500'
-                globalAmount -= amount
+                globalAmount -= 500
                 log = ' -lp refundLog' + i.toString() + '.LOG'
                 data = ' -in saleData' + i.toString()+ '.txt'
                 outData = ' -out refundData' + i.toString()+ '.txt'    
