@@ -63,9 +63,8 @@ def closeBatch(valPath, index)
         catchError(stageResult: 'FAILURE')
         {
             amount = ' -a ' + globalAmount.toString()
-            reAmount = ' -rea ' + refundsAmount.toString()
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + comPort + baudRate + logsPort + amount + reAmount
+            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + comPort + baudRate + logsPort + amount
             bat str
         }
     }
