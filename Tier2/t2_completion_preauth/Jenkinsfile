@@ -61,6 +61,13 @@ pipeline {
 
     stages 
     {
+            stage("init")
+            {
+                    steps
+                    {
+                            init()
+                    }
+            }
         stage('preauthCompletion1')
         {
             steps
