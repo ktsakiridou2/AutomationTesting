@@ -44,9 +44,7 @@ def preauthComp(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                max = 98
-                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
-                amount = '-a' + random_num.toString()
+                amount = '-a 10' 
                 log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
                 data = ' -in preauthData' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + amount + connType + ip + dir + comPort + logsPort + baudRate + cur + log + data + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt '
