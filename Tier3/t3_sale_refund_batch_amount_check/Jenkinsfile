@@ -100,7 +100,7 @@ pipeline {
         {
             steps
             {
-                sale(2)
+                sale(5)
             }
             
         }
@@ -108,7 +108,7 @@ pipeline {
         {
             steps
             {
-                refund(1)
+                refund(5)
             }
             
         }
