@@ -47,7 +47,8 @@ def preauthComp(size)
                 stan = ' -stan 0000'
                 authCode = ' -auth 000000'
                 log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
-                str = 'python.exe ../AutomationTesting/Main.py ' + authCode + stan + amount + connType + ip + dir + comPort + logsPort + baudRate + cur + log + ' -vp ../AutomationTesting/validation/preauthCompletionError1.txt '
+                data = ' -in preauthData' + i.toString()+ '.txt'
+                str = 'python.exe ../AutomationTesting/Main.py ' + authCode + stan + amount + connType + ip + dir + comPort + logsPort + baudRate + cur + log + ' -vp ../AutomationTesting/validation/preauthCompletionError1.txt ' + data
                 bat str
             }
         }
