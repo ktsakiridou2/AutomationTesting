@@ -25,8 +25,11 @@ def sale(size)
             catchError(stageResult: 'FAILURE')
             {
                 max = 98
-                random_num = "${Math.abs(0 - new Random().nextInt(max+1))}"
-                amount = '-a' + random_num.toString()
+                random_num = "${Math.abs(1+new Random().nextInt(max+1))}"
+                val = random_num as Integer
+                val = -val
+                println val
+                amount = '-a ' + val.toString()
                 data = ' -out saleData' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + comPort + baudRate + cur + logsPort 
