@@ -33,6 +33,13 @@ pipeline {
 
     stages 
     {
+         stage('Init')
+        {
+            steps
+            {
+                init() 
+            }
+        }
         stage('preauth')
         {
             steps
