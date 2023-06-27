@@ -23,8 +23,7 @@ def diagnostics()
         catchError(stageResult: 'FAILURE')
         {
             log = ' -lp diagnosticsLog.LOG'
-            //str = 'python.exe ../AutomationTesting/Main.py -vp ../AutomationTesting/validation/diagnostics.txt' + ip + connType + dir + log + comPort + logsPort + baudRate
-            str = 'python.exe ../AutomationTesting/Main.py -vp ../AutomationTesting/validation/diagnostics.txt' + dir + log
+            str = 'python.exe ../AutomationTesting/Main.py -vp ../AutomationTesting/validation/diagnostics.txt' + ip + connType + dir + log + comPort + logsPort + baudRate
             bat str
         }
     }
