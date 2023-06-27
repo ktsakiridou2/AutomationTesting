@@ -57,7 +57,7 @@ pipeline {
         {
             steps
             {
-                preauth(101)
+                preauth(30)
             }
             
         }
