@@ -63,7 +63,7 @@ pipeline {
         {
             steps
             {
-                preauth_preauthComp(15)
+                preauth_preauthComp(8)
             }
             
         }
