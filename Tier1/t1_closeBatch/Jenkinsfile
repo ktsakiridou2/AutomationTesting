@@ -1,12 +1,12 @@
-ip = ' -ip 192.168.0.103'
+/*ip = ' -ip 192.168.0.103'
 connType = ' -t 2'
-dir = ' -dir ../AutomationTesting/Tests/t1_closeBatch'
 globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
 comPort = ' -serialPort COM6'
 logsPort = ' -logsPort COM7'
 baudRate = ' -baud 9600'
-cur = ' -cur 975' 
+cur = ' -cur 975' */
 
+dir = ' -dir ../AutomationTesting/Tests/t1_closeBatch'
 
 def init()
 {
@@ -23,7 +23,8 @@ def closeBatch(valPath, index)
         catchError(stageResult: 'FAILURE')
         {
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + comPort + baudRate + logsPort
+            str = 'python.exe ../AutomationTesting/Main.py ' +' -vp ' + valPath + dir + log
+            //str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + comPort + baudRate + logsPort
             bat str
         }
     }
