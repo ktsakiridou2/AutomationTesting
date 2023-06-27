@@ -70,7 +70,7 @@ pipeline {
         {
             steps
             {
-                preauth(50)
+                preauth(5)
             }
             
         }
@@ -79,7 +79,7 @@ pipeline {
         {
             steps
             {
-                refund(50)
+                refund(5)
             }
             
         }
