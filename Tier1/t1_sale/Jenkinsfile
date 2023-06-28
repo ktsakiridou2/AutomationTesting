@@ -58,7 +58,7 @@ pipeline {
         {
             steps
             {
-                sale(15)
+                sale(5)
             }  
         }
     }
