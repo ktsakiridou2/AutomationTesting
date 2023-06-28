@@ -104,7 +104,7 @@ pipeline {
         {
             steps
             {
-                preauth_preauthComp(5)
+                preauth_preauthComp(2)
             }
             
         }
