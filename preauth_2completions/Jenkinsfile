@@ -1,6 +1,4 @@
-
-ip = ' -ip 192.168.1.2'
-connType = '-t 0'
+dir = ' -dir ../AutomationTesting/Tests/preauths_2completions'
 
 def init()
 {
@@ -20,7 +18,6 @@ def preauth()
                 max = 98
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
-                dir = ' -dir ../AutomationTesting/Tests/preauths_2completions'
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
                 data = ' -out Data' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
@@ -36,7 +33,6 @@ def preauthComp(valPath)
         catchError(stageResult: 'FAILURE')
         {
             i = 0
-            dir = ' -dir ../AutomationTesting/Tests/preauths_2completions'
             log = ' -lp preauthCompLog' + i.toString() + '.LOG'
             data = ' -in Data' + i.toString()+ '.txt'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + data
@@ -52,7 +48,6 @@ def closeBatch(valPath, index)
     {
         catchError(stageResult: 'FAILURE')
         {
-            dir = ' -dir ../AutomationTesting/Tests/preauths_2completions'
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log
             bat str
