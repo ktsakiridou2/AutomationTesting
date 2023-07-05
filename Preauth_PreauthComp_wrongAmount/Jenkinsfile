@@ -1,6 +1,5 @@
-ip = ' -ip 192.168.1.2'
-connType = '-t 0'
 dir = ' -dir ../AutomationTesting/Tests/Preauth_PreauthComp_wrongAmount'
+
 def init()
 {
         script
@@ -48,7 +47,6 @@ def closeBatch(valPath, index)
         catchError(stageResult: 'FAILURE')
         {
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            dir = ' -dir ../AutomationTesting/Tests/Preauth_PreauthComp_wrongStan'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log
             bat str
         }
