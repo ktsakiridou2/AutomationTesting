@@ -11,7 +11,7 @@ def sale(size)
             {
                 amount = '-a -10'
                 data = ' -out ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data
                 bat str 
             }
         }
@@ -24,7 +24,7 @@ def closeBatch(valPath)
     {
         catchError(stageResult: 'FAILURE')
         {
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath
+            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath
             bat str
         }
     }
