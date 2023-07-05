@@ -14,7 +14,7 @@ def closeBatch(valPath, index)
         {
             dir = ' -dir ../AutomationTesting/Tests/2closeBatches'
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log
+            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log
             bat str
         }
     }
