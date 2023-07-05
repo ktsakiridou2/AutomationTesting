@@ -1,5 +1,5 @@
-globalAmount = 0
 dir = ' -dir ../AutomationTesting/Tests/sale_batch_amount_check'
+globalAmount = 0
 
 def init()
 {
@@ -21,8 +21,7 @@ def sale(size)
                 globalAmount += 1000   
                 data = ' -out Data' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
-                globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + globalVal
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log
                 bat str 
             }
         }
@@ -38,7 +37,7 @@ def closeBatch(valPath, index)
         {
             amount = ' -a ' + globalAmount.toString()
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + amount
+            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log + amount
             bat str
         }
     }
