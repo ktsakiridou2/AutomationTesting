@@ -1,6 +1,4 @@
-
-ip = ' -ip 192.168.1.2'
-connType = '-t 0'
+dir = ' -dir ../AutomationTesting/Tests/sales_refund_loop'
 
 def sale_refund(size)
 {
@@ -17,7 +15,6 @@ def sale_refund(size)
                 
                 data = ' -out transData/Data' + i.toString()+ '.txt'
                 log = ' -lp Logs/saleLog' + i.toString() + '.LOG'
-                dir = ' -dir ../AutomationTesting/Tests/sales_refund_loop'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + dir + log + data
                 bat str 
                 
@@ -37,7 +34,6 @@ def closeBatch(valPath, index)
         catchError(stageResult: 'FAILURE')
         {
             log = ' -lp Logs/closeBatchLog' + index.toString() + '.LOG'
-            dir = ' -dir ../AutomationTesting/Tests/sales_refund_loop'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log
             bat str
         }
