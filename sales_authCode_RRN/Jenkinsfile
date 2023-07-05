@@ -1,6 +1,4 @@
-
-ip = ' -ip 192.168.1.2'
-connType = '-t 0'
+dir = ' -dir ../AutomationTesting/Tests/sales_authCode_RRN'
 
 def sale(size)
 {
@@ -15,7 +13,6 @@ def sale(size)
                 amount = '-a' + random_num.toString()
                 data = ' -out transData/Data' + i.toString()+ '.txt'
                 log = ' -lp Logs/saleLog' + i.toString() + '.LOG'
-                dir = ' -dir ../AutomationTesting/Tests/sales_authCode_RRN'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt '+' -gv ../AutomationTesting/validation/globalValidations.txt ' + amount + dir + log + data
                 bat str 
             }
@@ -30,7 +27,6 @@ def closeBatch(valPath, index)
         catchError(stageResult: 'FAILURE')
         {
             log = ' -lp Logs/closeBatchLog' + index.toString() + '.LOG'
-            dir = ' -dir ../AutomationTesting/Tests/sales_authCode_RRN'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath  + dir + log
             bat str
         }
