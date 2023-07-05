@@ -1,9 +1,7 @@
-
-ip = ' -ip 192.168.1.2'
-connType = '-t 0'
 globalAmount = 0
 refundsAmount = 0
 dir = ' -dir ../AutomationTesting/Tests/sale_refund_batch_amount_check'
+
 def init()
 {
         script
