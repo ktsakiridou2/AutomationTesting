@@ -1,6 +1,3 @@
-
-ip = ' -ip 192.168.1.2'
-connType = '-t 0'
 dir = ' -dir ../AutomationTesting/Tests/380_preauths_then_20_sales'
 
 def init()
