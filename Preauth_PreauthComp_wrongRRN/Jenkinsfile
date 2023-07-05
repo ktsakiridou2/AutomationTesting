@@ -1,5 +1,4 @@
-ip = ' -ip 192.168.1.2'
-connType = '-t 0'
+dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_RRN'
 
 def init()
 {
@@ -21,7 +20,6 @@ def preauth()
                 amount = '-a' + random_num.toString()
                 data = ' -out Data' + i.toString()+ '.txt'
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
-                dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_RRN'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
                 bat str 
             }
@@ -37,7 +35,6 @@ def preauthComp()
             i = 0
             data = ' -in Data' + i.toString()+ '.txt'
             log = ' -lp preauthCompLog' + i.toString() + '.LOG'
-            dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_RRN'
             rrn = ' -rrn 023456789123'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + ' -gv ../AutomationTesting/validation/globalValidations.txt ' + dir + log + data  + rrn
             bat str
@@ -53,7 +50,6 @@ def closeBatch(valPath, index)
         catchError(stageResult: 'FAILURE')
         {
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_RRN'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log
             bat str
         }
