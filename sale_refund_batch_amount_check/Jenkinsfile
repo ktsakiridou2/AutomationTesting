@@ -22,8 +22,7 @@ def sale(size)
                 globalAmount += 10000   
                 data = ' -out Data' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
-                globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + globalVal
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log
                 bat str 
             }
         }
@@ -42,7 +41,7 @@ def refund(size)
                 refundsAmount += 5000   
                 data = ' -in Data' + i.toString()+ '.txt'
                 log = ' -lp refundLog' + i.toString() + '.LOG'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/refund0.txt ' + data + log + dir + amount
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/refund0.txt ' + data + log + dir + amount
                 bat str
             }
         }
@@ -59,7 +58,7 @@ def closeBatch(valPath, index)
             amount = ' -a ' + globalAmount.toString()
             reAmount = ' -rea ' + refundsAmount.toString()  
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + amount + reAmount
+            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log + amount + reAmount
             bat str
         }
     }
