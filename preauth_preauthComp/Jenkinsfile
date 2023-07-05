@@ -1,8 +1,4 @@
-
-ip = ' -ip 192.168.1.2'
-connType = '-t 0'
-logsPort = ' -logsPort COM17'
-dir = ' -dir ../AutomationTesting/Tests/Preauth_PreauthComp'
+dir = ' -dir ../AutomationTesting/Tests/preauth_preauthComp'
 
 def init()
 {
