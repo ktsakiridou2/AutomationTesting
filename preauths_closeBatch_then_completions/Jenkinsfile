@@ -12,7 +12,7 @@ def preauth(size)
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
                 data = ' -out ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data
                 bat str 
             }
         }
@@ -29,7 +29,7 @@ def preauthComp(size)
             catchError(stageResult: 'FAILURE')
             {
                 data = '-in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletionError1.txt ' + data
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletionError1.txt ' + data
                 bat str
             }
         }
@@ -43,7 +43,7 @@ def closeBatch(valPath)
     {
         catchError(stageResult: 'FAILURE')
         {
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath
+            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath
             bat str
         }
     }
