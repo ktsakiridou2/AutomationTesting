@@ -21,15 +21,13 @@ def preauth_preauthComp(size)
 
                             log = ' -lp preauthLog' + i.toString() + '.LOG'
                             data = ' -out Data' + i.toString()+ '.txt'
-                            globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
-
-                            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data + globalVal
+                            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
                             bat str 
 
                             globalAmount += 10000
                             log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
                             data = ' -in Data' + i.toString()+ '.txt'
-                            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + dir + log + data + globalVal
+                            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + dir + log + data
                             bat str
                         }
                 }
@@ -48,7 +46,7 @@ def closeBatch(valPath, index)
         {
             amount = ' -a ' + globalAmount.toString()
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + amount
+            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log + amount
             bat str
         }
     }
