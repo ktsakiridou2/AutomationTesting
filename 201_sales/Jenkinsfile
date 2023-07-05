@@ -1,6 +1,4 @@
-
-ip = ' -ip 192.168.1.2'
-connType = '-t 0'
+dir = ' -dir ../AutomationTesting/Tests/201_sales'
 
 def init()
 {
@@ -21,7 +19,6 @@ def sale(size, offset)
                 max = 98
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
-                dir = ' -dir ../AutomationTesting/Tests/201_sales'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 data = ' -out Data' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + dir + log + data
@@ -37,7 +34,6 @@ def closeBatch(valPath, index)
     {
         catchError(stageResult: 'FAILURE')
         {
-            dir = ' -dir ../AutomationTesting/Tests/201_sales'
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
             str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log
             bat str
