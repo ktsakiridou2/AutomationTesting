@@ -20,7 +20,7 @@ def preauth()
                 amount = '-a' + random_num.toString()
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
                 data = ' -out Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
                 bat str 
             }
         }
@@ -36,7 +36,7 @@ def preauthCompError(valPath, index)
             log = ' -lp preauthCompletionLog' + index.toString() + '.LOG'
             stan = ' -stan 0'
             authCode = ' -auth 000000'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp '  +valPath + dir + log + stan + authCode
+            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp '  +valPath + dir + log + stan + authCode
             bat str
         }
     }
@@ -52,7 +52,7 @@ def preauthComp(valPath, index)
             i = 0
             log = ' -lp preauthCompletionLog' + index.toString() + '.LOG'
             data = ' -in Data' + i.toString()+ '.txt'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp '  +valPath + dir + log + data
+            str = 'python.exe ../AutomationTesting/Main.py ' +' -vp '  +valPath + dir + log + data
             bat str
         }
     }
@@ -66,7 +66,7 @@ def closeBatch(valPath, index)
         catchError(stageResult: 'FAILURE')
         {
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log
+            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log
             bat str
         }
     }
