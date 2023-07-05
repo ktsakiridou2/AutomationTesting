@@ -1,6 +1,4 @@
-
-ip = ' -ip 192.168.1.2'
-connType = ' -t 0'
+dir = ' -dir ../AutomationTesting/Tests/status'
 
 def init()
 {
@@ -17,7 +15,6 @@ def status()
     {
         catchError(stageResult: 'FAILURE')
         {
-            dir = ' -dir ../AutomationTesting/Tests/status'
             log = ' -lp statusLog.LOG'
             str = 'python.exe ../AutomationTesting/Main.py -vp ../AutomationTesting/validation/status.txt' + ip + connType + dir + log
             bat str
