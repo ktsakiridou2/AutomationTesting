@@ -20,16 +20,14 @@ def preauth_preauthComp(size)
                     random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                     amount = '-a' + random_num.toString()
                     log = ' -lp preauthLog' + i.toString() + '.LOG'
-                    data = ' -out Data' + i.toString()+ '.txt'
-                    globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
-                        
-                    str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
+                    data = ' -out Data' + i.toString()+ '.txt' 
+                    str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
                     bat str 
 
 
                     log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
                     data = ' -in Data' + i.toString()+ '.txt'
-                    str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + dir + log + data + globalVal
+                    str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + dir + log + data
                     bat str
                 }
         
@@ -45,7 +43,7 @@ def closeBatch(valPath, index)
         catchError(stageResult: 'FAILURE')
         {
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log
+            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log
             bat str
         }
     }
