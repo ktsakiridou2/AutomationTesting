@@ -52,7 +52,7 @@ pipeline {
         {
             steps
             {
-                preauth(100,0)
+                preauth(5,0)
             }
             
         }
@@ -61,7 +61,7 @@ pipeline {
         {
             steps
             {
-                preauth(101,100)
+                preauth(5,100)
             }
             
         }
