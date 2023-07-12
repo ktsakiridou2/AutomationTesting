@@ -28,6 +28,26 @@ def preauth(size, offset)
     }
 }
 
+def preauth(size, offset)
+{
+    script
+    {
+        for(int i= offset; i<size; ++i)
+        {
+            catchError(stageResult: 'FAILURE')
+            {
+                max = 98
+                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                amount = '-a' + random_num.toString()
+                log = ' -lp preauthLog' + i.toString() + '.LOG'
+                data = ' -out Data' + i.toString()+ '.txt'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
+                bat str 
+            }
+        }
+    }
+}
+
 def preauthComp(size, offset)
 {
     script
@@ -43,7 +63,6 @@ def preauthComp(size, offset)
             }
         }
     }
-
 }
 
 def closeBatch(valPath, index)
@@ -52,13 +71,13 @@ def closeBatch(valPath, index)
     {
         catchError(stageResult: 'FAILURE')
         {
-            dir = ' -dir ../AutomationTesting/Tests/200_preauths_then_completions'
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
             str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log
             bat str
         }
     }
 }
+
 
 pipeline {
     agent any
@@ -95,7 +114,7 @@ pipeline {
         {
             steps
             {
-                preauth(2,100)
+                preauth(2,0)
             }
             
         }
