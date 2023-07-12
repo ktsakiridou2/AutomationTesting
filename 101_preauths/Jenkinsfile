@@ -1,7 +1,7 @@
 dir = ' -dir ../AutomationTesting/Tests/101_preauths'
 
 
-def preauth(size, offset)
+def preauth(size)
 {
     script
     {
@@ -52,16 +52,7 @@ pipeline {
         {
             steps
             {
-                preauth(5,0)
-            }
-            
-        }
-      
-        stage('preauth2')
-        {
-            steps
-            {
-                preauth(5,100)
+                preauth(5)
             }
             
         }
