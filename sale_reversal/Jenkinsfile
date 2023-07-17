@@ -82,7 +82,7 @@ pipeline {
         {
             steps
             {
-                sale(1)
+                sale(5)
             }
             
         }
@@ -90,7 +90,7 @@ pipeline {
         {
             steps
             {
-                reversal(1)
+                reversal(5)
             }
             
         }
