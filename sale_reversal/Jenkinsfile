@@ -87,7 +87,7 @@ pipeline {
         {
             steps
             {
-                sale_reversal_loop(5)
+                sale_reversal_loop(100)
             }
             
         }
