@@ -16,7 +16,7 @@ def sale_reversal_wrong_amount(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                 max = 30
+                max = 98
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
                 data = ' -out Data' + i.toString()+ '.txt'
