@@ -8,7 +8,7 @@ def init()
         }
 }
 
-def sale(size)
+def sale_reversal_wrong_amount(size)
 {
     script
     {
@@ -16,16 +16,27 @@ def sale(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                amount = ' -a 10'
+                max = 98
+                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                amount = '-a' + random_num.toString()
                 data = ' -out Data' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log
+                bat str
+
+                max = 99
+                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                amount = '-a' + random_num.toString()
+                data = ' -in Data' + i.toString()+ '.txt'
+                log = ' -lp saleLog' + i.toString() + '.LOG'
+                globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/reversal_wrong_amount.txt ' + data + amount + dir + log + globalVal
                 bat str 
             }
         }
     }
 }
-def reversal(size)
+/* def reversal(size)
 {
     script
     {
@@ -42,7 +53,7 @@ def reversal(size)
             }
         }
     }
-}
+} */
 
 def closeBatch(valPath, index)
 {
@@ -78,22 +89,22 @@ pipeline {
             }
         }
 
-        stage('sale')
+        stage('sale_reversal_wrong_amount')
         {
             steps
             {
-                sale(1)
+                sale_reversal_wrong_amount(5)
             }
             
         }
-        stage('reversal')
+       /* stage('reversal')
         {
             steps
             {
                 reversal(1)
             }
             
-        }
+        } */
         stage('closeBatch2')
         {
             steps
