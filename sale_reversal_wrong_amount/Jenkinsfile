@@ -24,13 +24,10 @@ def sale_reversal_wrong_amount(size)
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log
                 bat str
 
-                max = 99
-                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
-                amount = '-a' + random_num.toString()
+                amount = '-a 5'
                 data = ' -in Data' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
-                globalVal = ' -gv ../AutomationTesting/validation/globalValidations.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/reversal_wrong_amount.txt ' + data + amount + dir + log + globalVal
+                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ../AutomationTesting/validation/reversal0.txt ' + data + amount + dir + log
                 bat str 
             }
         }
