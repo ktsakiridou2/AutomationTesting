@@ -8,7 +8,7 @@ def init()
         }
 }
 
-def sale(size)
+def sale_reversal_loop(size)
 {
     script
     {
@@ -22,12 +22,17 @@ def sale(size)
                 data = ' -out Data' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log
+                bat str
+
+                data = ' -in Data' + i.toString()+ '.txt'
+                log = ' -lp saleLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log
                 bat str 
             }
         }
     }
 }
-def reversal(size)
+/* def reversal(size)
 {
     script
     {
@@ -42,7 +47,7 @@ def reversal(size)
             }
         }
     }
-}
+} */
 
 def closeBatch(valPath, index)
 {
@@ -78,22 +83,22 @@ pipeline {
             }
         }
 
-        stage('sale')
+        stage('sale_reversal')
         {
             steps
             {
-                sale(5)
+                sale_reversal_loop(5)
             }
             
         }
-        stage('reversal')
+       /* stage('reversal')
         {
             steps
             {
                 reversal(5)
             }
             
-        }
+        } */
         stage('closeBatch2')
         {
             steps
