@@ -25,7 +25,7 @@ def sale_reversal_wrong_amount(size)
                 amount = ' -a 10'
                 data = ' -in Data' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
-                str = 'python.exe ../AutomationTesting/Main.py ' +' -vp ../AutomationTesting/validation/reversal_wrong_amount.txt ' + data + amount + dir + log
+                str = 'python.exe ../AutomationTesting/Main.py ' +' -vp ../AutomationTesting/validation/reversal0.txt ' + data + amount + dir + log
                 bat str 
             }
         }
