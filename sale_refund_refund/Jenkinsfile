@@ -1,6 +1,9 @@
+/* SALE REVERSAL REVERSAL */
+
+
 dir = ' -dir ../AutomationTesting/Tests/sale_refund_refund'
 
-def sale(size)
+def sale_reversalx2(size)
 {
     script
     {
@@ -11,29 +14,23 @@ def sale(size)
                 max = 98
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
-                data = ' -out ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data
+                data = ' -out Data' + i.toString()+ '.txt'
+                log = ' -lp saleLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log
+                bat str
+
+                data = ' -in Data' + i.toString()+ '.txt'
+                log = ' -lp saleLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log
+                bat str
+
+                data = ' -in Data' + i.toString()+ '.txt'
+                log = ' -lp saleLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log
                 bat str 
             }
         }
     }
-}
-
-def refund(size)
-{
-    script
-    {
-        catchError(stageResult: 'FAILURE')
-        {
-            for(int i=0; i<size; ++i)
-            {
-                data = '-in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/refund0.txt ' + data
-                bat str
-            }
-        }
-    }
-
 }
 
 def closeBatch(valPath)
@@ -64,29 +61,11 @@ pipeline {
             }
         }
 
-        stage('sale')
+         stage('sale_reversal_reversal')
         {
             steps
             {
-                sale(1)
-            }
-            
-        }
-
-        stage('refund1')
-        {
-            steps
-            {
-                refund(1)
-            }
-            
-        }
-
-        stage('refund2')
-        {
-            steps
-            {
-                refund(1)
+                sale_reversalx2(100)
             }
             
         }
