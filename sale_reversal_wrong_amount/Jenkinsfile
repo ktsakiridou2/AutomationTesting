@@ -21,16 +21,13 @@ def sale_reversal_wrong_amount(size)
                 amount = '-a' + random_num.toString()
                 data = ' -out Data' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + data + amount + dir + log
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log
                 bat str
 
-                max = 98
-                random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
-                amount = '-a' + random_num.toString()
                 data = ' -in Data' + i.toString()+ '.txt'
-                log = ' -lp reversalLog' + i.toString() + '.LOG'
-                str = 'python.exe ../AutomationTesting/Main.py ' +' -vp ../AutomationTesting/validation/reversal0.txt ' + data + amount + dir + log
-                bat str
+                log = ' -lp saleLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log
+                bat str 
 
             }
         }
