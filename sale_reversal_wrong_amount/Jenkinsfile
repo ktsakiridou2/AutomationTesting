@@ -93,7 +93,7 @@ pipeline {
         {
             steps
             {
-                sale_reversal_wrong_amount(5)
+                sale_reversal_wrong_amount(1)
             }
             
         }
