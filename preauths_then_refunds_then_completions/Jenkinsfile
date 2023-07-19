@@ -12,9 +12,10 @@ def preauth_then_reversal(size)
             {
                 max = 98
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
-                amount = '-a' + random_num.toString()
-                data = ' -out Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data
+                amount = '-a' + random_num.toString()               
+                data = ' -out preauthData' + i.toString()+ '.txt'
+                log = ' -lp preauthLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + dir + ' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + log
                 bat str 
             
                 data = ' -in Data' + i.toString()+ '.txt'
@@ -30,17 +31,18 @@ def preauthComp(size)
 {
     script
     {
-        for(int i=0; i<size; ++i)
+        for(int i= 0; i<size; ++i)
         {
             catchError(stageResult: 'FAILURE')
             {
-                data = '-in Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + data
+                log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
+                data = ' -in preauthData' + i.toString()+ '.txt'
+                outData = ' -out preauthComplData' + i.toString()+ '.txt'
+                str = 'python.exe ../AutomationTesting/Main.py ' + dir + log + data + outData + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt '
                 bat str
             }
         }
     }
-}
 
 def closeBatch(valPath, index)
 {
