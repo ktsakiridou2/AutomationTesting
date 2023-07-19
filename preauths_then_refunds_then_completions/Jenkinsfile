@@ -75,7 +75,7 @@ pipeline {
         {
             steps
             {
-                preauth_then_reversal(2)
+                preauth_then_reversal(50)
             } 
         }
         
@@ -83,7 +83,7 @@ pipeline {
         {
             steps
             {
-                preauthComp(2)
+                preauthComp(50)
             }
             
         }
