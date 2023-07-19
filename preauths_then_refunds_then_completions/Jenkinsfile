@@ -1,8 +1,8 @@
-/*PREAUTH REVERSAL COMPLETION */
+/*PREAUTH COMPLETION REVERSAL STO COMPLETION */
 
 dir = ' -dir ../AutomationTesting/Tests/preauths_then_refunds_then_completions'
 
-def preauth_then_reversal(size)
+def preauth(size)
 {
     script
     {
@@ -17,17 +17,13 @@ def preauth_then_reversal(size)
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + dir + ' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + log
                 bat str 
-
-                data = ' -in Data' + i.toString()+ '.txt'
-                log = ' -lp reversalLog' + i.toString() + '.LOG'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log
-                bat str 
+ 
             }
         }
     }
 }
 
-def preauthComp(size)
+def preauthComp_reversal(size)
 {
     script
     {
@@ -39,6 +35,11 @@ def preauthComp(size)
                 data = ' -in Data' + i.toString()+ '.txt'
                 outData = ' -out preauthComplData' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + dir + log + data + outData + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt '
+                bat str
+
+                data = ' -in preauthComplData' + i.toString()+ '.txt'
+                log = ' -lp reversalLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log
                 bat str
             }
         }
@@ -71,7 +72,7 @@ pipeline {
             }
         }
 
-        stage('preauth_then_reversal')
+        stage('preauth')
         {
             steps
             {
@@ -79,11 +80,11 @@ pipeline {
             } 
         }
         
-        stage('preauthCompletion')
+        stage('preauthCompletion_reversal')
         {
             steps
             {
-                preauthComp(50)
+                preauthComp_reversal(50)
             }
             
         }
