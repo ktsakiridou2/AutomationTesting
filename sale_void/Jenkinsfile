@@ -195,10 +195,10 @@ pipeline {
         {
             steps
             {
-                sale_void_reversal(33)
+                sale_void_reversal(3)
             }
         }
-         stage('sale_void_reversal2')
+       /*  stage('sale_void_reversal2')
         {
             steps
             {
@@ -213,7 +213,7 @@ pipeline {
                 sale_void_reversal(33)
             }
             
-        }
+        } */
         stage('closeBatch2')
         {
             steps
