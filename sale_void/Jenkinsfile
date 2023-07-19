@@ -191,11 +191,26 @@ pipeline {
             }
         }
 
-        stage('sale_void_reversal')
+        stage('sale_void_reversal1')
         {
             steps
             {
-                sale_void_reversal(2)
+                sale_void_reversal(33)
+            }
+        }
+         stage('sale_void_reversal2')
+        {
+            steps
+            {
+                sale_void_reversal(33)
+            }  
+        }
+
+         stage('sale_void_reversal3')
+        {
+            steps
+            {
+                sale_void_reversal(33)
             }
             
         }
