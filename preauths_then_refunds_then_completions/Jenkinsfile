@@ -13,7 +13,7 @@ def preauth_then_reversal(size)
                 max = 98
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()               
-                data = ' -out preauthData' + i.toString()+ '.txt'
+                data = ' -out Data' + i.toString()+ '.txt'
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + dir + ' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + log
                 bat str 
@@ -36,7 +36,7 @@ def preauthComp(size)
             catchError(stageResult: 'FAILURE')
             {
                 log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
-                data = ' -in preauthData' + i.toString()+ '.txt'
+                data = ' -in Data' + i.toString()+ '.txt'
                 outData = ' -out preauthComplData' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + dir + log + data + outData + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt '
                 bat str
