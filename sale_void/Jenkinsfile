@@ -1,3 +1,5 @@
+/* SALE REVERSAL VOID */
+
 dir = ' -dir ../AutomationTesting/Tests/sale_void'
 
 def init()
@@ -8,7 +10,7 @@ def init()
         }
 }
 
-def sale(size)
+def sale_reversal_loop(size)
 {
     script
     {
@@ -22,6 +24,11 @@ def sale(size)
                 data = ' -out Data' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log
+                bat str
+
+                data = ' -in Data' + i.toString()+ '.txt'
+                log = ' -lp reversalLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log
                 bat str 
             }
         }
@@ -78,11 +85,11 @@ pipeline {
             }
         }
 
-        stage('sale')
+        stage('sale_reversal_loop')
         {
             steps
             {
-                sale(1)
+                sale_reversal_loop(50)
             }
             
         }
@@ -90,7 +97,7 @@ pipeline {
         {
             steps
             {
-                voidTrans(1)
+                voidTrans(50)
             }
             
         }
