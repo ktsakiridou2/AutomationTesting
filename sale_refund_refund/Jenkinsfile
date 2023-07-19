@@ -32,18 +32,19 @@ def sale_reversalx2(size)
         }
     }
 }
-
-def closeBatch(valPath)
+def closeBatch(valPath, index)
 {
     script
     {
         catchError(stageResult: 'FAILURE')
         {
-            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath
+            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
+            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log
             bat str
         }
     }
 }
+
 
 pipeline {
     agent any
@@ -52,12 +53,11 @@ pipeline {
     {
 
 
-        stage('closeBatchStart')
+         stage('closeBatch1')
         {
             steps
             {
-                        
-                closeBatch('../AutomationTesting/validation/closeBatch1.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
             }
         }
 
@@ -83,14 +83,13 @@ pipeline {
             {
                 sale_reversalx2(33)
             }
-            
         }
         
-        stage('closeBatch')
+        stage('closeBatch2')
         {
             steps
             {
-                closeBatch('../AutomationTesting/validation/closeBatch.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 2)
             }
         }
     }
