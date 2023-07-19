@@ -43,6 +43,7 @@ def voidTrans(size)
             catchError(stageResult: 'FAILURE')
             {
                 data = ' -in Data' + i.toString()+ '.txt'
+                
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/void0.txt ' + data + dir + log
                 bat str 
@@ -111,7 +112,7 @@ pipeline {
     }
 } */
 
-/* SALE VOID REVERSAL */
+/* SALE VOID REVERSAL STO VOID */
 
 dir = ' -dir ../AutomationTesting/Tests/sale_void'
 
@@ -142,13 +143,14 @@ def sale_void_reversal(size)
             catchError(stageResult: 'FAILURE')
             {              
                 data = ' -in Data' + i.toString()+ '.txt'
+                outData = ' -out voidData' + i.toString()+ '.txt'
                 log = ' -lp voidLog' + i.toString() + '.LOG'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/void0.txt ' + data + dir + log
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/void0.txt ' + data +outData + dir + log
                 bat str
             }
             catchError(stageResult: 'FAILURE')
             {
-                data = ' -in Data' + i.toString()+ '.txt'
+                data = ' -in voidData' + i.toString()+ '.txt'
                 log = ' -lp reversalLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log
                 bat str 
@@ -195,10 +197,10 @@ pipeline {
         {
             steps
             {
-                sale_void_reversal(33)
+                sale_void_reversal(3)
             }
         }
-        stage('sale_void_reversal2')
+      /*  stage('sale_void_reversal2')
         {
             steps
             {
@@ -213,7 +215,7 @@ pipeline {
                 sale_void_reversal(33)
             }
             
-        } 
+        } */
         stage('closeBatch2')
         {
             steps
