@@ -195,7 +195,7 @@ pipeline {
         {
             steps
             {
-                sale_reversal_loop(2)
+                sale_void_reversal(2)
             }
             
         }
