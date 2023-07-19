@@ -43,6 +43,7 @@ def preauthComp(size)
             }
         }
     }
+}
 
 def closeBatch(valPath, index)
 {
