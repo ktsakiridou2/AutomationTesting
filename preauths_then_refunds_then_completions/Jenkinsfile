@@ -1,3 +1,5 @@
+/*PREAUTH REVERSAL COMPLETION */
+
 dir = ' -dir ../AutomationTesting/Tests/preauths_then_refunds_then_completions'
 
 def preauth(size)
@@ -35,7 +37,8 @@ def preauthComp(size)
     }
 
 }
-def refund(size)
+
+def reversal(size)
 {
     script
     {
@@ -43,13 +46,13 @@ def refund(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                data = '-in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/refund0.txt ' + data
-                bat str
+                data = ' -in Data' + i.toString()+ '.txt'
+                log = ' -lp reversalLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log
+                bat str 
             }
         }
     }
-
 }
 
 def closeBatch(valPath)
@@ -90,11 +93,11 @@ pipeline {
         }
 
         
-        stage('refund')
+        stage('reversal')
         {
             steps
             {
-                refund(3)
+                reversal(3)
             }
             
         }
