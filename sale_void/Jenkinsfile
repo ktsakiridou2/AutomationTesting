@@ -138,12 +138,16 @@ def sale_void_reversal(size)
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log
                 bat str
-
+            }
+            catchError(stageResult: 'FAILURE')
+            {              
                 data = ' -in Data' + i.toString()+ '.txt'
                 log = ' -lp voidLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/void0.txt ' + data + dir + log
                 bat str
-
+            }
+            catchError(stageResult: 'FAILURE')
+            {
                 data = ' -in Data' + i.toString()+ '.txt'
                 log = ' -lp reversalLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log
