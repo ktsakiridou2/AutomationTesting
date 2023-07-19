@@ -25,7 +25,7 @@ def sale_reversal_loop(size)
                 bat str
 
                 data = ' -in Data' + i.toString()+ '.txt'
-                log = ' -lp saleLog' + i.toString() + '.LOG'
+                log = ' -lp reversalLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log
                 bat str 
             }
@@ -41,7 +41,7 @@ def sale_reversal_loop(size)
             catchError(stageResult: 'FAILURE')
             {
                 data = ' -in Data' + i.toString()+ '.txt'
-                log = ' -lp saleLog' + i.toString() + '.LOG'
+                log = ' -lp reversalLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log
                 bat str 
             }
