@@ -89,7 +89,7 @@ pipeline {
         {
             steps
             {
-                sale_reversal_loop(50)
+                sale_reversal_loop(1)
             }
             
         }
@@ -97,7 +97,7 @@ pipeline {
         {
             steps
             {
-                voidTrans(50)
+                voidTrans(1)
             }
             
         }
