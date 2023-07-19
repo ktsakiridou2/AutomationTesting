@@ -62,13 +62,14 @@ def preauthComp(size)
     }
 } */
 
-def closeBatch(valPath)
+def closeBatch(valPath, index)
 {
     script
     {
         catchError(stageResult: 'FAILURE')
         {
-            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath
+            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
+            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log
             bat str
         }
     }
@@ -81,12 +82,11 @@ pipeline {
     {
 
 
-        stage('closeBatchStart')
+        stage('closeBatch1')
         {
             steps
             {
-                        
-                closeBatch('../AutomationTesting/validation/closeBatch1.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
             }
         }
 
@@ -94,7 +94,7 @@ pipeline {
         {
             steps
             {
-                preauth_then_reversal(3)
+                preauth_then_reversal(50)
             } 
         }
         
@@ -102,16 +102,16 @@ pipeline {
         {
             steps
             {
-                preauthComp(3)
+                preauthComp(50)
             }
             
         }
 
-        stage('closeBatch')
+       stage('closeBatch2')
         {
             steps
             {
-                closeBatch('../AutomationTesting/validation/closeBatch.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 2)
             }
         }
     }
