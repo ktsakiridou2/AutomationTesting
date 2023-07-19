@@ -104,12 +104,12 @@ pipeline {
         {
             steps
             {
-                sale_reversal_wrong_amount(33)
+                sale_reversal_wrong_amount(10)
             }
             
         }
 
-        stage('sale_reversal_wrong_amount')
+          /*stage('sale_reversal_wrong_amount')
         {
             steps
             {
@@ -118,7 +118,7 @@ pipeline {
             
         }
 
-        /* stage('sale_reversal_wrong_amount')
+       stage('sale_reversal_wrong_amount')
         {
             steps
             {
