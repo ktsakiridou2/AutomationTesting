@@ -85,27 +85,33 @@ pipeline {
         {
             steps
             {
-                preauth(10,0)
+                preauth(100,0)
             }
             
         }
         
-      /*  stage('preauth2')
+       stage('preauth2')
         {
             steps
             {
-                preauth(2,0)
+                preauth(200,100)
             }
             
-        } */
-        stage('preauthCompletion')
+        } 
+        stage('preauthCompletion1')
         {
             steps
             {
-                preauthComp(10,0)
+                preauthComp(100,0)
             }
         }
-   
+           stage('preauthCompletion2')
+        {
+            steps
+            {
+                preauthComp(200,100)
+            }
+        }
         stage('closeBatch2')
         {
             steps
