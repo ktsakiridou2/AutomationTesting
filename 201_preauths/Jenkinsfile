@@ -67,11 +67,10 @@ pipeline {
         {
             steps
             {
-                preauth(5,0)
+                preauth(100,0)
             }
             
         }
-        /*
         stage('preauth2')
         {
             steps
@@ -88,7 +87,6 @@ pipeline {
             }
             
         }
-        */
         stage('closeBatch2')
         {
             steps
