@@ -16,7 +16,7 @@ def preauth(size, offset)
         {
             catchError(stageResult: 'FAILURE')
             {
-                max = 1000
+                max = 25
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
 
@@ -37,12 +37,17 @@ def sale(size, offset)
         {
             catchError(stageResult: 'FAILURE')
             {
-                max = 1000
+               max = 98
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
-           
+                data = ' -out Data' + i.toString()+ '.txt'
                 log = ' -lp saleLog' + i.toString() + '.LOG'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + dir + log
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log
+                bat str
+
+                data = ' -in Data' + i.toString()+ '.txt'
+                log = ' -lp reversalLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log
                 bat str 
             }
         }
