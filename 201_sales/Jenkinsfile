@@ -54,14 +54,14 @@ pipeline {
             }
         }
 
-        stage('closeBatch1')
+       /* stage('closeBatch1')
         {
             steps
             {
                         
                 closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
             }
-        }
+        } */
 
         stage('sale1')
         {
