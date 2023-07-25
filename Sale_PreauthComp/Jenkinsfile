@@ -15,10 +15,7 @@ def sale(size)
         for(int i=0; i<size; ++i)
         {
             catchError(stageResult: 'FAILURE')
-            {
-                max = 5
-                random_q = "${Math.abs(1 + new Random().nextInt(max+1))}"
-                q = ' -q ' + random_q.toString()               
+            {               
                 max = 500
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
@@ -48,6 +45,19 @@ def preauthComp(size)
     }
 }
 
+def closeBatch(valPath, index)
+{
+    script
+    {
+        catchError(stageResult: 'FAILURE')
+        {
+            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
+            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log
+            bat str
+        }
+    }
+}
+
 
 pipeline {
     agent any
@@ -59,6 +69,15 @@ pipeline {
             steps
             {
                 init() 
+            }
+        }
+
+        stage('closeBatch1')
+        {
+            steps
+            {
+                        
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
             }
         }
 
@@ -77,6 +96,13 @@ pipeline {
                 preauthComp(5)
             }
             
+        }
+        stage('closeBatch2')
+        {
+            steps
+            {
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 2)
+            }
         }
     }
 }
