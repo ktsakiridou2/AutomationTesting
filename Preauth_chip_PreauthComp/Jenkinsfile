@@ -16,7 +16,7 @@ def preauth_preauthComp(size)
                 catchError(stageResult: 'FAILURE')
                 {
                     i = 0
-                    max = 98
+                    max = 5
                     random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                     amount = '-a' + random_num.toString()
                     log = ' -lp preauthLog' + i.toString() + '.LOG'
@@ -76,7 +76,7 @@ pipeline {
         {
             steps
             {
-                preauth_preauthComp(1)
+                preauth_preauthComp(15)
             }
             
         }
