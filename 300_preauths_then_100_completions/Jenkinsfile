@@ -16,7 +16,7 @@ def preauth(size, offset)
         {
             catchError(stageResult: 'FAILURE')
             {
-                max = 100
+                max = 10
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
 
