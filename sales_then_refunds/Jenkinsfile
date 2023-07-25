@@ -84,7 +84,39 @@ pipeline {
         {
             steps
             {
-                sale(2)
+                sale(100)
+            }
+            
+        }
+        stage('sales2')
+        {
+            steps
+            {
+                sale(100)
+            }
+            
+        }
+             stage('sales3')
+        {
+            steps
+            {
+                sale(5)
+            }
+            
+        }
+        stage('refunds1')
+        {
+            steps
+            {
+                refund(100)
+            }
+            
+        }
+            stage('refunds')
+        {
+            steps
+            {
+                refund(100)
             }
             
         }
@@ -92,7 +124,7 @@ pipeline {
         {
             steps
             {
-                refund(2)
+                refund(5)
             }
             
         }
