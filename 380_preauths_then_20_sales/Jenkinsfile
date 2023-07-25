@@ -16,7 +16,7 @@ def preauth(size, offset)
         {
             catchError(stageResult: 'FAILURE')
             {
-                max = 1000
+                max = 10
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
 
@@ -37,7 +37,7 @@ def sale(size, offset)
         {
             catchError(stageResult: 'FAILURE')
             {
-                max = 1000
+                max = 10
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
            
@@ -88,7 +88,7 @@ pipeline {
         {
             steps
             {
-                preauth(100,0)
+                preauth(10,0)
             }
             
         }
@@ -97,7 +97,7 @@ pipeline {
         {
             steps
             {
-                preauth(200,100)
+                preauth(20,10)
             }
             
         }
@@ -105,7 +105,7 @@ pipeline {
         {
             steps
             {
-                preauth(300,200)
+                preauth(30,20)
             }
             
         }
@@ -113,7 +113,7 @@ pipeline {
         {
             steps
             {
-                preauth(380,300)
+                preauth(38,30)
             }
             
         }
@@ -121,7 +121,7 @@ pipeline {
         {
             steps
             {
-                sale(400,380)
+                sale(10,0)
             }
         }
    
