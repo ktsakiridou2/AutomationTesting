@@ -12,7 +12,8 @@ def preauth_preauthComp(size)
 {
         script
         {
-
+              for(int i= offset; i<size; ++i)
+              {
                 catchError(stageResult: 'FAILURE')
                 {
                     i = 0
@@ -30,9 +31,10 @@ def preauth_preauthComp(size)
                     str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + dir + log + data
                     bat str
                 }
-        
+         }
             
-        }
+    }
+
 }
 
 
