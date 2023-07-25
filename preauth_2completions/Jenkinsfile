@@ -21,7 +21,7 @@ def preauth(size)
                 amount = '-a' + random_num.toString()
                 data = ' -out preauthData' + i.toString()+ '.txt'
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate + cur +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + log
+                str = 'python.exe ../AutomationTesting/Main.py ' + dir +' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + log
                 bat str 
             }
         }
@@ -38,7 +38,7 @@ def preauthComp(valPath, size)
             {
                 log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
                 data = ' -in preauthData' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip + dir + comPort + logsPort + baudRate + cur + log + data + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt '
+                str = 'python.exe ../AutomationTesting/Main.py ' + dir + log + data + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt '
                 bat str
             }
         }
@@ -51,9 +51,8 @@ def closeBatch(valPath, index)
     {
         catchError(stageResult: 'FAILURE')
         {
-            dir = ' -dir ../AutomationTesting/Tests/preauths_2completions'
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + connType + ip +' -vp ' + valPath + dir + log + comPort + logsPort + baudRate
+            str = 'python.exe ../AutomationTesting/Main.py ' +' -vp ' + valPath + dir + log
             bat str
         }
     }
