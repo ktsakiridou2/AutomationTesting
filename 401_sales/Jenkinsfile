@@ -16,7 +16,7 @@ def sale(size, offset)
         {
             catchError(stageResult: 'FAILURE')
             {
-                max = 39
+                max = 3
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
                 log = ' -lp saleLog' + i.toString() + '.LOG'
