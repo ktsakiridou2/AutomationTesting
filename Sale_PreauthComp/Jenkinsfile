@@ -1,62 +1,64 @@
-dir = ' -dir ../AutomationTesting/Tests/Sale_PreauthComp'
+dir = ' -dir ../AutomationTesting/Tests/sale_preauthComp'
 
-def sale()
+def init()
 {
         script
         {
+                bat 'python.exe ../AutomationTesting/SetupTest.py '
+        }
+}
+
+def sale(size)
+{
+    script
+    {
+        for(int i=0; i<size; ++i)
+        {
             catchError(stageResult: 'FAILURE')
             {
-                i = 0
-                max = 98
+                max = 9999
+                random_q = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                q = ' -q ' + random_q.toString()               
+                max = 500
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
-                data = ' -out ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data
-                bat str 
+                data = ' -out saleData' + i.toString()+ '.txt'
+                log = ' -lp saleLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' +' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log
+                bat str
             }
         }
+    }
 }
 
-def preauthComp()
+def preauthComp(size)
 {
     script
     {
-        catchError(stageResult: 'FAILURE')
+        for(int i= 0; i<size; ++i)
         {
-            i = 0
-            data = '-in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + data
-            bat str
-        }
-    }
-
-}
-
-def closeBatch(valPath)
-{
-    script
-    {
-        catchError(stageResult: 'FAILURE')
-        {
-            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath
-            bat str
+            catchError(stageResult: 'FAILURE')
+                {
+                log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
+                data = ' -in saleData' + i.toString()+ '.txt'
+                str = 'python.exe ../AutomationTesting/Main.py ' + dir + log + data + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt '
+                bat str
+            }
         }
     }
 }
+
 
 pipeline {
     agent any
 
     stages 
     {
-
-
-        stage('closeBatchStart')
+        stage('Init')
         {
             steps
             {
-                        
-                closeBatch('../AutomationTesting/validation/closeBatch1.txt')
+                init() 
             }
         }
 
@@ -64,26 +66,17 @@ pipeline {
         {
             steps
             {
-                sale()
-            }
-            
+                sale(5)
+            }  
         }
 
-        stage('preauthCompletion')
+       stage('preauthCompletion')
         {
             steps
             {
-                preauthComp()
+                preauthComp(5)
             }
             
-        }
-        
-        stage('closeBatch')
-        {
-            steps
-            {
-                closeBatch('../AutomationTesting/validation/closeBatch.txt')
-            }
         }
     }
 }
