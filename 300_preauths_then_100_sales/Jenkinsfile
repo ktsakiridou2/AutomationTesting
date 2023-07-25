@@ -37,7 +37,7 @@ def sale(size, offset)
         {
             catchError(stageResult: 'FAILURE')
             {
-               max = 98
+               max = 24
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
                 data = ' -out Data' + i.toString()+ '.txt'
@@ -93,7 +93,7 @@ pipeline {
         {
             steps
             {
-                preauth(100,0)
+                preauth(10,0)
             }
             
         }
@@ -102,7 +102,7 @@ pipeline {
         {
             steps
             {
-                preauth(200,100)
+                preauth(20,10)
             }
             
         }
@@ -110,7 +110,7 @@ pipeline {
         {
             steps
             {
-                preauth(300,200)
+                preauth(30,20)
             }
             
         }
@@ -118,7 +118,7 @@ pipeline {
         {
             steps
             {
-                sale(100,0)
+                sale(10,0)
             }
         }
    
