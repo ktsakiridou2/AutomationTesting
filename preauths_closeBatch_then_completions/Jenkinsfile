@@ -1,53 +1,63 @@
 dir = ' -dir ../AutomationTesting/Tests/preauths_closeBatch_then_completions'
 
-def preauth(size)
+def init()
+{
+        script
+        {
+                bat 'python.exe ../AutomationTesting/SetupTest.py '
+        }
+}
+
+def preauth(size, offset)
 {
     script
     {
-        for(int i=0; i<size; ++i)
+        for(int i= offset; i<size; ++i)
         {
             catchError(stageResult: 'FAILURE')
             {
-                max = 98
+                max = 2
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
-                data = ' -out ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data
+                log = ' -lp preauthLog' + i.toString() + '.LOG'
+                data = ' -out Data' + i.toString()+ '.txt'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
                 bat str 
             }
         }
     }
 }
 
-def preauthComp(size)
+def preauthComp(size, offset)
 {
     script
     {
-       
-        for(int i=0; i<size; ++i)
+        for(int i= offset; i<size; ++i)
         {
             catchError(stageResult: 'FAILURE')
             {
-                data = '-in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletionError1.txt ' + data
+                log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
+                data = ' -in Data' + i.toString()+ '.txt'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + dir + log + data
                 bat str
             }
         }
     }
-
 }
 
-def closeBatch(valPath)
+def closeBatch(valPath, index)
 {
     script
     {
         catchError(stageResult: 'FAILURE')
         {
-            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath
+            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
+            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log
             bat str
         }
     }
 }
+
 
 pipeline {
     agent any
@@ -55,47 +65,52 @@ pipeline {
     stages 
     {
 
-
-        stage('closeBatchStart')
+        stage('Init')
         {
             steps
             {
-                        
-                closeBatch('../AutomationTesting/validation/closeBatch1.txt')
+                init() 
             }
         }
-
-        stage('preauth')
-        {
-            steps
-            {
-                preauth(3)
-            }
-            
-        }
-   
         stage('closeBatch1')
         {
             steps
             {
-                closeBatch('../AutomationTesting/validation/closeBatch.txt')
+                        
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
             }
         }
-      
-        stage('preauthCompletion')
+
+        stage('preauth1')
         {
             steps
             {
-                preauthComp(3)
+                preauth(10,0)
             }
             
         }
-        
+
         stage('closeBatch2')
         {
             steps
             {
-                closeBatch('../AutomationTesting/validation/closeBatch1.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 2)
+            }
+        }
+        
+        stage('preauthCompletion1')
+        {
+            steps
+            {
+                preauthComp(10,0)
+            }
+        }
+    
+        stage('closeBatch3')
+        {
+            steps
+            {
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 3)
             }
         }
     }
