@@ -1,3 +1,5 @@
+/*PREAUTH + REVERSAL */
+
 dir = ' -dir ../AutomationTesting/Tests/101_preauths'
 
 def init()
@@ -22,6 +24,11 @@ def preauth(size, offset)
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
                 data = ' -out Data' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
+                bat str 
+
+                data = ' -in Data' + i.toString()+ '.txt'
+                log = ' -lp reversalLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log
                 bat str 
             }
         }
