@@ -1,4 +1,4 @@
-dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_input'
+dir = ' -dir ../AutomationTesting/Tests/200_preauths_then_completions'
 
 def init()
 {
@@ -8,41 +8,45 @@ def init()
         }
 }
 
-def preauth()
+def preauth(size, offset)
 {
-        script
+    script
+    {
+        for(int i= offset; i<size; ++i)
         {
             catchError(stageResult: 'FAILURE')
             {
-                i = 0
-                max = 98
+                max = 2
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
-                data = ' -out Data' + i.toString()+ '.txt'
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
+                data = ' -out Data' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
                 bat str 
             }
         }
+    }
 }
 
-def preauthComp()
+def preauthComp(size, offset)
 {
     script
     {
-        catchError(stageResult: 'FAILURE')
+        for(int i= offset; i<size; ++i)
         {
-            i = 0
-            data = ' -in Data' + i.toString()+ '.txt'
-            log = ' -lp preauthCompLog' + i.toString() + '.LOG'
-            stan = ' -stan 1345'
-            rrn = ' -rrn 123456789123'
-            authCode = ' -auth 123456'
-            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletion_wrong_input.txt ' + dir + log + data + stan + authCode + rrn            
-            bat str
+            catchError(stageResult: 'FAILURE')
+            {
+                log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
+                data = ' -in Data' + i.toString()+ '.txt'
+                 stan = ' -stan 1345'
+                 rrn = ' -rrn 123456789123'
+                 authCode = ' -auth 123456'
+                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletion_wrong_input.txt ' + dir + log + data + stan + authCode + rrn            
+                 bat str
+                
+            }
         }
     }
-
 }
 
 def closeBatch(valPath, index)
@@ -58,11 +62,13 @@ def closeBatch(valPath, index)
     }
 }
 
+
 pipeline {
     agent any
 
     stages 
     {
+
         stage('Init')
         {
             steps
@@ -70,7 +76,6 @@ pipeline {
                 init() 
             }
         }
-
         stage('closeBatch1')
         {
             steps
@@ -80,24 +85,37 @@ pipeline {
             }
         }
 
-        stage('preauth')
+        stage('preauth1')
         {
             steps
             {
-                preauth()
-            }
-            
-        }
-
-        stage('preauthCompletion')
-        {
-            steps
-            {
-                preauthComp()
+                preauth(10,0)
             }
             
         }
         
+       stage('preauth2')
+        {
+            steps
+            {
+                preauth(20,10)
+            }
+            
+        } 
+        stage('preauthCompletion1')
+        {
+            steps
+            {
+                preauthComp(10,0)
+            }
+        }
+           stage('preauthCompletion2')
+        {
+            steps
+            {
+                preauthComp(20,10)
+            }
+        }
         stage('closeBatch2')
         {
             steps
