@@ -1,4 +1,6 @@
 dir = ' -dir ../AutomationTesting/Tests/Preauth_PreauthComp_batch_amount_check'
+globalAmount = 0
+amount = 0
 
 def init()
 {
