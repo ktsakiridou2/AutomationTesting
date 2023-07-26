@@ -16,15 +16,15 @@ def preauth_preauthComp(size)
                 {
                         catchError(stageResult: 'FAILURE')
                         {
-                           globalAmount += 10000
-                           amount = ' -a 10000'
+                           globalAmount += 1
+                           amount = ' -a 1'
 
                             log = ' -lp preauthLog' + i.toString() + '.LOG'
                             data = ' -out Data' + i.toString()+ '.txt'
                             str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
                             bat str 
 
-                            globalAmount += 10000
+                            globalAmount += 1
                             log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
                             data = ' -in Data' + i.toString()+ '.txt'
                             str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + dir + log + data
