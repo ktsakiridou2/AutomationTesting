@@ -1,4 +1,5 @@
-dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_authCode'
+dir = ' -dir ../AutomationTesting/Tests/Preauth_PreauthComp_wrongAuthCode'
+
 def init()
 {
         script
@@ -35,10 +36,10 @@ def preauthComp(size, offset)
         {
             catchError(stageResult: 'FAILURE')
             {
-                authCode = ' -auth 012345'
+                stan = ' -stan 1234'
                 log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
                 data = ' -in Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + authCode + dir + log + data
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + stan + dir + log + data
                 bat str
             }
         }
