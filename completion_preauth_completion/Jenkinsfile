@@ -38,7 +38,7 @@ def preauthCompError(size, offset)
             {
                 log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
                 data = ' -in Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletionError.txt ' + dir + log + data
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletionError0.txt ' + dir + log + data
                 bat str
             }
         }
