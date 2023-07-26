@@ -38,7 +38,8 @@ def preauthComp(size)
             {
                 log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
                 data = ' -in Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + dir + log + data
+                outData = ' -out compData' + i.toString()+ '.txt'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + dir + log + data + outData
                 bat str
             }
         }
@@ -53,7 +54,7 @@ def refund(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                data = '-in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
+                data = ' -in compData' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/refund0.txt ' + data
                 bat str
             }
