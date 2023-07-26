@@ -8,13 +8,14 @@ def init()
         }
 }
 
-def preauth()
+def preauth(size, offset)
 {
-        script
+    script
+    {
+        for(int i= offset; i<size; ++i)
         {
             catchError(stageResult: 'FAILURE')
             {
-                i = 0
                 max = 98
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
@@ -24,39 +25,24 @@ def preauth()
                 bat str 
             }
         }
+    }
 }
 
-def preauthCompError(valPath, index)
+def preauthComp(size, offset)
 {
     script
     {
-        catchError(stageResult: 'FAILURE')
+        for(int i= offset; i<size; ++i)
         {
-            i = 0
-            log = ' -lp preauthCompletionLog' + index.toString() + '.LOG'
-            stan = ' -stan 0'
-            authCode = ' -auth 000000'
-            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp '  +valPath + dir + log + stan + authCode
-            bat str
+            catchError(stageResult: 'FAILURE')
+            {
+                log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
+                data = ' -in Data' + i.toString()+ '.txt'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + dir + log + data
+                bat str
+            }
         }
     }
-
-}
-
-def preauthComp(valPath, index)
-{
-    script
-    {
-        catchError(stageResult: 'FAILURE')
-        {
-            i = 0
-            log = ' -lp preauthCompletionLog' + index.toString() + '.LOG'
-            data = ' -in Data' + i.toString()+ '.txt'
-            str = 'python.exe ../AutomationTesting/Main.py ' +' -vp '  +valPath + dir + log + data
-            bat str
-        }
-    }
-
 }
 
 def closeBatch(valPath, index)
@@ -95,19 +81,19 @@ pipeline {
         }
 
         
-        stage('preauthCompletionError')
+       stage('preauthCompletion1')
         {
             steps
             {
-                preauthCompError('../AutomationTesting/validation/preauthCompletionError1.txt ', 1)
+                preauthComp(10,0)
             }
         }
 
-        stage('preauth')
+        stage('preauth1')
         {
             steps
             {
-                preauth()
+                preauth(10,0)
             }
             
         }
@@ -116,7 +102,7 @@ pipeline {
         {
             steps
             {
-                preauthComp('../AutomationTesting/validation/preauthCompletion0.txt ', 2)
+                preauthComp(10,0)
             }
         }
             
