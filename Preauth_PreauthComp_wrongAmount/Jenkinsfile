@@ -1,4 +1,4 @@
-dir = ' -dir ../AutomationTesting/Tests/200_preauths_then_completions'
+dir = ' -dir ../AutomationTesting/Tests/Preauth_PreauthComp_wrongAmount'
 
 def init()
 {
