@@ -1,41 +1,50 @@
 dir = ' -dir ../AutomationTesting/Tests/preauths_then_completions_then_refunds'
 
-def preauth(size)
+def init()
+{
+        script
+        {
+                bat 'python.exe ../AutomationTesting/SetupTest.py '
+        }
+}
+
+def preauth(size, offset)
 {
     script
     {
-        for(int i=0; i<size; ++i)
+        for(int i= offset; i<size; ++i)
         {
             catchError(stageResult: 'FAILURE')
             {
-                max = 98
+                max = 2
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
-                data = ' -out ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data
+                log = ' -lp preauthLog' + i.toString() + '.LOG'
+                data = ' -out Data' + i.toString()+ '.txt'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
                 bat str 
             }
         }
     }
 }
 
-def preauthComp(size)
+def preauthComp(size, offset)
 {
     script
     {
-
-        for(int i=0; i<size; ++i)
+        for(int i= offset; i<size; ++i)
         {
             catchError(stageResult: 'FAILURE')
             {
-                data = '-in ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + data
+                log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
+                data = ' -in Data' + i.toString()+ '.txt'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + dir + log + data
                 bat str
             }
         }
     }
-
 }
+
 def refund(size)
 {
     script
@@ -53,13 +62,14 @@ def refund(size)
 
 }
 
-def closeBatch(valPath)
+def closeBatch(valPath, index)
 {
     script
     {
         catchError(stageResult: 'FAILURE')
         {
-            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath
+            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
+            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log
             bat str
         }
     }
@@ -70,7 +80,13 @@ pipeline {
 
     stages 
     {
-
+        stage('Init')
+        {
+            steps
+            {
+                init() 
+            }
+        }
 
         stage('closeBatchStart')
         {
