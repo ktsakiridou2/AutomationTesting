@@ -16,7 +16,7 @@ def preauth(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                max = 2
+                max = 1
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
@@ -54,11 +54,13 @@ def refund(size)
         {
             catchError(stageResult: 'FAILURE')
             {
+                log = ' -lp refundLog' + i.toString() + '.LOG'
                 data = ' -in compData' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/refund0.txt ' + data
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/refund0.txt ' + data + dir + log
                 bat str
             }
         }
+
     }
 
 }
