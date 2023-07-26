@@ -1,5 +1,4 @@
 dir = ' -dir ../AutomationTesting/Tests/preauth_completion_wrong_authCode'
-
 def init()
 {
         script
@@ -8,39 +7,42 @@ def init()
         }
 }
 
-def preauth()
+def preauth(size, offset)
 {
-        script
+    script
+    {
+        for(int i= offset; i<size; ++i)
         {
             catchError(stageResult: 'FAILURE')
             {
-                i = 0
-                max = 98
+                max = 2
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
-                data = ' -out Data' + i.toString()+ '.txt'
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
+                data = ' -out Data' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + dir + log + data
                 bat str 
             }
         }
+    }
 }
 
-def preauthComp()
+def preauthComp(size, offset)
 {
     script
     {
-        catchError(stageResult: 'FAILURE')
+        for(int i= offset; i<size; ++i)
         {
-            i = 0
-            data = ' -in Data' + i.toString()+ '.txt'
-            log = ' -lp preauthCompLog' + i.toString() + '.LOG'
-            authCode = ' -auth 012345'
-            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletion_wrong_input.txt ' + ' -gv ../AutomationTesting/validation/globalValidations.txt ' + dir + log + data  + authCode
-            bat str
+            catchError(stageResult: 'FAILURE')
+            {
+                authCode = ' -auth 012345'
+                log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
+                data = ' -in Data' + i.toString()+ '.txt'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + authCode + dir + log + data
+                bat str
+            }
         }
     }
-
 }
 
 def closeBatch(valPath, index)
@@ -56,6 +58,7 @@ def closeBatch(valPath, index)
     }
 }
 
+
 pipeline {
     agent any
 
@@ -69,7 +72,6 @@ pipeline {
                 init() 
             }
         }
-            
         stage('closeBatch1')
         {
             steps
@@ -79,24 +81,20 @@ pipeline {
             }
         }
 
-        stage('preauth')
+        stage('preauth1')
         {
             steps
             {
-                preauth(10)
+                preauth(10,0)
             }
-            
         }
-
-        stage('preauthCompletion')
+        stage('preauthCompletion1')
         {
             steps
             {
-                preauthComp(10)
+                preauthComp(10,0)
             }
-            
         }
-        
         stage('closeBatch2')
         {
             steps
