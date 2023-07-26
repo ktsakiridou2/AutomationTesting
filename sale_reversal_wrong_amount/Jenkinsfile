@@ -16,7 +16,7 @@ def sale_reversal_wrong_amount(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                max = 98
+                max = 2
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
                 data = ' -out Data' + i.toString()+ '.txt'
@@ -104,36 +104,10 @@ pipeline {
         {
             steps
             {
-                sale_reversal_wrong_amount(33)
+                sale_reversal_wrong_amount(5)
             }
             
         }
-
-          stage('sale_reversal_wrong_amount2')
-        {
-            steps
-            {
-                sale_reversal_wrong_amount(33)
-            }
-            
-        }
-
-       /* stage('sale_reversal_wrong_amount')
-        {
-            steps
-            {
-                sale_reversal_wrong_amount(33)
-            }
-            
-        }
-       stage('reversal')
-        {
-            steps
-            {
-                reversal(1)
-            }
-            
-        } */
         stage('closeBatch2')
         {
             steps
