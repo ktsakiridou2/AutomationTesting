@@ -36,10 +36,10 @@ def preauthComp(size, offset)
         {
             catchError(stageResult: 'FAILURE')
             {
-                stan = ' -stan 1234'
+                authCode = ' -auth 123456'
                 log = ' -lp preauthCompletionLog' + i.toString() + '.LOG'
                 data = ' -in Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + stan + dir + log + data
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt ' + authCode + dir + log + data
                 bat str
             }
         }
