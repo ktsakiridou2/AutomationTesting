@@ -1,30 +1,40 @@
-dir = ' -dir ../AutomationTesting/Tests/sales_negative_amount'
+dir = ' -dir ../AutomationTesting/Tests/201_sales'
 
+def init()
+{
+        script
+        {
+                bat 'python.exe ../AutomationTesting/SetupTest.py '
+        }
+}
 
-def sale(size)
+def sale(size, offset)
 {
     script
     {
-        for(int i=0; i<size; ++i)
+        for(int i= offset; i<size; ++i)
         {
             catchError(stageResult: 'FAILURE')
             {
+                
                 amount = '-a -10'
-                data = ' -out ../AutomationTesting/transData/Data' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data
+                log = ' -lp saleLog' + i.toString() + '.LOG'
+                data = ' -out Data' + i.toString()+ '.txt'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + dir + log + data
                 bat str 
             }
         }
     }
 }
 
-def closeBatch(valPath)
+def closeBatch(valPath, index)
 {
     script
     {
         catchError(stageResult: 'FAILURE')
         {
-            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath
+            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
+            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log
             bat str
         }
     }
@@ -35,31 +45,37 @@ pipeline {
 
     stages 
     {
+        stage('Init')
+        {
+            steps
+            {
+                init() 
+            }
+        }
 
-
-        stage('closeBatchStart')
+        stage('closeBatch1')
         {
             steps
             {
                         
-                closeBatch('../AutomationTesting/validation/closeBatch1.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
             }
-        }
+        } 
 
-        stage('sale')
+        stage('sale1')
         {
             steps
             {
-                sale(1)
+                sale(5,0)
             }
             
         }
-
-        stage('closeBatch')
+  
+        stage('closeBatch2')
         {
             steps
             {
-                closeBatch('../AutomationTesting/validation/closeBatch.txt')
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 2)
             }
         }
     }
