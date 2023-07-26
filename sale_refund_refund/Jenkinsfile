@@ -65,26 +65,10 @@ pipeline {
         {
             steps
             {
-                sale_reversalx2(1)
+                sale_reversalx2(10)
             }
             
         }
-         stage('sale_reversal_reversal2')
-        {
-            steps
-            {
-                sale_reversalx2(1)
-            }
-            
-        }
-         stage('sale_reversal_reversal3')
-        {
-            steps
-            {
-                sale_reversalx2(1)
-            }
-        }
-        
         stage('closeBatch2')
         {
             steps
