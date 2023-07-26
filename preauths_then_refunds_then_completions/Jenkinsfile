@@ -16,14 +16,19 @@ def preauth(size)
                 data = ' -out Data' + i.toString()+ '.txt'
                 log = ' -lp preauthLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + dir + ' -vp ../AutomationTesting/validation/preauth0.txt ' + amount + data + log
-                bat str 
+                bat str
+
+                 data = ' -in Data' + i.toString()+ '.txt'
+                log = ' -lp reversalLog' + i.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log
+                bat str
  
             }
         }
     }
 }
 
-def preauthComp_reversal(size)
+def preauthComp(size)
 {
     script
     {
@@ -35,11 +40,6 @@ def preauthComp_reversal(size)
                 data = ' -in Data' + i.toString()+ '.txt'
                 outData = ' -out preauthComplData' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + dir + log + data + outData + ' -vp ../AutomationTesting/validation/preauthCompletion0.txt '
-                bat str
-
-                data = ' -in preauthComplData' + i.toString()+ '.txt'
-                log = ' -lp reversalLog' + i.toString() + '.LOG'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log
                 bat str
             }
         }
@@ -80,11 +80,11 @@ pipeline {
             } 
         }
         
-        stage('preauthCompletion_reversal')
+        stage('preauthCompletion')
         {
             steps
             {
-                preauthComp_reversal(5)
+                preauthComp(5)
             }
             
         }
