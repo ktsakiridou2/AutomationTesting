@@ -1,4 +1,4 @@
-/* SALE REVERSAL VOID
+/* SALE REVERSAL VOID */
 
 dir = ' -dir ../AutomationTesting/Tests/sale_void'
 
@@ -43,7 +43,6 @@ def voidTrans(size)
             catchError(stageResult: 'FAILURE')
             {
                 data = ' -in Data' + i.toString()+ '.txt'
-                
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/void0.txt ' + data + dir + log
                 bat str 
@@ -90,7 +89,7 @@ pipeline {
         {
             steps
             {
-                sale_reversal_loop(50)
+                sale_reversal_loop(5)
             }
             
         }
@@ -98,7 +97,7 @@ pipeline {
         {
             steps
             {
-                voidTrans(50)
+                voidTrans(5)
             }
             
         }
@@ -110,9 +109,9 @@ pipeline {
             }
         }
     }
-} */
+} 
 
-/* SALE VOID REVERSAL STO VOID */
+/* SALE VOID REVERSAL STO VOID 
 
 dir = ' -dir ../AutomationTesting/Tests/sale_void'
 
@@ -200,22 +199,6 @@ pipeline {
                 sale_void_reversal(3)
             }
         }
-      /*    stage('sale_void_reversal2')
-        {
-            steps
-            {
-                sale_void_reversal(33)
-            }  
-        }
-
-         stage('sale_void_reversal3')
-        {
-            steps
-            {
-                sale_void_reversal(33)
-            }
-            
-        } */
         stage('closeBatch2')
         {
             steps
@@ -225,3 +208,4 @@ pipeline {
         }
     }
 }
+*/
