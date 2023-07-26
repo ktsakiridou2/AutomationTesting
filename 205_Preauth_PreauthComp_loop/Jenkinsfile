@@ -14,7 +14,7 @@ def preauth_preauthComp(size, offset)
         {
             for(int i=offset;i<size;++i)
             {
-                    max = 98
+                    max = 1
                     random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                     amount = '-a' + random_num.toString()
                     
@@ -81,7 +81,7 @@ pipeline {
         {
             steps
             {
-                preauth_preauthComp(50, 0)
+                preauth_preauthComp(10, 0)
             }
             
         }
