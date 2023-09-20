@@ -67,12 +67,12 @@ pipeline {
         {
             steps
             {
-                sale(50,0)
+                sale(2,0)
             }
             
         }
   
-        stage('sale2')
+      /*  stage('sale2')
         {
             steps
             {
@@ -136,7 +136,7 @@ pipeline {
                 sale(405,400)
             }
             
-        } 
+        } */
         stage('closeBatch2')
         {
             steps
