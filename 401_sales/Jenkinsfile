@@ -16,7 +16,7 @@ def sale(size, offset)
         {
             catchError(stageResult: 'FAILURE')
             {
-                max = 50
+                max = -50
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
                 log = ' -lp saleLog' + i.toString() + '.LOG'
@@ -72,12 +72,12 @@ pipeline {
         {
             steps
             {
-                sale(50,0)
+                sale(2,0)
             }
             
         }
   
-        stage('sale2')
+       /* stage('sale2')
         {
             steps
             {
@@ -101,7 +101,7 @@ pipeline {
             }
             
         }
-       /* stage('sale5')
+        stage('sale5')
         {
             steps
             {
