@@ -75,7 +75,9 @@ pipeline {
                 sale(5,0)
             }
             
-        } /*
+        }
+            
+    }/*
   
         stage('sale2')
         {
