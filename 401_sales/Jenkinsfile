@@ -33,7 +33,7 @@ def sale(size, offset)
     }
 }
 
-def closeBatch(valPath, index)
+ def closeBatch(valPath, index)
 {
     script
     {
@@ -44,7 +44,7 @@ def closeBatch(valPath, index)
             bat str
         }
     }
-}
+} 
 
 pipeline {
     agent any
@@ -59,7 +59,7 @@ pipeline {
             }
         }
 
-        stage('closeBatch1')
+       /* stage('closeBatch1')
         {
             steps
             {
@@ -67,7 +67,7 @@ pipeline {
                 closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
             }
         }
-
+*/
         stage('sale1')
         {
             steps
@@ -77,7 +77,7 @@ pipeline {
             
         }
   
-         stage('sale2')
+      /*   stage('sale2')
         {
             steps
             {
@@ -117,6 +117,6 @@ pipeline {
             }
             
         }
-
+*/
     }
 }
