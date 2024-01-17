@@ -113,41 +113,7 @@ pipeline {
         {
             steps
             {
-                sale(300,250)
+                sale(296,250)
             }
             
         }
-            
-        stage('sale7')
-        {
-            steps
-            {
-                sale(350,300)
-            }
-            
-        }
-        stage('sale8')
-        {
-            steps
-            {
-                sale(400,350)
-            }
-            
-        }       
-        stage('sale9')
-        {
-            steps
-            {
-                sale(405,400)
-            }
-            
-        } 
-        stage('closeBatch2')
-        {
-            steps
-            {
-                closeBatch('../AutomationTesting/validation/closeBatch.txt', 2)
-            }
-        }
-    }
-}
