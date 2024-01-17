@@ -72,12 +72,12 @@ pipeline {
         {
             steps
             {
-                sale(5,0)
+                sale(40,0)
             }
             
         }
   
-        stage('sale2')
+        /* stage('sale2')
         {
             steps
             {
@@ -116,7 +116,7 @@ pipeline {
                 sale(296,250)
             }
             
-        }
+        } */
 
     }
 }
