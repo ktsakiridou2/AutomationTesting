@@ -24,10 +24,10 @@ def sale(size, offset)
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale2.txt ' + amount + dir + log + data
                 bat str 
                 
-                log = ' -lp completeSaleLog' + i.toString() + '.LOG'
+                /* log = ' -lp completeSaleLog' + i.toString() + '.LOG'
                 data = ' -out completeSaleData' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/complete_sale.txt ' + dir + log + data
-                bat str 
+                bat str */
             }
         }
     }
