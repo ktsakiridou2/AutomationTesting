@@ -21,7 +21,7 @@ def sale(size, offset)
                 amount = '-a' + random_num.toString()
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 data = ' -out saleData' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale2.txt ' + amount + dir + log + data
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + dir + log + data
                 bat str 
                 
                 /* log = ' -lp completeSaleLog' + i.toString() + '.LOG'
