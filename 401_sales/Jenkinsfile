@@ -23,7 +23,7 @@ def sale(size, offset)
                 trxID = ' -o 12345678901234'  
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 data = ' -out saleData' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + dir + log + data
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + dir + log + data + deviceID + trxID
                 bat str 
                 
                 /* log = ' -lp completeSaleLog' + i.toString() + '.LOG'
