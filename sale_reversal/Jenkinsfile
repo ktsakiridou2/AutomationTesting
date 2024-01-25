@@ -32,7 +32,7 @@ def sale_reversal_loop(size)
                 deviceID = ' -q 1234567890'
                 trxID = ' -o 12345678901234'  
                 log = ' -lp reversalLog' + i.toString() + '.LOG'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log + deviceID + deviceID
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log + deviceID + trxID
                 bat str 
             }
         }
