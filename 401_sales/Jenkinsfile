@@ -17,7 +17,7 @@ def sale(size, offset)
             catchError(stageResult: 'FAILURE')
             {
                 max = 500
-                max2 = 898
+                max2 = 899
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
                 random_num2 = "${Math.abs(99 + new Random().nextInt(max2+1))}"
