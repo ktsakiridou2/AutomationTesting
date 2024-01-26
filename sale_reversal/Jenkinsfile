@@ -16,21 +16,21 @@ def sale_reversal_loop(size)
         {
             catchError(stageResult: 'FAILURE')
             {
-                max = 98
+                max = 500
+                max2 = 898
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
-                data = ' -out Data' + i.toString()+ '.txt'
-                log = ' -lp saleLog' + i.toString() + '.LOG'
+                random_num2 = "${Math.abs(99 + new Random().nextInt(max2+1))}"
                 deviceID = ' -q 1234567890'
-                trxID = ' -o 12345678901234'  
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + data + dir + log + deviceID + trxID
-                bat str
+                trxID = ' -o 12345678901' + random_num2.toString()
+                log = ' -lp saleLog' + i.toString() + '.LOG'
+                data = ' -out saleData' + i.toString()+ '.txt'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + dir + log + data + deviceID + trxID
+                bat str 
             }
                 catchError(stageResult: 'FAILURE')
             {
-                data = ' -in Data' + i.toString()+ '.txt'
-                deviceID = ' -q 1234567890'
-                trxID = ' -o 12345678901234'  
+                data = ' -in Data' + i.toString()+ '.txt'  
                 log = ' -lp reversalLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log + deviceID + trxID
                 bat str 
