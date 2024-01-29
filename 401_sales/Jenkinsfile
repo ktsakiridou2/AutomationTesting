@@ -22,7 +22,7 @@ def sale(size, offset)
                 amount = '-a' + random_num.toString()
                 random_num2 = "${Math.abs(99 + new Random().nextInt(max2+1))}"
                 deviceID = ' -q 1234567890'
-                trxID = ' -o 12345678901' + random_num2.toString()
+                trxID = ' -o 1234567890' + random_num2.toString()
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 data = ' -out saleData' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + dir + log + data + deviceID + trxID
@@ -76,7 +76,7 @@ pipeline {
         {
             steps
             {
-                sale(30,0)
+                sale(10,0)
             }
             
         }
