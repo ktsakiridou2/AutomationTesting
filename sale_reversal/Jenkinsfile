@@ -91,7 +91,7 @@ pipeline {
         {
             steps
             {
-                sale_reversal_loop(120)
+                sale_reversal_loop(148)
             }
             
         }
@@ -102,13 +102,13 @@ pipeline {
                 reversal(5)
             }
             
-        } */
+        } 
         stage('closeBatch2')
         {
             steps
             {
                 closeBatch('../AutomationTesting/validation/closeBatch.txt', 2)
             }
-        }
+        } */
     }
 }
