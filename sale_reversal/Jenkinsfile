@@ -87,11 +87,28 @@ pipeline {
             }
         }
 
-        stage('sale_reversal')
+        stage('sale_reversal1')
         {
             steps
             {
-                sale_reversal_loop(148)
+                sale_reversal_loop(50)
+            }
+            
+        }
+
+        stage('sale_reversal2')
+        {
+            steps
+            {
+                sale_reversal_loop(50)
+            }
+            
+        }
+        stage('sale_reversal3')
+        {
+            steps
+            {
+                sale_reversal_loop(48)
             }
             
         }
