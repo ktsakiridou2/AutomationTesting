@@ -119,13 +119,13 @@ pipeline {
                 reversal(5)
             }
             
-        } 
+        } */
         stage('closeBatch2')
         {
             steps
             {
                 closeBatch('../AutomationTesting/validation/closeBatch.txt', 2)
             }
-        } */
+        } 
     }
 }
