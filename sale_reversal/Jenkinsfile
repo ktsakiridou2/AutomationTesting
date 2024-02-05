@@ -29,7 +29,7 @@ def sale_reversal_loop(size)
                 bat str 
 
                 data = ' -in saleData' + i.toString()+ '.txt'
-                trxID2 = ' -o 12345678901' + random_num2.toString()
+                trxID2 = ' -o 12347678901' + random_num2.toString()
                 log = ' -lp reversalLog' + i.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/reversal0.txt ' + data + dir + log + deviceID + trxID2
                 bat str
