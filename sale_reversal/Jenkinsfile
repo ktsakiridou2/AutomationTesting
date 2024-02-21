@@ -91,7 +91,7 @@ pipeline {
         {
             steps
             {
-                sale_reversal_loop(1)
+                sale_reversal_loop(73)
             }
             
         }
@@ -100,7 +100,7 @@ pipeline {
         {
             steps
             {
-                sale_reversal_loop(1)
+                sale_reversal_loop(73)
             }  
         }
         /* stage('closeBatch2')
