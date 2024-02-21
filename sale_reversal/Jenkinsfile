@@ -101,23 +101,14 @@ pipeline {
             steps
             {
                 sale_reversal_loop(1)
-            }
-            
+            }  
         }
-       /* stage('reversal')
-        {
-            steps
-            {
-                reversal(5)
-            }
-            
-        } */
-        stage('closeBatch2')
+        /* stage('closeBatch2')
         {
             steps
             {
                 closeBatch('../AutomationTesting/validation/closeBatch.txt', 2)
             }
-        } 
+        } */
     }
 }
