@@ -136,6 +136,82 @@ pipeline {
                 closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
             }
         }
+stage('sale5')
+        {
+            steps
+            {
+                sale(1,0)
+            }
+        } 
+        stage('closeBatch5')
+        {
+            steps
+            {
+                        
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
+            }
+        }
+	     stage('sale6')
+        {
+            steps
+            {
+                sale(1,0)
+            }
+        } 
+        stage('closeBatch6')
+        {
+            steps
+            {
+                        
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
+            }
+        }
+	     stage('sale7')
+        {
+            steps
+            {
+                sale(1,0)
+            }
+        } 
+        stage('closeBatch7')
+        {
+            steps
+            {
+                        
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
+            }
+        }
+	     stage('sale8')
+        {
+            steps
+            {
+                sale(1,0)
+            }
+        } 
+        stage('closeBatch8')
+        {
+            steps
+            {
+                        
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
+            }
+        }
 
+     stage('sale9')
+        {
+            steps
+            {
+                sale(1,0)
+            }
+        } 
+        stage('closeBatch9')
+        {
+            steps
+            {
+                        
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
+            }
+        }
+	
     }
 }
