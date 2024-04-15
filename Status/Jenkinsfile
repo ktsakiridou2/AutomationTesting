@@ -212,6 +212,157 @@ stage('sale5')
                 closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
             }
         }
-	
+	stage('sale10')
+        {
+            steps
+            {
+                sale(1,0)
+            }
+        } 
+        stage('closeBatch10')
+        {
+            steps
+            {
+                        
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
+            }
+        }
+	     stage('sale11')
+        {
+            steps
+            {
+                sale(1,0)
+            }
+        } 
+        stage('closeBatch11')
+        {
+            steps
+            {
+                        
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
+            }
+        }
+	     stage('sale12')
+        {
+            steps
+            {
+                sale(1,0)
+            }
+        } 
+        stage('closeBatch12')
+        {
+            steps
+            {
+                        
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
+            }
+        }
+	     stage('sale13')
+        {
+            steps
+            {
+                sale(1,0)
+            }
+        } 
+        stage('closeBatch13')
+        {
+            steps
+            {
+                        
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
+            }
+        }
+
+     stage('sale14')
+        {
+            steps
+            {
+                sale(1,0)
+            }
+        } 
+        stage('closeBatch14')
+        {
+            steps
+            {
+                        
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
+            }
+        }
+stage('sale15')
+        {
+            steps
+            {
+                sale(1,0)
+            }
+        } 
+        stage('closeBatch15')
+        {
+            steps
+            {
+                        
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
+            }
+        }
+	     stage('sale16')
+        {
+            steps
+            {
+                sale(1,0)
+            }
+        } 
+        stage('closeBatch16')
+        {
+            steps
+            {
+                        
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
+            }
+        }
+	     stage('sale17')
+        {
+            steps
+            {
+                sale(1,0)
+            }
+        } 
+        stage('closeBatch17')
+        {
+            steps
+            {
+                        
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
+            }
+        }
+	     stage('sale18')
+        {
+            steps
+            {
+                sale(1,0)
+            }
+        } 
+        stage('closeBatch18')
+        {
+            steps
+            {
+                        
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
+            }
+        }
+
+     stage('sale19')
+        {
+            steps
+            {
+                sale(1,0)
+            }
+        } 
+        stage('closeBatch19')
+        {
+            steps
+            {
+                        
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
+            }
+        }
     }
 }
