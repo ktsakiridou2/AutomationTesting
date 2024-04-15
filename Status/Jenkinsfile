@@ -31,6 +31,13 @@ def sale(size, offset)
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/complete_sale.txt ' + dir + log + data
                 bat str
                 }
+                catchError(stageResult: 'FAILURE')
+                {
+            dir = ' -dir ../AutomationTesting/Tests/2closeBatches'
+            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
+            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log
+            bat str
+                }
         }
     }
 }
@@ -42,7 +49,7 @@ def closeBatch(valPath, index)
         {
             dir = ' -dir ../AutomationTesting/Tests/2closeBatches'
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log
+            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + '../AutomationTesting/validation/closeBatch.txt' + dir + log
             bat str
         }
     }
