@@ -25,7 +25,6 @@ def sale(size)
                 data = ' -out saleData' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + dir + log + data + deviceID + trxID 
                 bat str 
-                }
 
                 log = ' -lp completeSaleLog' + i.toString() + '.LOG'
                 data = ' -out completeSaleData' + i.toString()+ '.txt'
