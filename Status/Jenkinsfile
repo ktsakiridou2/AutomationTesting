@@ -33,24 +33,11 @@ def sale(size, offset)
                 }
                 catchError(stageResult: 'FAILURE')
                 {
-            dir = ' -dir ../AutomationTesting/Tests/2closeBatches'
-            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log
-            bat str
+                    dir = ' -dir ../AutomationTesting/Tests/2closeBatches'
+                    log = ' -lp closeBatchLog' + index.toString() + '.LOG'
+                    str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log
+                    bat str
                 }
-        }
-    }
-}
-def closeBatch(valPath, index)
-{
-    script
-    {
-        catchError(stageResult: 'FAILURE')
-        {
-            dir = ' -dir ../AutomationTesting/Tests/2closeBatches'
-            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + '../AutomationTesting/validation/closeBatch.txt' + dir + log
-            bat str
         }
     }
 }
@@ -73,14 +60,6 @@ pipeline {
             {
                 sale(1,0)
             }
-        }
-        stage('closeBatch')
-        {
-            steps
-            {
-                        
-                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
-            }
-        }   
 } 
+}
 }
