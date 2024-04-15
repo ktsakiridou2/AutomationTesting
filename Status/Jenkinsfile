@@ -8,7 +8,7 @@ def init()
         }
 }
 
-def sale(size)
+def sale(size, offset)
 {
     script
     {
@@ -53,7 +53,7 @@ pipeline {
         {
             steps
             {
-                sale(2)
+                sale(1, 0)
             }
         }
 	}
