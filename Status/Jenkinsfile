@@ -28,8 +28,8 @@ def sale(size, offset)
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/complete_sale.txt ' + dir + log + data
                 bat str
 		}
-	}
-	    catchError(stageResult: 'FAILURE')
+		}
+	   	 catchError(stageResult: 'FAILURE')
                 {
             	log = ' -lp closeBatchLog' + index.toString() + '.LOG'
             	str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/closeBatch.txt ' + dir + log
