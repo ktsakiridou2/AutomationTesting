@@ -8,14 +8,14 @@ def init()
         }
 }
 
-def sale_closebatch(size, offset)
+def sale(size, offset)
 {
     script
     {
         for(int i= offset; i<size; ++i)
         {
                 catchError(stageResult: 'FAILURE')
-        {
+                {
                 max = 500
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
@@ -23,14 +23,14 @@ def sale_closebatch(size, offset)
                 data = ' -out saleData' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + dir + log + data
                 bat str 
-        }
+                }
                 catchError(stageResult: 'FAILURE')
-        {
+                {
                 log = ' -lp completeSaleLog' + i.toString() + '.LOG'
                 data = ' -out completeSaleData' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/complete_sale.txt ' + dir + log + data
                 bat str
-        }
+                }
         }
     }
 }
@@ -60,14 +60,14 @@ pipeline {
                 init() 
             }
         }
-        stage('oneSale')
+        stage('sale')
         {
             steps
             {
                 sale_closebatch(1,0)
             }
         }
-        stage('closeBatch1')
+        stage('closeBatch')
         {
             steps
             {
