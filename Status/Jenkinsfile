@@ -14,8 +14,6 @@ def sale_closebatch(size, offset)
     {
         for(int i= offset; i<size; ++i)
         {
-        catchError(stageResult: 'FAILURE')
-                {
                 max = 500
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
@@ -32,7 +30,6 @@ def sale_closebatch(size, offset)
                 log = ' -lp closeBatchLog' + index.toString() + '.LOG'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + '../AutomationTesting/validation/closeBatch.txt' + dir + log
                 bat str
-                }
         }
     }
 }
