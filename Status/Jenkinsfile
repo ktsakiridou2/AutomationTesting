@@ -25,18 +25,18 @@ def sale_closebatch(size, offset)
                 bat str 
                 }
                  catchError(stageResult: 'FAILURE')
-        {
+                {
                 log = ' -lp completeSaleLog' + i.toString() + '.LOG'
                 data = ' -out completeSaleData' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/complete_sale.txt ' + dir + log + data
                 bat str
-        }
+                }
                 catchError(stageResult: 'FAILURE')
-        {
-            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log
-            bat str
-        }
+                {
+                log = ' -lp closeBatchLog' + index.toString() + '.LOG'
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log
+                bat str
+                }
         }
     }
 }
