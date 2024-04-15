@@ -14,6 +14,8 @@ def sale_closebatch(size, offset)
     {
         for(int i= offset; i<size; ++i)
         {
+                catchError(stageResult: 'FAILURE')
+        {
                 max = 500
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
                 amount = '-a' + random_num.toString()
@@ -21,15 +23,27 @@ def sale_closebatch(size, offset)
                 data = ' -out saleData' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + dir + log + data
                 bat str 
-                
+        }
+                catchError(stageResult: 'FAILURE')
+        {
                 log = ' -lp completeSaleLog' + i.toString() + '.LOG'
                 data = ' -out completeSaleData' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/complete_sale.txt ' + dir + log + data
                 bat str
-                
-                log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + '../AutomationTesting/validation/closeBatch.txt' + dir + log
-                bat str
+        }
+        }
+    }
+}
+def closeBatch(valPath, index)
+{
+    script
+    {
+        catchError(stageResult: 'FAILURE')
+        {
+            dir = ' -dir ../AutomationTesting/Tests/2closeBatches'
+            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
+            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log
+            bat str
         }
     }
 }
@@ -46,12 +60,22 @@ pipeline {
                 init() 
             }
         }
-        stage('OneSale_CloseBatch_Loop')
+        stage('oneSale')
         {
             steps
             {
-                sale_closebatch(2,0)
+                sale_closebatch(1,0)
             }
+        }
+        stage('closeBatch1')
+        {
+            steps
+            {
+                        
+                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
+            }
+        }
+
             
         } 
     }
