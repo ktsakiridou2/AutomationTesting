@@ -64,7 +64,7 @@ pipeline {
         {
             steps
             {
-                sale_closebatch(1,0)
+                sale(1,0)
             }
         }
         stage('closeBatch')
@@ -74,8 +74,6 @@ pipeline {
                         
                 closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
             }
-        }
-
-            
-        } 
-    }
+        }   
+} 
+}
