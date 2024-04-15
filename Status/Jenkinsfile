@@ -16,19 +16,20 @@ def sale(size)
         {
                 catchError(stageResult: 'FAILURE')
                 {
-                max = 500
+                 max = 500
                 random_num = "${Math.abs(1 + new Random().nextInt(max+1))}"
+                deviceID = 1234567890
+                trxID = 12345678901234
                 amount = '-a' + random_num.toString()
                 log = ' -lp saleLog' + i.toString() + '.LOG'
                 data = ' -out saleData' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + dir + log + data
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + dir + log + data + deviceID + trxID 
                 bat str 
                 }
-                catchError(stageResult: 'FAILURE')
-                {
+
                 log = ' -lp completeSaleLog' + i.toString() + '.LOG'
                 data = ' -out completeSaleData' + i.toString()+ '.txt'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/complete_sale.txt ' + dir + log + data
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/complete_sale.txt ' + dir + log + data + deviceID + trxID
                 bat str
                 }
                 catchError(stageResult: 'FAILURE')
