@@ -29,7 +29,6 @@ def sale(size, offset)
                 data = ' -out completeSaleData' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/complete_sale.txt ' + dir + log + data
                 bat str
-                }
         }
     }
 }
