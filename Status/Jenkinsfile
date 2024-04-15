@@ -23,19 +23,20 @@ def sale(size, offset)
                 data = ' -out saleData' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/sale0.txt ' + amount + dir + log + data
                 bat str 
-                }
                 log = ' -lp completeSaleLog' + i.toString() + '.LOG'
                 data = ' -out completeSaleData' + i.toString()+ '.txt'
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/complete_sale.txt ' + dir + log + data
                 bat str
-
+		}
+	}
+	    catchError(stageResult: 'FAILURE')
+                {
             	log = ' -lp closeBatchLog' + index.toString() + '.LOG'
             	str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/closeBatch.txt ' + dir + log
            	bat str
-                
+		}
         }
     }
-}
 pipeline {
     agent any
 
