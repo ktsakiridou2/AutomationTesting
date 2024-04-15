@@ -34,7 +34,7 @@ def sale_closebatch(size, offset)
                 catchError(stageResult: 'FAILURE')
                 {
                 log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log
+                str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + '../AutomationTesting/validation/closeBatch.txt' + dir + log
                 bat str
                 }
         }
