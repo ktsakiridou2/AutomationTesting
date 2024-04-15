@@ -8,7 +8,7 @@ def init()
         }
 }
 
-def sale(size, offset)
+def sale(size)
 {
     script
     {
@@ -31,25 +31,15 @@ def sale(size, offset)
                 str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/complete_sale.txt ' + dir + log + data
                 bat str
                 }
-        }
-    }
-}
-
-
-def closeBatch(valPath, index)
-{
-    script
-    {
-        catchError(stageResult: 'FAILURE')
-        {
-            dir = ' -dir ../AutomationTesting/Tests/2closeBatches'
+                catchError(stageResult: 'FAILURE')
+                {
             log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ' + valPath + dir + log
+            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/closeBatch.txt ' + dir + log
             bat str
+                }
         }
     }
 }
-
 pipeline {
     agent any
 
@@ -66,15 +56,7 @@ pipeline {
         {
             steps
             {
-                sale(1,0)
-            }
-        } 
-        stage('closeBatch1')
-        {
-            steps
-            {
-                        
-                closeBatch('../AutomationTesting/validation/closeBatch.txt', 1)
+                sale(2)
             }
         }
 }
