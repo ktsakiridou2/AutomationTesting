@@ -33,9 +33,10 @@ def sale(size)
                 }
                 catchError(stageResult: 'FAILURE')
                 {
-            log = ' -lp closeBatchLog' + index.toString() + '.LOG'
-            str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/closeBatch.txt ' + dir + log
-            bat str
+                    log = ' -lp closeBatchLog' + index.toString() + '.LOG'
+                    data = ' -out closeBatchData' + i.toString()+ '.txt'
+                    str = 'python.exe ../AutomationTesting/Main.py ' + ' -vp ../AutomationTesting/validation/closeBatch.txt ' + dir + log + data
+                    bat str
                 }
         }
     }
